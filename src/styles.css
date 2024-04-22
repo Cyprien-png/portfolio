@@ -4,6 +4,7 @@
     --color-primary: #FF6CAB;
     --color-secondary: #7366FF;
     --color-dark: #111111;
+    --color-gradient: linear-gradient(135deg, rgba(255,108,171,1) 0%, rgba(115,102,255,1) 100%);
 }
 
 body, app-root {
