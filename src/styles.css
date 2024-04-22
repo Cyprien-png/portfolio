@@ -1,1 +1,22 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root{
+    --color-primary: #FF6CAB;
+    --color-secondary: #7366FF;
+    --color-dark: #111111;
+}
+
+body, app-root {
+    all: unset;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    background: var(--color-dark);
+    color: white;
+    font-family: 'Roboto', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Archivo', sans-serif;
+    font-weight: bold;
+}
