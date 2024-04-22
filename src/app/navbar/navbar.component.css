@@ -1,8 +1,33 @@
 nav {
-    width: 100%;
+    position: fixed;
+    width: 100dvw;
     height: 10dvh;
     background: var(--color-dark);
     border-bottom: 10px solid;
     border-image-slice: 1;
     border-image-source: var(--color-gradient);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    h1 {
+        padding-left: 3rem;
+    }
+}
+
+#navigation-section {
+    list-style-type: none;
+    display: flex;
+    gap: 6rem;
+    padding-right: 6rem;
+
+    a {
+        padding: 1rem;
+        cursor: pointer;
+        transition: all 200ms;
+
+        &:hover {
+            color: var(--color-secondary);
+        }
+    }
 }
