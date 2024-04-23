@@ -11,7 +11,15 @@
     .card {
       scale: 1.1;
     }
+
+    .light {
+      opacity: 1;
+    }
   }
+}
+
+.light, .project-details, .project-preview {
+  pointer-events: none;
 }
 
 .card {
@@ -27,6 +35,14 @@
   justify-content: center;
   align-items: center;
   transition: 100ms linear;
+}
+
+.light {
+  position: absolute;
+  height: 200%;
+  width: 600%;
+  opacity: 0;
+  background: linear-gradient(90deg, rgba(0,0,0,0.8) 0%, rgba(142,235,255,0) 35%, rgba(255,255,255,0.6) 50%, rgba(142,235,255,0) 65%, rgba(0,0,0,0.8) 100%);
 }
 
 .project-details {
