@@ -1,0 +1,23 @@
+h1 {
+    font-size: 4rem;
+}
+
+section {
+    font-size: 2rem;
+}
+
+#about, .about {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.about {
+    height: 40dvh;
+    gap: 10rem;
+
+    img {
+        height: 100%;
+    }
+}
+
