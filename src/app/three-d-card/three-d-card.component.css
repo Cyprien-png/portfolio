@@ -1,9 +1,9 @@
 .card-container {
-  --card-size: 18rem;
+  --card-size: 20rem;
 }
 
 .card-container {
-  perspective: var(--card-size);
+  perspective: calc(var(--card-size) *2.5);
   transition: all 100ms linear;
 
   &:hover {
@@ -14,7 +14,7 @@
     }
 
     .light {
-      opacity: 1;
+      opacity: 0.8;
     }
   }
 }
@@ -35,6 +35,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
   transition: 100ms linear;
 }
 
@@ -43,7 +44,7 @@
   height: 200%;
   width: 1000%;
   opacity: 0;
-  background: linear-gradient(90deg, rgba(0,0,0,0.8) 0%, rgba(142,235,255,0) 35%, rgba(255,255,255,0.6) 50%, rgba(142,235,255,0) 65%, rgba(0,0,0,0.8) 100%);
+  background: linear-gradient(90deg, rgba(0,0,0,0.8) 0%, rgba(142,142,142,0.2) 35%, rgba(255,255,255,0.5) 50%, rgba(142,142,142,0.2) 65%, rgba(0,0,0,0.8) 100%);
 }
 
 .project-details {
