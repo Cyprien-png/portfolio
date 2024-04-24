@@ -13,6 +13,11 @@ section, .about, .cards {
     align-items: center;
 }
 
+#projects {
+    flex-direction: column;
+    gap: 4rem;
+}
+
 .about {
     height: 40dvh;
     gap: 10rem;
