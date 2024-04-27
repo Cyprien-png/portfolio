@@ -1,0 +1,24 @@
+.magnetic-area {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:hover {
+        z-index: 1;
+        scale: 1.2;
+    }
+}
+
+.techno {
+    position: absolute;
+    background-color: white;
+    height: 55%;
+    width: 55%;
+    border-radius: 50%;
+    transition: all 0.1s;
+    pointer-events: none;
+}
