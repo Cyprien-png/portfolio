@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-bordered-circle',
@@ -8,5 +8,7 @@ import { Component } from '@angular/core';
   styleUrl: './bordered-circle.component.css'
 })
 export class BorderedCircleComponent {
+  @Input() imgsrc = "";
+  @Input() linkhref = "";
 
 }
