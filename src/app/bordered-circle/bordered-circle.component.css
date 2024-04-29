@@ -19,4 +19,24 @@
         height: calc(100% + var(--border-width)*2);
         width: calc(100% + var(--border-width)*2);
     }
+
+    &::after {
+        content: "";
+        z-index: -1;
+        position: absolute;
+        background: var(--color-gradient);
+        filter: blur(1rem);
+        transition: opacity 300ms;
+        opacity: 0;
+        height: 90%;
+        width: 90%;
+        border-radius: 50%;
+    }
+
+    &:hover {
+
+        &::after {
+            opacity: 1;
+        }
+    }
 }
