@@ -1,0 +1,22 @@
+.bordered-circle {
+    --border-width: 10px;
+
+    position: relative;
+    background-color: gray;
+    height: calc(100% - var(--border-width)*2);
+    width: calc(100% - var(--border-width)*2);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &::before {
+        content: '';
+        z-index: -1;
+        position: absolute;
+        background-color: white;
+        border-radius: 50%;
+        height: calc(100% + var(--border-width)*2);
+        width: calc(100% + var(--border-width)*2);
+    }
+}
