@@ -1,23 +1,17 @@
 .bordered-circle {
-    --border-width: 10px;
-
     position: relative;
-    background-color: gray;
-    height: calc(100% - var(--border-width)*2);
-    width: calc(100% - var(--border-width)*2);
+    height: 100%;
+    width: 100%;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
 
-    &::before {
-        content: '';
-        z-index: -1;
-        position: absolute;
-        background-color: white;
+    img {
+        height: 100%;
+        width: 100%;
         border-radius: 50%;
-        height: calc(100% + var(--border-width)*2);
-        width: calc(100% + var(--border-width)*2);
+        object-fit: cover;
     }
 
     &::after {
@@ -26,17 +20,22 @@
         position: absolute;
         background: var(--color-gradient);
         filter: blur(1rem);
-        transition: opacity 300ms;
-        opacity: 0;
-        height: 90%;
-        width: 90%;
+        transition: scale 300ms;
+        height: 100%;
+        width: 100%;
         border-radius: 50%;
+        animation: rotate 5s linear infinite;
     }
 
     &:hover {
-
         &::after {
-            opacity: 1;
+            scale: 1.1;
         }
+    }
+}
+
+@keyframes rotate {
+    to {
+        rotate: 1turn;
     }
 }
