@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-magnetic-circle',
@@ -8,6 +8,9 @@ import { Component } from '@angular/core';
   styleUrl: './magnetic-circle.component.css'
 })
 export class MagneticCircleComponent {
+  @Input() icon = "";
+  @Input() name = "";
+
   magnetize(event: any){
     const magneticArea = event.target as HTMLElement
     const techno = magneticArea.querySelector('.techno') as HTMLElement

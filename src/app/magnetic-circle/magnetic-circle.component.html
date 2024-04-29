@@ -1,3 +1,3 @@
-<div (mousemove)="this.magnetize($event)" (mouseleave)="this.demagnetize($event)" class="magnetic-area">
-    <div class="techno"></div>
+<div (mousemove)="this.magnetize($event)" (mouseleave)="this.demagnetize($event)" class="magnetic-area" [title]="name">
+    <img [src]="icon" class="techno"/>
 </div>
