@@ -43,3 +43,20 @@ section, .about, .cards {
     justify-content: center;
     flex-direction: row;
 }
+
+#contact {
+    height: calc(100dvh - 4rem);
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.contact-container {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+}
+
+.contact-icon {
+    height: 20dvw;
+    width: 20dvw;
+}

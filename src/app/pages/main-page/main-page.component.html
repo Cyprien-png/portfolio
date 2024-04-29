@@ -7,8 +7,8 @@
             <h1><b class="text-shining">Full stack</b> developer</h1>
             <p>From concept to execution,<br>I'm one of those magician weaving digital dreams into reality.</p>
         </div>
-    </div>    
-    
+    </div>
+
     <app-scroll-button [targetID]="'projects'" />
 </section>
 
@@ -20,37 +20,60 @@
         <app-three-d-card />
         <app-three-d-card />
         <app-three-d-card />
-    </div>       
-    
+    </div>
+
     <app-scroll-button [targetID]="'skills'" />
 </section>
 
 <section id="skills" class="full-screen">
     <h2>Here are some of my favorites technos.</h2>
 
-    <div class="technos-container">
-        <div class="magnetic-techno">
-            <app-magnetic-circle/>
-        </div>       
-        <div class="magnetic-techno">
-            <app-magnetic-circle/>
-        </div>       
-        <div class="magnetic-techno">
-            <app-magnetic-circle/>
-        </div>       
-        <div class="magnetic-techno">
-            <app-magnetic-circle/>
-        </div>       
+    <div id="skills-container">
+        <div class="technos-container">
+            <div class="magnetic-techno">
+                <app-magnetic-circle />
+            </div>
+            <div class="magnetic-techno">
+                <app-magnetic-circle />
+            </div>
+            <div class="magnetic-techno">
+                <app-magnetic-circle />
+            </div>
+            <div class="magnetic-techno">
+                <app-magnetic-circle />
+            </div>
+        </div>
+        <div class="technos-container">
+            <div class="magnetic-techno">
+                <app-magnetic-circle />
+            </div>
+            <div class="magnetic-techno">
+                <app-magnetic-circle />
+            </div>
+            <div class="magnetic-techno">
+                <app-magnetic-circle />
+            </div>
+        </div>
     </div>
-    <div class="technos-container">
-        <div class="magnetic-techno">
-            <app-magnetic-circle/>
-        </div>       
-        <div class="magnetic-techno">
-            <app-magnetic-circle/>
-        </div>       
-        <div class="magnetic-techno">
-            <app-magnetic-circle/>
-        </div>      
+
+    <app-scroll-button [targetID]="'contact'" />
+</section>
+
+<section id="contact">
+    <h2>Feel free to reach out to me!</h2>
+
+    <div class="contact-container">
+        <div class="contact-icon">
+            <app-bordered-circle linkhref="https://linkedin.com/in/cyprien-jaquier-138ba1220"
+                imgsrc="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/LinkedIn_logo_initials.png/600px-LinkedIn_logo_initials.png?20140125013055" />
+        </div>
+        <div class="contact-icon">
+            <app-bordered-circle linkhref="https://github.com/Cyprien-png"
+                imgsrc="https://cdn.pixabay.com/photo/2022/01/30/13/33/github-6980894_1280.png" />
+        </div>
+        <div class="contact-icon">
+            <app-bordered-circle linkhref="mailto:cyprien@jaquier.dev"
+                imgsrc="https://www.pngall.com/wp-content/uploads/13/Email-Logo-PNG-Image-HD.png" />
+        </div>
     </div>
 </section>
