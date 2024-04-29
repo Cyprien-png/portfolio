@@ -1,0 +1,14 @@
+[
+    {
+        "name": "React",
+        "icon": "https://cdn.freebiesupply.com/logos/large/2x/react-1-logo-png-transparent.png"
+    },
+    {
+        "name": "Angular",
+        "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Angular_full_color_logo.svg/1200px-Angular_full_color_logo.svg.png"
+    },
+    {
+        "name": "Laravel",
+        "icon": "https://download.logo.wine/logo/Laravel/Laravel-Logo.wine.png"
+    }
+]

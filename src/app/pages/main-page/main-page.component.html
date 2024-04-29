@@ -30,28 +30,18 @@
 
     <div id="skills-container">
         <div class="technos-container">
-            <div class="magnetic-techno">
-                <app-magnetic-circle />
+            <!-- loop for each languages -->
+            
+            <div *ngFor="let language of languages" class="magnetic-techno">
+                <app-magnetic-circle [name]="language.name" [icon]="language.icon" />
             </div>
-            <div class="magnetic-techno">
-                <app-magnetic-circle />
-            </div>
-            <div class="magnetic-techno">
-                <app-magnetic-circle />
-            </div>
-            <div class="magnetic-techno">
-                <app-magnetic-circle />
-            </div>
+
         </div>
         <div class="technos-container">
-            <div class="magnetic-techno">
-                <app-magnetic-circle />
-            </div>
-            <div class="magnetic-techno">
-                <app-magnetic-circle />
-            </div>
-            <div class="magnetic-techno">
-                <app-magnetic-circle />
+            <!-- loop for each frameworks / libs -->
+            
+            <div *ngFor="let framework of frameworks" class="magnetic-techno">
+                <app-magnetic-circle [name]="framework.name" [icon]="framework.icon" />
             </div>
         </div>
     </div>

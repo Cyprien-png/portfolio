@@ -1,0 +1,18 @@
+[
+    {
+        "name": "TypeScript",
+        "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Typescript_logo_2020.svg/1024px-Typescript_logo_2020.svg.png"
+    },
+    {
+        "name": "PHP",
+        "icon": "https://upload.wikimedia.org/wikipedia/commons/c/c1/PHP_Logo.png"
+    },
+    {
+        "name": "Ruby",
+        "icon": "https://static-00.iconduck.com/assets.00/ruby-icon-1024x1024-u3yoql71.png"
+    },
+    {
+        "name": "Python",
+        "icon": "https://logolook.net/wp-content/uploads/2022/12/Python-Software-Foundation-Emblem.png"
+    }
+]
