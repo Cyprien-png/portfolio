@@ -8,7 +8,9 @@
     <div class="light"></div>
     <img class="project-preview" src="{{imgSrc}}" />
     <div class="project-details">
-      <span class="project-labels"></span>
+      <ul class="project-labels">
+        <li class="project-label" *ngFor="let label of labels">{{label}}</li>        
+      </ul>
       <h5 class="project-title">{{title}}</h5>
       <p class="project-description">{{description}}</p>
     </div>

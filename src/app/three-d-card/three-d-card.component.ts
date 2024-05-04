@@ -1,9 +1,10 @@
 import { Component, Input } from "@angular/core";
+import {NgFor} from "@angular/common";
 
 @Component({
   selector: "app-three-d-card",
   standalone: true,
-  imports: [],
+  imports: [NgFor],
   templateUrl: "./three-d-card.component.html",
   styleUrl: "./three-d-card.component.css",
 })
@@ -11,6 +12,7 @@ export class ThreeDCardComponent {
   @Input() title: string = "";
   @Input() description: string = "";
   @Input() imgSrc: string = "";
+  @Input() labels: string[] = [];
 
   private focusSubscription?: ReturnType<typeof setTimeout> | void;
 
