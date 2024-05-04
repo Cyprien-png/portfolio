@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, Input } from "@angular/core";
 
 @Component({
   selector: "app-three-d-card",
@@ -8,6 +8,10 @@ import { Component } from "@angular/core";
   styleUrl: "./three-d-card.component.css",
 })
 export class ThreeDCardComponent {
+  @Input() title: string = "";
+  @Input() description: string = "";
+  @Input() imgSrc: string = "";
+
   private focusSubscription?: ReturnType<typeof setTimeout> | void;
 
   changePerspective(event: any) {
