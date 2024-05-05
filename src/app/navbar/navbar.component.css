@@ -19,7 +19,7 @@ nav {
 #navigation-section {
     list-style-type: none;
     display: flex;
-    gap: 6rem;
+    gap: 6dvw;
     padding-right: 6rem;
 
     a {
@@ -30,5 +30,11 @@ nav {
         &:hover {
             color: var(--color-secondary);
         }
+    }
+}
+
+@media screen and (max-width: 900px) {
+    #navigation-section{
+        display: none;
     }
 }
