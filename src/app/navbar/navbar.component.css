@@ -23,6 +23,8 @@ nav {
     padding-right: 6rem;
 
     a {
+        color: white;
+        text-decoration: none;
         padding: 1rem;
         cursor: pointer;
         transition: all 200ms;
