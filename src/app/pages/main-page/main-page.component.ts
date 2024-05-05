@@ -6,6 +6,7 @@ import { MagneticCircleComponent } from '../../magnetic-circle/magnetic-circle.c
 import { BorderedCircleComponent } from '../../bordered-circle/bordered-circle.component';
 import * as languageData from '../../../assets/data/languages.json';
 import * as frameworkData from '../../../assets/data/frameworks.json';
+import * as projectData from '../../../assets/data/projects.json';
 import { NgFor } from '@angular/common';
 
 @Component({
@@ -18,4 +19,5 @@ import { NgFor } from '@angular/common';
 export class MainPageComponent {
   languages: any = (languageData as any).default;
   frameworks: any = (frameworkData as any).default;
+  projects: any = (projectData as any).default;
 }

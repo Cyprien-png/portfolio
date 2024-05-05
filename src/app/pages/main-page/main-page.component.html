@@ -1,7 +1,7 @@
 <app-navbar />
 <section id="about" class="full-screen">
     <div class="about">
-        <img src="../../../assets/cyprien-jaquier.png">
+        <img src="../../../assets/images/cyprien-jaquier.png">
 
         <div>
             <h1><b class="text-shining">Full stack</b> developer</h1>
@@ -17,9 +17,7 @@
     <h2>Here are three projects I'm proud of.</h2>
 
     <div class="cards">
-        <app-three-d-card />
-        <app-three-d-card />
-        <app-three-d-card />
+        <app-three-d-card *ngFor="let project of projects" [labels]="project.labels" [imgSrc]="project.image" [title]="project.name" [description]="project.description"/>
     </div>
 
     <app-scroll-button [targetID]="'skills'" />
