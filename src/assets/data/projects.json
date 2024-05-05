@@ -1,19 +1,19 @@
 [
     {
         "name": "Zonta waffles",
-        "image": "/assets/images/projects/Zonta.png",
+        "image": "assets/images/projects/Zonta.png",
         "labels": ["Laravel", "React", "Under development"],
         "description": "Annually the Zonta club of Sainte-Croix organizes a waffle sale. It is on the occasion of a course on developing a webapp using Laravel that with three classmates we are going to offer them a management tool. This application allows to organize sales, place orders, assign deliveries and manage invoicing."
     },
     {
         "name": "SeaCracker",
-        "image": "/assets/images/projects/SeaCracker.png",
+        "image": "assets/images/projects/SeaCracker.png",
         "labels": ["Angular", "RxJS", "WebSocket"],
         "description": "During a course on object-oriented programming, with three classmates we developed a \"Kahoot like\" quiz application. The questions are asked from a presenter device and participants can answer them from their smartphone. The application is based on Angular and uses WebSockets for real-time communication."
     },
     {
         "name": "Medical appointment",
-        "image": "/assets/images/projects/MediApp.png",
+        "image": "assets/images/projects/MediApp.png",
         "labels": ["React", "Frontend", "In prod"],
         "description": "During an internship in a company I was tasked with developing a medical appointment scheduling application. The backend already existed in the form of an API. I worked entirely on the frontend in close collaboration with the designers and backend developers."
     }
