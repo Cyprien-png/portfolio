@@ -1,1 +1,15 @@
 @import "tailwindcss";
+
+@theme {
+    --color-custom-blue-dark: #020b4c;
+    --color-custom-blue-mid: #0835c8;
+    --color-custom-blue-light: #19b6fc;
+}
+
+.bg-noise {
+  @apply bg-[url('/noise.webp')] bg-[length:10rem];
+}
+
+.overlay {
+  @apply absolute inset-0 mix-blend-overlay pointer-events-none;
+}
