@@ -1,14 +1,10 @@
 <script setup>
-import Particles from './components/Particles.vue';
-
+import Background from './components/Background.vue';
 </script>
 
 <template>
-  <div class="bg-custom-blue-dark h-screen relative overflow-hidden">
-    <Particles class="blur-[7rem]"/>
-    
-    <div id="particles-js"></div>
-    <div class="overlay bg-noise"></div>
-  </div>
+  <section class="h-screen w-screen overflow-hidden">
+    <Background class="h-screen w-screen absolute inset-0 overflow-hidden"/>
+  </section>
 </template>
 

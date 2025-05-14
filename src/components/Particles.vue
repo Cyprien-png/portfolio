@@ -13,12 +13,9 @@ onMounted(() => {
   document.head.appendChild(statsScript)
 })
 
-function initializeParticles() {
-  particlesJS("particles-js", particlesConfig);
-  requestAnimationFrame(update);
-}
+const initializeParticles = () => {particlesJS("particles-js", particlesConfig)};
 </script>
 
 <template>
-  <div id="particles-js"></div>
+  <div id="particles-js" class="h-full overflow-hidden"></div>
 </template>
