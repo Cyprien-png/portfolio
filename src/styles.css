@@ -2,11 +2,11 @@
 @import "tailwindcss";
 
 @theme {
-    --color-custom-blue-dark: #020b4c;
-    --color-custom-blue-mid: #0835c8;
-    --color-custom-blue-light: #19b6fc;
+  --color-custom-blue-dark: #020b4c;
+  --color-custom-blue-mid: #0835c8;
+  --color-custom-blue-light: #19b6fc;
 
-    --font-custom-code: "Cascadia Code", sans-serif;
+  --font-custom-code: "Cascadia Code", sans-serif;
 }
 
 .bg-noise {
@@ -16,3 +16,5 @@
 .overlay {
   @apply absolute inset-0 mix-blend-overlay pointer-events-none;
 }
+
+
