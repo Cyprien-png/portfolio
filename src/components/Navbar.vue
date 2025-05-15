@@ -27,7 +27,7 @@ import FillableBox from './FillableBox.vue';
             </FillableBox>
         </div>
 
-        <a class="flex h-full bg-slider" href="mailto:cyprien@jaquier.dev">
+        <a class="flex h-full bg-slider cursor-custom-pointer" href="mailto:cyprien@jaquier.dev">
             <button class="flex flex-col justify-center py-4 px-8 xl:px-24 text-left flex-1 relative">
                 <p class="text-sm leading-none absolute top-7">You want me by your side?</p>
                 <h1 class="uppercase font-bold text-5xl mix-blend-difference">Hire me!</h1>

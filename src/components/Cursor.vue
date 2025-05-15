@@ -1,11 +1,25 @@
 <script setup>
 import { onMounted, ref } from 'vue';
 
+const isHovering = ref(false);
+
 const gapX = ref(0);
 const gapY = ref(0);
 
 onMounted(() => {
     const cursor = document.getElementById('cursor');
+    const hoverListeners = document.querySelectorAll('.cursor-custom-pointer');
+
+    hoverListeners.forEach((hoverListener) => {
+        hoverListener.addEventListener('mouseover', () => {
+            isHovering.value = true;
+        });
+
+        hoverListener.addEventListener('mouseleave', () => {
+            isHovering.value = false;
+        });
+    });
+
 
     // Update cursor position based on data attributes
     const updateCursorPosition = (event) => {
@@ -21,12 +35,16 @@ onMounted(() => {
     return () => {
         window.removeEventListener('mousemove', updateCursorPosition);
     };
+
+
 });
 </script>
 
 <template>
     <div :data-gap-x="gapX" :data-gap-y="gapY" id="cursor"
-        class="absolute w-3 h-3 bg-white mix-blend-difference z-50 rounded-full -translate-1/2 pointer-events-none">
+        class="absolute w-3 h-3 bg-white mix-blend-difference z-50 rounded-full -translate-1/2 pointer-events-none"
+        :class="{ 'rounded-none animate-spin': isHovering }">
+
     </div>
 </template>
 
@@ -34,6 +52,7 @@ onMounted(() => {
 #cursor {
     transition: width 0.5s ease, height 0.5s ease;
 }
+
 body * {
     cursor: none;
 }
