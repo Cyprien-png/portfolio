@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cascadia+Code:ital,wght@0,200..700;1,200..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cascadia+Code:ital,wght@0,200..700;1,200..700&family=Pirata+One&display=swap');
 @import "tailwindcss";
 
 @theme {
@@ -7,6 +7,7 @@
   --color-custom-blue-light: #19b6fc;
 
   --font-custom-code: "Cascadia Code", sans-serif;
+  --font-custom-pirata: "Pirata One", system-ui;
 }
 
 .bg-noise {
@@ -17,4 +18,6 @@
   @apply absolute inset-0 mix-blend-overlay pointer-events-none;
 }
 
-
+header{
+  @apply border-white;
+}
