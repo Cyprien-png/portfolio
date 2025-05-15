@@ -5,7 +5,7 @@ import Cursor from './components/Cursor.vue';
 </script>
 
 <template>
-  <Cursor/>
+  <div id="cursor-container"><Cursor/></div>
   <div class="h-dvh w-dvw relative text-white font-custom-code flex justify-center items-center overflow-hidden">
     <Background class="h-dvh w-dvw absolute inset-0 -z-10" />
 
