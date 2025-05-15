@@ -23,7 +23,7 @@ import CJ from './svg/CJ.vue';
         </div>
 
         <a class="flex h-full bg-slider" href="mailto:cyprien@jaquier.dev">
-            <button class="flex flex-col justify-center py-4 px-8 xl:px-24 cursor-pointer text-left flex-1 relative">
+            <button class="flex flex-col justify-center py-4 px-8 xl:px-24 text-left flex-1 relative">
                 <p class="text-sm leading-none absolute top-7">You want me by your side?</p>
                 <h1 class="uppercase font-bold text-5xl mix-blend-difference">Hire me!</h1>
             </button>

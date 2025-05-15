@@ -1,9 +1,11 @@
 <script setup>
 import Background from './components/Background.vue';
 import Navbar from './components/Navbar.vue';
+import Cursor from './components/Cursor.vue';
 </script>
 
 <template>
+  <Cursor/>
   <div class="h-dvh w-dvw relative text-white font-custom-code flex justify-center items-center overflow-hidden">
     <Background class="h-dvh w-dvw absolute inset-0 -z-10" />
 
