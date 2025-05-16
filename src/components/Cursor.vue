@@ -50,7 +50,7 @@ onMounted(() => {
 
 <style>
 #cursor {
-    transition: width 0.5s ease, height 0.5s ease;
+    transition: width .6s ease, height .6s ease;
 }
 
 body * {

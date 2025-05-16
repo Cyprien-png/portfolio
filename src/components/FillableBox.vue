@@ -10,6 +10,11 @@ function mouseOver(event) {
     active.value = true;
     const box = event.currentTarget;
 
+    // ensure  that the cursor is not already in the box
+    if (cursor.parentElement === box) {
+        return;
+    }
+    
     // move the cursor in the box
     box.appendChild(cursor);
     const newSize = Math.max(box.clientWidth, box.clientHeight) * 3;
