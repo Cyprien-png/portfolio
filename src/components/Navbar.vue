@@ -8,7 +8,7 @@ import FillableBox from './FillableBox.vue';
 
 <template>
     <nav class="w-full h-32 flex border-b-2 mb-12 border-white">
-        <CJ class="h-full w-auto border-r-2 text-white opacity-50" />
+        <CJ class="h-full w-auto border-r-2 text-white opacity-50 hidden xl:block" />
 
         <ul class="flex justify-around items-center flex-1 border-x-2">
             <li>future sections</li>
@@ -27,12 +27,12 @@ import FillableBox from './FillableBox.vue';
             </FillableBox>
         </div>
 
-        <a class="flex h-full bg-slider cursor-custom-pointer" href="mailto:cyprien@jaquier.dev">
-            <button class="flex flex-col justify-center py-4 px-8 xl:px-24 text-left flex-1 relative">
+        <a class="h-full bg-slider cursor-custom-pointer hidden md:flex" href="mailto:cyprien@jaquier.dev">
+            <button class="flex flex-col justify-center py-4 px-8 text-left flex-1 relative">
                 <p class="text-sm leading-none absolute top-7">You want me by your side?</p>
                 <h1 class="uppercase font-bold text-5xl mix-blend-difference">Hire me!</h1>
             </button>
-            <MailQR class="h-full w-auto border-l-2" />
+            <MailQR class="h-full w-auto border-l-2 hidden xl:block" />
         </a>
     </nav>
 </template>
