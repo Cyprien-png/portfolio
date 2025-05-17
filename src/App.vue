@@ -13,6 +13,10 @@ import Cursor from './components/Cursor.vue';
 
     <div class="w-full min-h-full flex flex-col border-[1rem] border-white">
       <Navbar />
+
+      <h1 class="flex flex-col uppercase font-custom-anton font-extrabold text-center text-[8dvw]">
+        Full Stack Developer
+      </h1>
     </div>
   </div>
 </template>

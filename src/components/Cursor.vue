@@ -39,8 +39,6 @@ onMounted(() => {
     } else {
         console.error('Cursor element not found');
     }
-
-
 });
 </script>
 

@@ -7,7 +7,7 @@ import FillableBox from './FillableBox.vue';
 </script>
 
 <template>
-    <nav class="w-full h-32 flex border-b-2 border-white">
+    <nav class="w-full h-32 flex border-b-2 mb-12 border-white">
         <CJ class="h-full w-auto border-r-2 text-white opacity-50" />
 
         <ul class="flex justify-around items-center flex-1 border-x-2">
