@@ -10,12 +10,14 @@ onMounted(() => {
     const scrollableScreen = document.getElementById('scrollable-screen');
     const scrollTrack = document.getElementById('scroll-track');
     const scrollContainer = scrollableScreen.parentElement;
-    
+
     const updateScrollbar = () => {
         isScollable.value = scrollableScreen.clientHeight > scrollContainer.clientHeight;
-        const coeff = scrollableScreen.clientHeight / scrollTrack.clientHeight
-        thumbH.value = body.clientHeight / coeff;
-        thumbY.value = scrollContainer.scrollTop / coeff;
+        if (!isScollable) { return };
+
+        const coeff = scrollTrack.clientHeight / scrollableScreen.clientHeight
+        thumbH.value = body.clientHeight * coeff;
+        thumbY.value = scrollContainer.scrollTop * coeff;
     }
 
     updateScrollbar();
