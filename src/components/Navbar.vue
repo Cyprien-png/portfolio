@@ -11,7 +11,7 @@ import FillableBox from './FillableBox.vue';
         <CJ class="h-full w-auto border-r-2 text-white opacity-50 hidden xl:block" />
 
         <ul class="flex justify-around items-center flex-1 border-x-2">
-            <li>future sections</li>
+            <li class="underline-slider">future sections</li>
         </ul>
 
         <div class="flex flex-col h-full w-fit border-r-2">
