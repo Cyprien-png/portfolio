@@ -10,9 +10,12 @@ import FillableBox from './FillableBox.vue';
     <nav class="w-full h-32 flex border-b-2 mb-12 border-white">
         <CJ class="h-full w-auto border-r-2 text-white opacity-50 hidden xl:block" />
 
-        <ul class="flex justify-around items-center flex-1 border-x-2">
-            <li class="underline-slider">future sections</li>
-        </ul>
+        <div class="flex justify-around items-center flex-1 border-x-2 px-8">
+            <a class="underline-slider p-2 cursor-custom-pointer">About</a>
+            <a class="underline-slider p-2 cursor-custom-pointer">Education</a>
+            <a class="underline-slider p-2 cursor-custom-pointer">Projects</a>
+            <a class="underline-slider p-2 cursor-custom-pointer">Contact</a>
+        </div>
 
         <div class="flex flex-col h-full w-fit border-r-2">
             <FillableBox class="border-b-1">
