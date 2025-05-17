@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref } from 'vue';
+import { onMounted, onUnmounted, ref } from 'vue';
 
 const thumbY = ref(0);
 const thumbH = ref(0);
@@ -22,6 +22,13 @@ onMounted(() => {
 
     updateScrollbar();
     scrollContainer.addEventListener('scroll', updateScrollbar);
+    window.addEventListener('resize', updateScrollbar);
+})
+
+onUnmounted(() => {
+    const scrollContainer = document.getElementById('scrollable-screen').parentElement;
+    scrollContainer.removeEventListener('scroll', updateScrollbar);
+    window.removeEventListener('resize', updateScrollbar);
 })
 </script>
 
