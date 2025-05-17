@@ -10,6 +10,17 @@
   --font-custom-anton: "Anton", sans-serif;
 }
 
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+
 .bg-noise {
   @apply bg-[url('/noise.webp')] bg-[length:10rem];
 }
