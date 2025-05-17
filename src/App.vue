@@ -11,12 +11,15 @@ import Cursor from './components/Cursor.vue';
     </div>
     <Background class="h-dvh w-dvw absolute inset-0 -z-10" />
 
-    <div class="w-full min-h-full flex flex-col border-[1rem] border-white">
-      <Navbar />
+    <div class="w-screen h-screen flex flex-col border-x-[1rem] border-white overflow-auto">
+      
+      <Navbar class="border-t-[1rem] border-white"/>
 
-      <h1 class="flex flex-col uppercase font-custom-anton font-extrabold text-center text-[8dvw]">
-        Full Stack Developer
-      </h1>
+      <div class="px-24 flex-1 border-b-[1rem] border-white">
+        <h1 class="flex flex-col uppercase font-custom-anton font-extrabold text-center text-[8dvw]">
+          Full Stack Developer
+        </h1>
+      </div>
     </div>
   </div>
 </template>
