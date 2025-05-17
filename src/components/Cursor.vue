@@ -20,21 +20,25 @@ onMounted(() => {
         });
     });
 
+    if (cursor) {
+        // Update cursor position based on data attributes
+        const updateCursorPosition = (event) => {
+            const gapXValue = parseInt(cursor.dataset.gapX) || 0;
+            const gapYValue = parseInt(cursor.dataset.gapY) || 0;
 
-    // Update cursor position based on data attributes
-    const updateCursorPosition = (event) => {
-        const gapXValue = parseInt(cursor.dataset.gapX) || 0;
-        const gapYValue = parseInt(cursor.dataset.gapY) || 0;
+            cursor.style.left = `${event.clientX - gapXValue}px`;
+            cursor.style.top = `${event.clientY - gapYValue}px`;
+        };
 
-        cursor.style.left = `${event.clientX - gapXValue}px`;
-        cursor.style.top = `${event.clientY - gapYValue}px`;
-    };
+        window.addEventListener('mousemove', updateCursorPosition);
 
-    window.addEventListener('mousemove', updateCursorPosition);
-
-    return () => {
-        window.removeEventListener('mousemove', updateCursorPosition);
-    };
+        // Cleanup event listener on component unmount
+        return () => {
+            window.removeEventListener('mousemove', updateCursorPosition);
+        };
+    } else {
+        console.error('Cursor element not found');
+    }
 
 
 });
@@ -49,10 +53,6 @@ onMounted(() => {
 </template>
 
 <style>
-#cursor {
-    transition: width .6s ease, height .6s ease;
-}
-
 body * {
     cursor: none;
 }
