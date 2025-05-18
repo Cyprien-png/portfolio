@@ -8,7 +8,7 @@ import FillableBox from './FillableBox.vue';
 
 <template>
     <nav class="w-full h-36 flex border-b-2 mb-12 border-white">
-        <CJ class="h-full w-auto border-r-2 text-white opacity-50 hidden xl:block" />
+        <CJ class="h-full w-auto border-r-2 p-8 opacity-90 text-white hidden xl:block" />
 
         <div class="flex justify-around items-center flex-1 border-x-2 px-8">
             <a class="underline-slider p-2 cursor-custom-pointer">About</a>
