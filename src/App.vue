@@ -3,6 +3,7 @@ import Background from './components/Background.vue';
 import Navbar from './components/Navbar.vue';
 import Cursor from './components/Cursor.vue';
 import Scrollbar from './components/Scrollbar.vue';
+import AnimatedBanner from './components/AnimatedBanner.vue';
 </script>
 
 <template>
@@ -18,10 +19,11 @@ import Scrollbar from './components/Scrollbar.vue';
         <Navbar class="border-t-[1rem] border-white" />
 
         <div class="px-24 flex-1 border-b-[1rem] border-white">
-          <h1 class="flex flex-col uppercase font-custom-anton font-extrabold text-center text-[8dvw]">
+          <h1 class="flex flex-col uppercase font-custom-anton font-extrabold text-center mb-12 text-[8dvw]">
             Full Stack Developer
           </h1>
 
+          <AnimatedBanner />
         </div>
       </div>
     </div>
