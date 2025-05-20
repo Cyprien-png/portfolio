@@ -1,6 +1,5 @@
 <script setup>
 import { defineProps } from 'vue';
-import FillableBox from './FillableBox.vue';
 
 const props = defineProps({
     isReverse: {
@@ -11,7 +10,7 @@ const props = defineProps({
 </script>
 
 <template>
-    <div class="w-screen h-7 absolute left-0 bg-white px-4">
+    <div class="w-screen h-7 bg-white">
         <div
             class="relative text-custom-blue-dark font-bold w-full h-7 flex justify-center items-center overflow-hidden">
             <div class="absolute flex slide-left" :class="{ 'animate-reverse': props.isReverse }">

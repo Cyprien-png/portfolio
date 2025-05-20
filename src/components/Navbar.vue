@@ -19,6 +19,7 @@ const navItems = [
 
         <div class="flex justify-around items-center flex-1 border-r-2 px-8">
             <a v-for="(item, i) in navItems" :key="item"
+                :href="`#${item.toLowerCase()}`"
                 class="underline-slider p-2 cursor-custom-pointer animate-slides-from-left opacity-0"
                 :style="{ animationDelay: `${i * 0.1}s` }">
                 {{ item }}

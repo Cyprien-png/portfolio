@@ -40,6 +40,11 @@
   @apply bg-[url('/noise.webp')] bg-[length:10rem];
 }
 
+.bg-noise-animated {
+  @apply bg-[url('/noise.webp')] bg-[length:6rem] opacity-85;
+  animation: noise .4s steps(1) infinite;
+}
+
 .overlay {
   @apply absolute inset-0 mix-blend-overlay pointer-events-none;
 }
@@ -54,6 +59,46 @@ nav {
 
 .underline-slider {
   @apply relative after:absolute after:bottom-0 after:h-0.5 after:bg-white after:transition-transform after:duration-200 after:left-0 after:w-full after:origin-right after:scale-x-0 hover:after:scale-x-100 hover:after:origin-left;
+}
+
+.section-container {
+  @apply px-12 lg:px-24 w-full h-dvh;
+}
+
+@keyframes noise {
+  0% {
+    background-position: 0 0;
+  }
+  10% {
+    background-position: 1.2rem 0.7rem;
+  }
+  20% {
+    background-position: 2rem 1.5rem;
+  }
+  30% {
+    background-position: 0.8rem 2.1rem;
+  }
+  40% {
+    background-position: 1.7rem 0.3rem;
+  }
+  50% {
+    background-position: 2.3rem 1.8rem;
+  }
+  60% {
+    background-position: 0.4rem 1.2rem;
+  }
+  70% {
+    background-position: 1.5rem 2.2rem;
+  }
+  80% {
+    background-position: 2rem 0.5rem;
+  }
+  90% {
+    background-position: 0.6rem 1.7rem;
+  }
+  100% {
+    background-position: 0 0;
+  }
 }
 
 @keyframes slides-from-left {

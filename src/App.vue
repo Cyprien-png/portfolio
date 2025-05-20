@@ -13,23 +13,26 @@ import AnimatedBanner from './components/AnimatedBanner.vue';
     </div>
     <Background class="h-dvh w-dvw absolute inset-0 -z-10" />
 
-    <div class="w-screen h-screen flex flex-col border-x-[1rem] border-white overflow-auto no-scrollbar">
+    <div class="w-screen h-screen flex flex-col border-x-[1rem] border-white overflow-auto no-scrollbar scroll-smooth">
       <div id="scrollable-screen" class="flex-1 flex flex-col">
         <Scrollbar />
         <Navbar class="border-t-[1rem] border-white" />
 
-        <div class="px-12 lg:px-24 flex-1 border-b-[1rem] border-white">
+        <div class="flex-1 border-b-[1rem] border-white">
           <AnimatedBanner :isReverse="true">
             Welcome on my portfolio!
           </AnimatedBanner>
           <h1
-            class="flex flex-col uppercase font-custom-anton font-extrabold text-center mb-4 mt-12 text-[8dvw] highlight animate-slides-from-top">
+            class="flex flex-col opacity-0 uppercase font-custom-anton font-extrabold text-center my-4 text-[8dvw] highlight animate-slides-from-top">
             Full Stack Developer
           </h1>
-
           <AnimatedBanner>
             This website is currently under development, don't hesitate to write to me with any suggestions.
           </AnimatedBanner>
+
+          <section id="about" class="section-container">
+          </section>
+
         </div>
       </div>
     </div>
