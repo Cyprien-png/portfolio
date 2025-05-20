@@ -23,7 +23,7 @@ import AnimatedBanner from './components/AnimatedBanner.vue';
             Welcome on my portfolio!
           </AnimatedBanner>
           <h1
-            class="flex flex-col uppercase font-custom-anton font-extrabold text-center mb-4 mt-12 text-[8dvw] highlight">
+            class="flex flex-col uppercase font-custom-anton font-extrabold text-center mb-4 mt-12 text-[8dvw] highlight animate-slides-from-top">
             Full Stack Developer
           </h1>
 

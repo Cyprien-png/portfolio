@@ -4,6 +4,13 @@ import GitHub from './svg/GitHub.vue';
 import LinkedIn from './svg/LinkedIn.vue';
 import CJ from './svg/CJ.vue';
 import FillableBox from './FillableBox.vue';
+
+const navItems = [
+    'About',
+    'Education',
+    'Projects',
+    'Contact'
+];
 </script>
 
 <template>
@@ -11,10 +18,11 @@ import FillableBox from './FillableBox.vue';
         <CJ class="h-full w-auto border-r-2 p-8 opacity-90 text-white hidden xl:block" />
 
         <div class="flex justify-around items-center flex-1 border-r-2 px-8">
-            <a class="underline-slider p-2 cursor-custom-pointer">About</a>
-            <a class="underline-slider p-2 cursor-custom-pointer">Education</a>
-            <a class="underline-slider p-2 cursor-custom-pointer">Projects</a>
-            <a class="underline-slider p-2 cursor-custom-pointer">Contact</a>
+            <a v-for="(item, i) in navItems" :key="item"
+                class="underline-slider p-2 cursor-custom-pointer animate-slides-from-left opacity-0"
+                :style="{ animationDelay: `${i * 0.1}s` }">
+                {{ item }}
+            </a>
         </div>
 
         <div class="flex flex-col h-full w-fit border-r-2">
