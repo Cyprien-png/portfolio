@@ -18,12 +18,18 @@ import AnimatedBanner from './components/AnimatedBanner.vue';
         <Scrollbar />
         <Navbar class="border-t-[1rem] border-white" />
 
-        <div class="px-24 flex-1 border-b-[1rem] border-white">
-          <h1 class="flex flex-col uppercase font-custom-anton font-extrabold text-center mb-12 text-[8dvw]">
+        <div class="px-12 lg:px-24 flex-1 border-b-[1rem] border-white">
+          <AnimatedBanner :isReverse="true">
+            Welcome on my portfolio!
+          </AnimatedBanner>
+          <h1
+            class="flex flex-col uppercase font-custom-anton font-extrabold text-center mb-4 mt-12 text-[8dvw] highlight">
             Full Stack Developer
           </h1>
 
-          <AnimatedBanner />
+          <AnimatedBanner>
+            This website is currently under development, don't hesitate to write to me with any suggestions.
+          </AnimatedBanner>
         </div>
       </div>
     </div>

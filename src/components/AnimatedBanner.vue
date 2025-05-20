@@ -1,9 +1,22 @@
+<script setup>
+import { defineProps } from 'vue';
+import FillableBox from './FillableBox.vue';
+
+const props = defineProps({
+    isReverse: {
+        type: Boolean,
+        default: false
+    }
+});
+</script>
+
 <template>
-    <div class="w-screen h-7 absolute left-0 bg-white px-4 opacity-90">
-        <div class="relative text-custom-blue-dark font-bold w-full h-7 flex justify-center items-center overflow-hidden">
-            <div class="absolute flex slide-left">
+    <div class="w-screen h-7 absolute left-0 bg-white px-4">
+        <div
+            class="relative text-custom-blue-dark font-bold w-full h-7 flex justify-center items-center overflow-hidden">
+            <div class="absolute flex slide-left" :class="{ 'animate-reverse': props.isReverse }">
                 <span v-for="n in 8" :key="n" class="whitespace-nowrap h-7 flex items-center px-4">
-                    This website is currently under development, don't hesitate to write to me with any suggestions.
+                    <slot></slot>
                 </span>
             </div>
         </div>
@@ -13,6 +26,10 @@
 <style scoped>
 .slide-left {
     animation: slide-left 20s linear infinite;
+}
+
+.animate-reverse {
+    animation-direction: reverse;
 }
 
 @keyframes slide-left {

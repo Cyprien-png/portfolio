@@ -14,12 +14,18 @@
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
+
   .no-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
-}
 
+  .text-outline {
+    @apply text-transparent;
+    text-stroke: .1rem white;
+    -webkit-text-stroke: .1rem white;
+  }
+}
 
 .bg-noise {
   @apply bg-[url('/noise.webp')] bg-[length:10rem];
@@ -39,6 +45,10 @@ nav {
 
 .underline-slider {
   @apply relative after:absolute after:bottom-0 after:h-0.5 after:bg-white after:transition-transform after:duration-200 after:left-0 after:w-full after:origin-right after:scale-x-0 hover:after:scale-x-100 hover:after:origin-left;
+}
+
+.highlight {
+  text-shadow: 0 0 2rem rgba(255, 255, 255, .2)
 }
 
 #cursor {
