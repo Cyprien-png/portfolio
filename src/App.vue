@@ -13,12 +13,12 @@ import AnimatedBanner from './components/AnimatedBanner.vue';
     </div>
     <Background class="h-dvh w-dvw absolute inset-0 -z-10" />
 
-    <div class="w-screen h-screen flex flex-col border-x-[1rem] border-white overflow-auto no-scrollbar scroll-smooth">
-      <div id="scrollable-screen" class="flex-1 flex flex-col">
+    <div class="w-screen h-dvh flex flex-col overflow-auto no-scrollbar scroll-smooth">
+      <div id="scrollable-screen" class="flex-1 flex flex-col border-[1rem] border-white">
         <Scrollbar />
-        <Navbar class="border-t-[1rem] border-white" />
+        <Navbar />
 
-        <div class="flex-1 border-b-[1rem] border-white overflow-hidden">
+        <div class="flex-1 overflow-hidden">
           <AnimatedBanner :isReverse="true">
             Welcome on my portfolio!
           </AnimatedBanner>

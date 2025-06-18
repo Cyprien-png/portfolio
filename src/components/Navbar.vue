@@ -17,7 +17,7 @@ const navItems = [
     <nav class="w-full h-36 flex border-b-2 border-white">
         <CJ class="h-full w-auto border-r-2 p-8 opacity-90 text-white hidden xl:block" />
 
-        <div class="flex justify-around items-center flex-1 border-r-2 px-8">
+        <div class="flex justify-around items-center flex-1 sm:border-r-2 sm:px-8">
             <a v-for="(item, i) in navItems" :key="item"
                 :href="`#${item.toLowerCase()}`"
                 class="underline-slider p-2 cursor-custom-pointer animate-slides-from-left opacity-0"
@@ -26,7 +26,7 @@ const navItems = [
             </a>
         </div>
 
-        <div class="flex flex-col h-full w-fit border-r-2">
+        <div class="sm:flex flex-col h-full w-fit border-r-2 hidden">
             <FillableBox class="border-b-1">
                 <a target="_blank" href="https://github.com/Cyprien-png">
                     <GitHub class="flex-1 h-full w-16 p-5" />
