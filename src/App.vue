@@ -29,10 +29,6 @@ import AnimatedBanner from './components/AnimatedBanner.vue';
           <AnimatedBanner>
             This website is currently under development, don't hesitate to write to me with any suggestions.
           </AnimatedBanner>
-
-          <section id="about" class="section-container">
-          </section>
-
         </div>
       </div>
     </div>
