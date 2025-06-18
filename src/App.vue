@@ -18,7 +18,7 @@ import AnimatedBanner from './components/AnimatedBanner.vue';
         <Scrollbar />
         <Navbar class="border-t-[1rem] border-white" />
 
-        <div class="flex-1 border-b-[1rem] border-white">
+        <div class="flex-1 border-b-[1rem] border-white overflow-hidden">
           <AnimatedBanner :isReverse="true">
             Welcome on my portfolio!
           </AnimatedBanner>
