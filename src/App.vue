@@ -46,7 +46,7 @@ const getMyAge = () => {
             Full Stack Developer
           </h1>
           <AnimatedBanner>
-            This website is currently under development, don't hesitate to write to me with any suggestions.
+            This site is currently under development, feel free to contact me with your suggestions.
           </AnimatedBanner>
         </div>
 

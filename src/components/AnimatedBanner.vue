@@ -14,7 +14,7 @@ const props = defineProps({
         <div
             class="relative text-custom-blue-dark font-bold w-full h-7 flex justify-center items-center overflow-hidden">
             <div class="absolute flex slide-left" :class="{ 'animate-reverse': props.isReverse }">
-                <span v-for="n in 8" :key="n" class="whitespace-nowrap h-7 flex items-center px-4">
+                <span v-for="n in 10" :key="n" class="whitespace-nowrap h-7 flex items-center px-4">
                     <slot></slot>
                 </span>
             </div>
@@ -37,7 +37,7 @@ const props = defineProps({
     }
 
     to {
-        transform: translateX(-12.5%);
+        transform: translateX(-10%);
     }
 }
 </style>
