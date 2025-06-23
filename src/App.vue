@@ -4,12 +4,15 @@ import Navbar from './components/Navbar.vue';
 import Cursor from './components/Cursor.vue';
 import Scrollbar from './components/Scrollbar.vue';
 import AnimatedBanner from './components/AnimatedBanner.vue';
+
+// Flag to check if the device is mobile
+const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 </script>
 
 <template>
   <div class="h-dvh w-dvw relative text-white font-custom-code flex justify-center items-center overflow-hidden">
     <div id="cursor-container">
-      <Cursor />
+      <Cursor v-if="!isMobile" />
     </div>
     <Background class="h-dvh w-dvw absolute inset-0 -z-10" />
 
