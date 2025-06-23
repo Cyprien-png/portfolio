@@ -14,7 +14,7 @@
 }
 
 .highlight {
-  text-shadow: 0 0 2rem rgba(255, 255, 255, .2)
+  @apply text-shadow-[0_0_1rem_rgb(255_255_255_/_0.5)] md:text-shadow-[0_0_2rem_rgb(255_255_255_/_0.5)];
 }
 
 #cursor {
@@ -62,7 +62,7 @@ nav {
 }
 
 .section-container {
-  @apply px-4 md:px-12 lg:px-24 w-full h-dvh;
+  @apply px-4 md:px-12 lg:px-24 w-full;
 }
 
 @keyframes noise {
