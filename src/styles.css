@@ -62,7 +62,7 @@ nav {
 }
 
 .section-container {
-  @apply px-12 lg:px-24 w-full h-dvh;
+  @apply px-4 md:px-12 lg:px-24 w-full h-dvh;
 }
 
 @keyframes noise {

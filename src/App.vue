@@ -7,6 +7,22 @@ import AnimatedBanner from './components/AnimatedBanner.vue';
 
 // Flag to check if the device is mobile
 const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+const getMyAge = () => {
+  const birthYear = 2004;
+  const birthMonth = 4;
+  const birthDay = 12;
+
+  const today = new Date();
+  let age = today.getFullYear() - birthYear;
+
+  if (today.getMonth() < birthMonth - 1 || (today.getMonth() === birthMonth - 1 && today.getDate() < birthDay)) {
+    age--;
+  }
+
+  return age;
+};
+
 </script>
 
 <template>
@@ -33,6 +49,26 @@ const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/
             This website is currently under development, don't hesitate to write to me with any suggestions.
           </AnimatedBanner>
         </div>
+
+        <section id="about" class="section-container">
+          <h1 class="text-2xl font-bold uppercase mb-2 mt-8 animate-slides-from-top">
+            About me
+          </h1>
+          <p class="hover:text-gray-400 transition-all">
+            <span class="text-white font-bold">Hi, I'm Cyprien, I’m {{ getMyAge() }} years old,</span>
+            and I live in Switzerland.
+            <span class="text-white font-bold">When I was a kid, I</span>
+            was part of the nerdy group that only talked about video games
+            during recess. My first console was a Nintendo DS (Lite), and after spending weeks making Mario run
+            around,
+            <span class="text-white font-bold">I started wondering how a few buttons could bring a fictional character
+              to life.</span>
+            That’s where it all began.
+            <span class="text-white font-bold">That curiosity pushed me into the world of computer science, and</span>
+            though I’ve explored different aspects of it along the way (systems, networking, development),
+            <span class="text-white font-bold">it’s in coding that I’ve found the most joy.</span>
+          </p>
+        </section>
       </div>
     </div>
   </div>
