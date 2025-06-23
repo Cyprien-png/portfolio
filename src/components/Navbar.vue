@@ -27,12 +27,12 @@ const navItems = [
         </div>
 
         <div class="sm:flex flex-col h-full w-fit border-r-2 hidden">
-            <FillableBox class="border-b-1">
+            <FillableBox class="border-b-1 h-1/2">
                 <a target="_blank" href="https://github.com/Cyprien-png">
                     <GitHub class="flex-1 h-full w-16 p-5" />
                 </a>
             </FillableBox>
-            <FillableBox class="border-t-1">
+            <FillableBox class="border-t-1 h-1/2">
                 <a target="_blank" href="https://www.linkedin.com/in/cyprien-jaquier">
                     <LinkedIn class="flex-1 h-full w-16 p-5" />
                 </a>
