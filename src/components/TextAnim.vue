@@ -12,8 +12,10 @@ const props = defineProps({
   }
 })
 
+const uniqueId = `textanim-${Math.random().toString(36).slice(2, 9)}`
+
 onMounted(() => {
-  const container = document.querySelector('.alt-container')
+  const container = document.querySelector(`.${uniqueId}`)
   const words = container.querySelectorAll('.word')
   const letters = container.querySelectorAll('.letter')
   const stepCount = words.length - 1
@@ -21,7 +23,8 @@ onMounted(() => {
   if (stepCount <= 0) return
   const stepPercentage = 100 / (stepCount * 2)
 
-  let keyframes = `@keyframes slide-steps {\n  0% { transform: translateY(0%); }\n`
+  const animName = `slide-steps-${uniqueId}`
+  let keyframes = `@keyframes ${animName} {\n  0% { transform: translateY(0%); }\n`
 
   for (let i = 0; i <= stepCount - 1; i++) {
     const startPercent = stepPercentage + stepPercentage * i * 2
@@ -40,7 +43,8 @@ onMounted(() => {
   const duration = `${stepCount * props.duration}s`
 
   letters.forEach((l) => {
-    l.style.animationDuration = duration
+    l.style.animation = `${animName} ${duration} cubic-bezier(0.25, 0.1, 0.25, 1.4) infinite`
+    l.style.animationDelay = `calc(var(--i) * 100ms)`
   })
 })
 
@@ -50,27 +54,26 @@ const splitTexts = computed(() => {
 </script>
 
 <template>
-    <div class="alt-container ">
-      <p
-        v-for="(letters, wi) in splitTexts"
-        :key="wi"
-        class="word flex"
+  <div :class="['alt-container', uniqueId]">
+    <p
+      v-for="(letters, wi) in splitTexts"
+      :key="wi"
+      class="word flex"
+    >
+      <span
+        v-for="(letter, li) in letters"
+        :key="li"
+        class="letter"
+        :style="{ '--i': li }"
       >
-        <span
-          v-for="(letter, li) in letters"
-          :key="li"
-          class="letter"
-          :style="{ '--i': li }"
-        >
-          {{ letter }}
-        </span>
-      </p>
-    </div>
+        {{ letter }}
+      </span>
+    </p>
+  </div>
 </template>
 
 <style scoped>
 .alt-container .word .letter {
-  animation: slide-steps cubic-bezier(0.25, 0.1, 0.25, 1.4) infinite;
-  animation-delay: calc(var(--i)*100ms);
+  display: inline-block;
 }
 </style>
