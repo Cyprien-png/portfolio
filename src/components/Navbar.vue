@@ -21,6 +21,7 @@ const selectSection = async (sectionId) => {
 
 const updateNav = () => {
   const navEl = nav.value
+
   const activeEl = navEl.querySelector(`[data-section="${currentSection.value}"]`)
   if (!activeEl || !indicator.value || !navEl) return
 
@@ -64,8 +65,8 @@ const handleScroll = () => {
     })
   }
 
-  const matchedSection = sections.find((s) => s === current.id)
-  if (matchedSection) currentSection.value = matchedSection
+  const matchedSection = sections.value.find((s) => s.id === current.id)
+  if (matchedSection) currentSection.value = matchedSection.id
   updateNav()
 }
 
