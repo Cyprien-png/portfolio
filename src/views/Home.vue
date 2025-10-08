@@ -1,17 +1,20 @@
-<script setup></script>
+<script setup>
+import TextAnim from '../components/TextAnim.vue'
+</script>
 
 <template>
-    <section class="w-dvw h-dvh overflow-hidden p-10">
-        <div class="h-full w-full p-4 bg-fit bg-cover bg-position-[center_40%] rounded-3xl bg-[url('/placeholder.png')] flex flex-col justify-center items-center text-center">
-            <p class="text-[#fff] font-rubik uppercase text-[10dvw] leading-[7.33dvw] xl:text-[15dvh] xl:leading-[11dvh] tracking-tighter">
-                Here<br/>
-                to <span class="text-red-500">build</span><br/>
-                thefuture<br/>
-                one line<br/>
-                at a time.
-            </p>
+    <section class="w-dvw h-dvh overflow-hidden p-[3dvw]">
+        <div class="h-full w-full bg-fit bg-cover bg-position-[center_40%] rounded-4xl bg-[url('/placeholder.png')] flex flex-col justify-center items-center text-center">
+            <div class="text-[#fff] font-rubik uppercase text-[10dvw] xl:text-[13dvh] leading-none flex flex-col justify-center items-center ">
+               <p class="flex h-[8.4dvw] xl:h-[11dvh] ">Here</p>
+               <p class="flex h-[8.4dvw] xl:h-[11dvh] overflow-hidden">
+                   <span class="standard-text">to </span>
+                   <TextAnim :texts="['Build', 'Develop', 'Impact', 'Change', 'Design']" duration="2.5" :class="'text-[#DE2E2E]'" />
+                </p>
+                <p class="flex h-[8.4dvw] xl:h-[11dvh] ">the future</p>
+                <p class="flex h-[8.4dvw] xl:h-[11dvh] ">one line</p>
+                <p class="flex h-[8.4dvw] xl:h-[11dvh] ">at a time.</p>
+            </div>
         </div>
     </section>
 </template>
-
-<style scoped></style>
