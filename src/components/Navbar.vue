@@ -1,0 +1,107 @@
+<script setup>
+import { ref, onMounted, onBeforeUnmount, nextTick } from 'vue'
+import { useScrollContext } from '@/composables/useScrollContext'
+
+const { containerRef, sections, contentRef } = useScrollContext()
+
+const currentSection = ref('home')
+const isProgrammaticScroll = ref(false)
+
+const nav = ref(null)
+const indicator = ref(null)
+
+let scrollTimeout
+
+const selectSection = async (sectionId) => {
+  currentSection.value = sectionId
+  await nextTick()
+  updateNav()
+  updateScroll(sectionId)
+}
+
+const updateNav = () => {
+  const navEl = nav.value
+  const activeEl = navEl.querySelector(`[data-section="${currentSection.value}"]`)
+  if (!activeEl || !indicator.value || !navEl) return
+
+  const width = activeEl.offsetWidth
+  const position = activeEl.getBoundingClientRect().left - navEl.getBoundingClientRect().left
+
+  indicator.value.style.width = `${width}px`
+  indicator.value.style.transform = `translateX(${position}px)`
+}
+
+const updateScroll = (sectionId) => {
+  const section = document.getElementById(sectionId)
+  const sectionY = section.getBoundingClientRect().top - contentRef.value.getBoundingClientRect().top
+
+  isProgrammaticScroll.value = true
+  containerRef.value.scrollTo({ top: sectionY, left: 0, behavior: 'smooth' })
+
+  clearTimeout(scrollTimeout)
+  scrollTimeout = setTimeout(() => {
+    isProgrammaticScroll.value = false
+  }, 600)
+}
+
+const handleScroll = () => {
+  if (isProgrammaticScroll.value) return
+  const sectionsEls = Array.from(document.querySelectorAll('.window'))
+  let current = sectionsEls[0]
+  const isAtBottom =
+    Math.ceil(containerRef.value.scrollTop + containerRef.value.clientHeight) >= containerRef.value.scrollHeight
+
+  if (isAtBottom) {
+    current = sectionsEls[sectionsEls.length - 1]
+  } else {
+    sectionsEls.forEach((section) => {
+      const rect = section.getBoundingClientRect()
+      const containerRect = containerRef.value.getBoundingClientRect()
+      const offsetTop = rect.top - containerRect.top
+      if (offsetTop <= 0 && current.getBoundingClientRect().top < section.getBoundingClientRect().top) {
+        current = section
+      }
+    })
+  }
+
+  const matchedSection = sections.find((s) => s === current.id)
+  if (matchedSection) currentSection.value = matchedSection
+  updateNav()
+}
+
+onMounted(() => {
+  containerRef.value.addEventListener('scroll', handleScroll, { passive: true })
+  containerRef.value.addEventListener('wheel', handleScroll)
+  containerRef.value.addEventListener('touchmove', handleScroll, { passive: true })
+
+  nextTick(updateNav)
+})
+
+onBeforeUnmount(() => {
+  containerRef.value?.removeEventListener('scroll', handleScroll)
+  containerRef.value?.removeEventListener('wheel', handleScroll)
+  containerRef.value?.removeEventListener('touchmove', handleScroll)
+})
+</script>
+
+<template>
+  <nav
+    ref="nav"
+    class="fixed flex gap-1 rounded-full top-[4dvw] left-1/2 -translate-x-1/2 z-50 bg-[#0004] outline-2 outline-[#aaa8] backdrop-blur-sm"
+  >
+    <div
+      ref="indicator"
+      class="bg-white absolute inset-0 rounded-full h-full transition-[transform_0.5s_cubic-bezier(0.25,_0.1,_0.25,_1.4),width_.5s_ease-out]"
+    ></div>
+
+    <a
+      v-for="section in sections"
+      :key="section.id"
+      class="nav-element cursor-pointer px-4 py-2 relative text-white mix-blend-difference"
+      :data-section="section.id"
+      @click="selectSection(section.id)"
+    >
+      {{ section.id }}
+    </a>
+  </nav>
+</template>
