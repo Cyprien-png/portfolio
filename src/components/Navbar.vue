@@ -97,11 +97,11 @@ onBeforeUnmount(() => {
     <a
       v-for="section in sections"
       :key="section.id"
-      class="nav-element cursor-pointer px-4 py-2 relative text-white mix-blend-difference"
+      class="nav-element cursor-pointer px-4 py-2 relative text-white mix-blend-difference first-letter:capitalize"
       :data-section="section.id"
       @click="selectSection(section.id)"
     >
-      {{ section.id }}
+      {{ section.id.replace('-', ' ') }}
     </a>
   </nav>
 </template>
