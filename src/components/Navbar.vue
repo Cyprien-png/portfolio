@@ -42,7 +42,7 @@ const updateScroll = (sectionId) => {
   clearTimeout(scrollTimeout)
   scrollTimeout = setTimeout(() => {
     isProgrammaticScroll.value = false
-  }, 600)
+  }, 1000)
 }
 
 const handleScroll = () => {
@@ -52,9 +52,7 @@ const handleScroll = () => {
   const isAtBottom =
     Math.ceil(containerRef.value.scrollTop + containerRef.value.clientHeight) >= containerRef.value.scrollHeight
 
-  if (isAtBottom) {
-    current = sectionsEls[sectionsEls.length - 1]
-  } else {
+ 
     sectionsEls.forEach((section) => {
       const rect = section.getBoundingClientRect()
       const containerRect = containerRef.value.getBoundingClientRect()
@@ -63,8 +61,7 @@ const handleScroll = () => {
         current = section
       }
     })
-  }
-
+  
   const matchedSection = sections.value.find((s) => s.id === current.id)
   if (matchedSection) currentSection.value = matchedSection.id
   updateNav()
@@ -92,7 +89,8 @@ onBeforeUnmount(() => {
   >
     <div
       ref="indicator"
-      class="bg-white absolute inset-0 rounded-full h-full transition-[transform_0.5s_cubic-bezier(0.25,_0.1,_0.25,_1.4),width_.5s_ease-out]"
+      id="indicator"
+      class="bg-white absolute inset-0 rounded-full h-full"
     ></div>
 
     <a
@@ -106,3 +104,11 @@ onBeforeUnmount(() => {
     </a>
   </nav>
 </template>
+
+<style scoped>
+#indicator {
+   transition:
+    transform .5s cubic-bezier(0.25, 0.1, 0.25, 1.4),
+    width .5s ease-out;
+}
+</style>
