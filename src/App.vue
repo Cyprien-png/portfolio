@@ -2,6 +2,7 @@
 import Navbar from './components/Navbar.vue';
 import Home from './views/Home.vue'
 import AboutMe from './views/AboutMe.vue';
+import Projects from './views/Projects.vue';
 import { provideScrollContext } from '@/composables/useScrollContext'
 
 const { containerRef, contentRef } = provideScrollContext()
@@ -13,6 +14,7 @@ const { containerRef, contentRef } = provideScrollContext()
     <div ref="contentRef" id="content" class="w-full flex flex-col">
       <Home />
       <AboutMe />
+      <Projects />
     </div>
   </div>
 </template>

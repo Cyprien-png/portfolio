@@ -3,8 +3,8 @@ import FramedMainSection from '@/layouts/FramedMainSection.vue';
 </script>
 
 <template>
-    <FramedMainSection id="about-me">
-        <div class="h-full w-full bg-fit bg-cover bg-position-[center_40%] rounded-4xl bg-[url('/placeholder.png')] flex flex-col justify-center items-center text-center">
+    <FramedMainSection id="about-me" class="h-dvh">
+        <div class="h-full w-full bg-fit rounded-4xl bg-amber-700 flex flex-col justify-center items-center text-center">
            
         </div>
     </FramedMainSection>
