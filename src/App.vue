@@ -9,7 +9,7 @@ const { containerRef, contentRef } = provideScrollContext()
 </script>
 
 <template>
-  <div ref="containerRef" id="container" class="overflow-auto h-dvh">
+  <div ref="containerRef" id="container" class="overflow-auto h-dvh font-cantarell">
     <Navbar />
     <div ref="contentRef" id="content" class="w-full flex flex-col">
       <Home />
