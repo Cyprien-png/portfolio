@@ -108,7 +108,7 @@ onBeforeUnmount(() => {
 <style scoped>
 #indicator {
    transition:
-    transform .5s cubic-bezier(0.25, 0.1, 0.25, 1.4),
-    width .5s ease-out;
+    transform .2s ease-out,
+    width .2s ease-out;
 }
 </style>
