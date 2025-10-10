@@ -1,7 +1,9 @@
 <script setup>
 import FramedMainSection from '@/layouts/FramedMainSection.vue';
 import ToggleSection from '@/components/ToggleSection.vue';
+import { useSingleToggle } from '@/composables/useSingleToggle.js'
 
+const { isOpen, toggle } = useSingleToggle()
 const projects = [
     {
         title: "Game Engine",
@@ -35,7 +37,7 @@ const projects = [
     <FramedMainSection id="projects" :class="'min-h-[100dvh] flex h-auto'">
         <div class="flex-1 w-full bg-fit flex flex-col text-center pt-18">
             <div class="w-full h-full flex flex-col">
-                <ToggleSection v-for="(project, pi) in projects">
+                <ToggleSection v-for="(project, pi) in projects" :key="pi" :open="isOpen(pi)" @toggle="toggle(pi)">
                     <template v-slot:header>
                         <h1 class="tracking-[-0.3dvw]">
                             00-{{ (pi + 1).toLocaleString('en-US', { minimumIntegerDigits: 2 }) }}
