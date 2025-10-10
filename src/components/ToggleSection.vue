@@ -5,13 +5,16 @@ const props = defineProps({
   open: { type: Boolean, default: false }
 })
 
-const emit = defineEmits(['toggle'])
+const emit = defineEmits(['toggle', 'hover', 'leave'])
+
 </script>
 
 <template>
   <div
     class="flex-none group relative p-4 w-full items-center font-rubik cursor-pointer text-[2dvw] bg-white overflow-hidden transition-all"
-    @click="emit('toggle')">
+    @click="emit('toggle')"
+    @mouseover="emit('hover')"
+    @mouseleave="emit('leave')">
     <!-- black overlay -->
     <div
       class="absolute inset-0 bg-black pointer-events-none group-hover:translate-y-0 transition-transform duration-500"
