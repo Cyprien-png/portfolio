@@ -1,8 +1,9 @@
 <script setup>
-import Navbar from './components/Navbar.vue';
-import Home from './views/Home.vue'
-import AboutMe from './views/AboutMe.vue';
-import Projects from './views/Projects.vue';
+import Navbar from '@/components/Navbar.vue';
+import Home from '@/views/Home.vue'
+import AboutMe from '@/views/AboutMe.vue';
+import Projects from '@/views/Projects.vue';
+import Awards from '@/views/Awards.vue';
 import { provideScrollContext } from '@/composables/useScrollContext'
 
 const { containerRef, contentRef } = provideScrollContext()
@@ -15,6 +16,7 @@ const { containerRef, contentRef } = provideScrollContext()
       <Home />
       <AboutMe />
       <Projects />
+      <Awards />
     </div>
   </div>
 </template>
