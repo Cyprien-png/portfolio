@@ -4,41 +4,10 @@ import ToggleSection from '@/components/ToggleSection.vue';
 import { useSingleToggle } from '@/composables/useSingleToggle.js'
 import ImageAsCursor from '@/components/ImageAsCursor.vue';
 import { useImageAsCursor } from '@/composables/useImageAsCursor'
+import projects from '@/data/projects.json'
 
 const { setImage, open, close } = useImageAsCursor()
 const { isOpen, toggle } = useSingleToggle()
-const projects = [
-    {
-        title: "Game Engine",
-        description: "A lightweight, modular TypeScript game engine designed for modern browsers. Only 50kb when minified, but packed with powerful features for creating impressive 2D and 3D games.",
-        link: "https://sprunk-engine.com/",
-        image: "/placeholder.png"
-    },
-    {
-        title: "Portfolio",
-        description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-        link: "#",
-        image: "https://images.nationalgeographic.org/image/upload/v1638892272/EducationHub/photos/hoh-river-valley.jpg"
-    },
-    {
-        title: "Find your tribe",
-        description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-        link: "#",
-        image: "/placeholder.png"
-    },
-    {
-        title: "Flappy Bot",
-        description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-        link: "#",
-        image: "https://www.metroparks.net/wp-content/uploads/2017/06/1080p_HBK_autumn-morning_GI.jpg"
-    },
-    {
-        title: "SeaCracker",
-        description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-        link: "#",
-        image: "https://treesforall.nl/app/uploads/2022/03/Bos-Nederland-Epe-e1719389547661-0x1400-c-default.webp"
-    }
-]
 </script>
 
 <template>
