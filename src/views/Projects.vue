@@ -28,7 +28,7 @@ const { isOpen, toggle } = useSingleToggle()
                             <div class="h-full w-full flex flex-col border-l-8 border-black text-justify">
                                 <p class="p-6 flex-1">{{ project.description }}</p>
                                 <a :href="project.link" target="_blank"
-                                    class="flex justify-center border-t-8 h-12 bg-[url('/external-link.svg')] bg-[length:1.5rem] animate-[bg-move_3s_linear_infinite]">
+                                    class="flex justify-center border-t-8 h-12 bg-[url('/external-link.svg')] bg-[length:1.5rem] bg-blend-difference animate-[bg-move_3s_linear_infinite]">
                                 </a>
                             </div>
                         </div>
@@ -38,3 +38,16 @@ const { isOpen, toggle } = useSingleToggle()
         </div>
     </FramedMainSection>
 </template>
+
+
+<style>
+@keyframes bg-move {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 1.5rem -1.5rem;
+  }
+}
+</style>

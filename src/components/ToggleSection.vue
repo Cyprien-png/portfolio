@@ -35,15 +35,3 @@ const emit = defineEmits(['toggle', 'hover', 'leave'])
     <slot name="content"></slot>
   </div>
 </template>
-
-<style>
-@keyframes bg-move {
-  0% {
-    background-position: 0 0;
-  }
-
-  100% {
-    background-position: 1.5rem -1.5rem;
-  }
-}
-</style>
