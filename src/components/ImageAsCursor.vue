@@ -14,14 +14,15 @@ let targetY = 0
 let rafId = null
 
 const updatePosition = (e) => {
+  if (!isOpen.value) return;
   targetX = e.clientX
   targetY = e.clientY
 }
 
 const animate = () => {
-  // smooth easing (adjust 0.1 for faster/slower follow)
-  x.value += (targetX - x.value) * 0.1
-  y.value += (targetY - y.value) * 0.1
+  // smooth easing
+  x.value += (targetX - x.value) * 0.2
+  y.value += (targetY - y.value) * 0.2
 
   rafId = requestAnimationFrame(animate)
 }
