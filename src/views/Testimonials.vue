@@ -8,8 +8,8 @@ import RotateOnScroll from '@/components/RotateOnScroll.vue'
     <FramedMainSection id="testimonials" class="min-h-[100dvh] flex relative">
         <RotateOnScroll>
             <!-- Frame -->
-            <template #highlight="{ registerHighLight, registerFollowingWindow }">
-                <div class="h-dvh w-full absolute z-20 top-0 left-0 border-black border-[3dvw] pointer-events-none">
+            <template #highlight="{ registerHighLight, registerFollowingWindow, registerFollow }">
+                <div :ref="registerFollow" class="h-dvh w-full absolute z-20 top-0 left-0 border-black border-[3dvw] pointer-events-none">
                     <div :ref="registerFollowingWindow"
                         class="h-full w-full outline-[#000a] outline-[2dvw] rounded-4xl flex flex-col justify-center items-center p-[3dvw]">
                         <div :ref="registerHighLight" class="rounded-full transition-all duration-500 outline-[5dvw]">

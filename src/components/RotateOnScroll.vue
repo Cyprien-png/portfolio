@@ -8,7 +8,10 @@ const { containerRef } = useScrollContext()
 const contRef = ref(null)
 const highlightEl = ref(null)
 const followingWindow = ref(null)
+const follow = ref(null)
 const centerY = ref(0)
+const sectionStart = ref(0)
+const paddingTopRef = ref(0)
 let resizeObserver = null
 let rafId = null
 
@@ -25,6 +28,10 @@ function registerContainer(el) {
     contRef.value = el
 }
 
+function registerFollow(el) {
+    follow.value = el
+}
+
 function computeLayout() {
     const container = contRef.value
     const highlight = highlightEl.value
@@ -39,8 +46,11 @@ function computeLayout() {
 
     const frameStyle = followingWindow.value ? getComputedStyle(followingWindow.value) : null
     const paddingTop = frameStyle ? parseFloat(frameStyle.paddingTop) || 0 : 0
+    paddingTopRef.value = paddingTop
     const paddingBottom = frameStyle ? parseFloat(frameStyle.paddingBottom) || 0 : 0
     const frameOffset = paddingTop + paddingBottom
+
+    sectionStart.value = contRef.value.getBoundingClientRect().top - paddingTop
 
     const offset = (viewportH - frameOffset) / 2 - (itemH / 2)
     centerY.value = viewportH / 2 - (itemH / 2)
@@ -64,11 +74,22 @@ function computeLayout() {
 function handleScroll() {
     const container = contRef.value
     if (!container) return
+    let pos = contRef.value.getBoundingClientRect().top - paddingTopRef.value
+    const startScroll = 0
+    const endScroll = -container.getBoundingClientRect().height + window.innerHeight - paddingTopRef.value
 
-    Array.from(container.children).forEach((el) => {
-        const rotation = Math.round((el.getBoundingClientRect().top - centerY.value) * 10) / 10
-        el.style.transform = `rotateX(${(rotation / -6) % 180}deg) translateZ(${-Math.abs(rotation) / 2}px)`
-    })
+    if (pos > startScroll) {
+        pos = startScroll
+    } else if (pos < endScroll) {
+        pos = endScroll
+    } else {        
+        Array.from(container.children).forEach((el) => {
+            const rotation = Math.round((el.getBoundingClientRect().top - centerY.value) * 10) / 10
+            el.style.transform = `rotateX(${(rotation / -6) % 180}deg) translateZ(${-Math.abs(rotation) / 2}px)`
+        })
+    }
+    
+    follow.value.style.transform = `translateY(${-pos}px)`
 }
 
 onMounted(async () => {
@@ -105,7 +126,7 @@ defineExpose({ highlightEl })
 
 <template>
     <!-- Frame -->
-    <slot name="highlight" :registerFollowingWindow="registerFollowingWindow" :registerHighLight="registerHighlight">
+    <slot name="highlight" :registerFollow="registerFollow" :registerFollowingWindow="registerFollowingWindow" :registerHighLight="registerHighlight">
     </slot>
 
     <!-- Scrollable content -->
