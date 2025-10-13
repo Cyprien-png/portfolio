@@ -71,6 +71,14 @@ function computeLayout() {
     }
 }
 
+function setRotation(container, scro) {
+    Array.from(container.children).forEach((el) => {
+        scroll = scro ?? el.getBoundingClientRect().top
+        const rotation = Math.round((scroll - centerY.value) * 10) / 10
+        el.style.transform = `rotateX(${(rotation / -6) % 180}deg) translateZ(${-Math.abs(rotation) / 2}px)`
+    })
+}
+
 function handleScroll() {
     const container = contRef.value
     if (!container) return
@@ -80,15 +88,14 @@ function handleScroll() {
 
     if (pos > startScroll) {
         pos = startScroll
+        setRotation(container, centerY.value)
     } else if (pos < endScroll) {
         pos = endScroll
-    } else {        
-        Array.from(container.children).forEach((el) => {
-            const rotation = Math.round((el.getBoundingClientRect().top - centerY.value) * 10) / 10
-            el.style.transform = `rotateX(${(rotation / -6) % 180}deg) translateZ(${-Math.abs(rotation) / 2}px)`
-        })
+        setRotation(container, centerY.value)
+    } else {
+        setRotation(container)
     }
-    
+
     follow.value.style.transform = `translateY(${-pos}px)`
 }
 
@@ -126,7 +133,8 @@ defineExpose({ highlightEl })
 
 <template>
     <!-- Frame -->
-    <slot name="highlight" :registerFollow="registerFollow" :registerFollowingWindow="registerFollowingWindow" :registerHighLight="registerHighlight">
+    <slot name="highlight" :registerFollow="registerFollow" :registerFollowingWindow="registerFollowingWindow"
+        :registerHighLight="registerHighlight">
     </slot>
 
     <!-- Scrollable content -->
