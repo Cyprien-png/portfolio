@@ -4,6 +4,7 @@ import Home from '@/views/Home.vue'
 import AboutMe from '@/views/AboutMe.vue';
 import Projects from '@/views/Projects.vue';
 import Awards from '@/views/Awards.vue';
+import Testimonials from './views/Testimonials.vue';
 import { provideScrollContext } from '@/composables/useScrollContext'
 
 const { containerRef, contentRef } = provideScrollContext()
@@ -17,6 +18,7 @@ const { containerRef, contentRef } = provideScrollContext()
       <AboutMe />
       <Projects />
       <Awards />
+      <Testimonials />
     </div>
   </div>
 </template>
