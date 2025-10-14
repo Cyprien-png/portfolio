@@ -40,7 +40,7 @@ const computeLayout = () => {
     followingFramePaddingRef.value = frameStyle ? parseFloat(frameStyle.paddingTop) || 0 : 0
 
     contentContainerRef.value.style.paddingTop = `${offset}px`
-    contentContainerRef.value.style.paddingBottom = `${offset + followingFramePaddingRef.value}px`
+    contentContainerRef.value.style.paddingBottom = `${offset}px`
 
     if (highlightEl.value) {
         let maxHeight = items[0].offsetHeight;
@@ -74,7 +74,7 @@ const handleScroll = () => {
     if (!contentContainerRef.value) return
 
     const scrollPositionStart = 0
-    const scrollPositionEnd = -contentContainerRef.value.getBoundingClientRect().height + window.innerHeight - followingFramePaddingRef.value
+    const scrollPositionEnd = -contentContainerRef.value.getBoundingClientRect().height + followingFrameInnerAreaRef.value.offsetHeight
     let scrollPositionCurrent = contentContainerRef.value.getBoundingClientRect().top - followingFramePaddingRef.value
 
     if (scrollPositionCurrent > scrollPositionStart) {

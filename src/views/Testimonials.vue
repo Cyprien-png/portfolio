@@ -5,7 +5,7 @@ import RotateOnScroll from '@/components/RotateOnScroll.vue'
 </script>
 
 <template>
-    <FramedMainSection id="testimonials" class="min-h-[100dvh] flex relative bg-sky-50">
+    <FramedMainSection id="testimonials" class="min-h-[100dvh] flex relative">
         <RotateOnScroll>
             <!-- Frame -->
             <template #highlight="{ registerHighLight, registerFollowingFrame }">
