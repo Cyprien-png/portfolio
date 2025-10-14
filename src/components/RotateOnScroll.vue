@@ -5,98 +5,89 @@ import { useScrollContext } from '@/composables/useScrollContext'
 const { containerRef } = useScrollContext()
 
 // Internal refs
-const contRef = ref(null)
+const contentContainerRef = ref(null)
 const highlightEl = ref(null)
-const followingWindow = ref(null)
-const follow = ref(null)
-const centerY = ref(0)
-const paddingTopRef = ref(0)
+const followingFrameRef = ref(null)
+const followingFrameInnerAreaRef = ref(null)
+const followingFramePaddingRef = ref(0)
+
 let resizeObserver = null
 let rafId = null
 
-// The function that the parent will use via slot binding
-function registerHighlight(el) {
+// Refs auto setters
+const registerHighlight = (el) => {
     highlightEl.value = el
 }
 
-function registerFollowingWindow(el) {
-    followingWindow.value = el
+const registerContainer = (el) => {
+    contentContainerRef.value = el
 }
 
-function registerContainer(el) {
-    contRef.value = el
+const registerFollowingFrame = (el) => {
+    followingFrameRef.value = el
+    followingFrameInnerAreaRef.value = el.firstChild
 }
 
-function registerFollow(el) {
-    follow.value = el
-}
+// Set the base positions
+const computeLayout = () => {
+    if (!contentContainerRef.value) return
 
-function computeLayout() {
-    const container = contRef.value
-    const highlight = highlightEl.value
-    if (!container) return
-
-    const items = container.querySelectorAll('.testimonial-item')
+    const items = contentContainerRef.value.querySelectorAll('.testimonial-item')
     if (!items.length) return
 
-    const firstItem = items[0]
-    const viewportH = window.innerHeight
-    const itemH = firstItem.offsetHeight
+    const frameStyle = followingFrameInnerAreaRef.value ? getComputedStyle(followingFrameInnerAreaRef.value) : null
+    const offset = followingFrameInnerAreaRef.value.offsetHeight / 2 - (items[0].offsetHeight / 2)
+    followingFramePaddingRef.value = frameStyle ? parseFloat(frameStyle.paddingTop) || 0 : 0
 
-    const frameStyle = followingWindow.value ? getComputedStyle(followingWindow.value) : null
-    const paddingTop = frameStyle ? parseFloat(frameStyle.paddingTop) || 0 : 0
-    paddingTopRef.value = paddingTop
+    contentContainerRef.value.style.paddingTop = `${offset}px`
+    contentContainerRef.value.style.paddingBottom = `${offset + followingFramePaddingRef.value}px`
 
-    const frameOffset = paddingTop*2
+    if (highlightEl.value) {
+        let maxHeight = items[0].offsetHeight;
+        let maxWidth = items[0].offsetWidth;
 
-    const offset = (viewportH - frameOffset) / 2 - (itemH / 2)
-    centerY.value = viewportH / 2 - (itemH / 2)
-
-    const topPad = Math.max(0, offset)
-
-    container.style.paddingTop = `${topPad}px`
-    container.style.paddingBottom = `${topPad + paddingTop}px`
-    container.style.display = 'flex'
-    container.style.flexDirection = 'column'
-    container.style.justifyContent = 'flex-start'
-
-    if (highlight) {
-        const maxHeight = Math.max(...Array.from(items).map(i => i.offsetHeight)) * 2
-        const maxWidth = Math.max(...Array.from(items).map(i => i.offsetWidth)) * 1.2
-        highlight.style.height = `${maxHeight}px`
-        highlight.style.width = `${maxWidth}px`
+        Array.from(items).forEach((i) => {
+            if (i.offsetHeight > maxHeight) maxHeight = i.offsetHeight;
+            if (i.offsetWidth > maxWidth) maxWidth = i.offsetWidth;
+        })
+     
+        highlightEl.value.style.height = `${maxHeight * 2}px`
+        highlightEl.value.style.width = `${maxWidth * 1.2}px`
     }
 }
 
-function setRotation(container, scro) {
-    const containerPos = contRef.value.getBoundingClientRect().top
+// Apply the transformations
+const setRotation = (container, scro) => {
+    const containerPos = contentContainerRef.value.getBoundingClientRect().top
     
     Array.from(container.children).forEach((el) => {
-        const scroll = scro ?? containerPos
-        const rotation = Math.round((scroll + el.offsetTop - centerY.value) * 10) / 10
+        const scroll = scro ?? containerPos;
+        const centerY = window.innerHeight / 2 - (el.offsetHeight / 2);
+        const rotation = Math.round((scroll + el.offsetTop - centerY) * 10) / 10
+
         el.style.transform = `rotateX(${(rotation / -6) % 180}deg) translateZ(${-Math.abs(rotation) / 2}px)`
     })
 }
 
-function handleScroll() {
-    const container = contRef.value
-    if (!container) return
+// Compute an action based on the scroll
+const handleScroll = () => {
+    if (!contentContainerRef.value) return
 
-    let pos = contRef.value.getBoundingClientRect().top - paddingTopRef.value
-    const startScroll = 0
-    const endScroll = -container.getBoundingClientRect().height + window.innerHeight - paddingTopRef.value
+    const scrollPositionStart = 0
+    const scrollPositionEnd = -contentContainerRef.value.getBoundingClientRect().height + window.innerHeight - followingFramePaddingRef.value
+    let scrollPositionCurrent = contentContainerRef.value.getBoundingClientRect().top - followingFramePaddingRef.value
 
-    if (pos > startScroll) {
-        pos = startScroll
-        setRotation(container, startScroll + paddingTopRef.value)
-    } else if (pos < endScroll) {
-        pos = endScroll
-        setRotation(container, endScroll + paddingTopRef)
+    if (scrollPositionCurrent > scrollPositionStart) {
+        scrollPositionCurrent = scrollPositionStart
+        setRotation(contentContainerRef.value, scrollPositionStart + followingFramePaddingRef.value)
+    } else if (scrollPositionCurrent < scrollPositionEnd) {
+        scrollPositionCurrent = scrollPositionEnd
+        setRotation(contentContainerRef.value, scrollPositionEnd + followingFramePaddingRef)
     } else {
-        setRotation(container)
+        setRotation(contentContainerRef.value)
     }
 
-    follow.value.style.transform = `translateY(${-pos}px)`
+    followingFrameRef.value.style.transform = `translateY(${-scrollPositionCurrent}px)`
 }
 
 onMounted(async () => {
@@ -117,8 +108,8 @@ onMounted(async () => {
             if (rafId) cancelAnimationFrame(rafId)
             rafId = requestAnimationFrame(() => computeLayout())
         })
-        if (contRef.value) resizeObserver.observe(contRef.value)
-        contRef.value.querySelectorAll('.testimonial-item').forEach(el => resizeObserver.observe(el))
+        if (contentContainerRef.value) resizeObserver.observe(contentContainerRef.value)
+        contentContainerRef.value.querySelectorAll('.testimonial-item').forEach(el => resizeObserver.observe(el))
     }
 })
 
@@ -133,8 +124,7 @@ defineExpose({ highlightEl })
 
 <template>
     <!-- Frame -->
-    <slot name="highlight" :registerFollow="registerFollow" :registerFollowingWindow="registerFollowingWindow"
-        :registerHighLight="registerHighlight">
+    <slot name="highlight" :registerFollowingFrame="registerFollowingFrame" :registerHighLight="registerHighlight">
     </slot>
 
     <!-- Scrollable content -->
