@@ -72,8 +72,10 @@ function computeLayout() {
 }
 
 function setRotation(container, scro) {
+    const containerPos = contRef.value.getBoundingClientRect().top
+    
     Array.from(container.children).forEach((el) => {
-        scroll = scro ?? el.getBoundingClientRect().top
+        const scroll = scro ? scro + el.offsetTop : containerPos + el.offsetTop
         const rotation = Math.round((scroll - centerY.value) * 10) / 10
         el.style.transform = `rotateX(${(rotation / -6) % 180}deg) translateZ(${-Math.abs(rotation) / 2}px)`
     })
@@ -82,16 +84,17 @@ function setRotation(container, scro) {
 function handleScroll() {
     const container = contRef.value
     if (!container) return
+
     let pos = contRef.value.getBoundingClientRect().top - paddingTopRef.value
     const startScroll = 0
     const endScroll = -container.getBoundingClientRect().height + window.innerHeight - paddingTopRef.value
 
     if (pos > startScroll) {
         pos = startScroll
-        setRotation(container, centerY.value)
+        setRotation(container, startScroll + paddingTopRef.value)
     } else if (pos < endScroll) {
         pos = endScroll
-        setRotation(container, centerY.value)
+        setRotation(container, endScroll + paddingTopRef)
     } else {
         setRotation(container)
     }
