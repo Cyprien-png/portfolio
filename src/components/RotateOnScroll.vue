@@ -10,7 +10,6 @@ const highlightEl = ref(null)
 const followingWindow = ref(null)
 const follow = ref(null)
 const centerY = ref(0)
-const sectionStart = ref(0)
 const paddingTopRef = ref(0)
 let resizeObserver = null
 let rafId = null
@@ -47,10 +46,8 @@ function computeLayout() {
     const frameStyle = followingWindow.value ? getComputedStyle(followingWindow.value) : null
     const paddingTop = frameStyle ? parseFloat(frameStyle.paddingTop) || 0 : 0
     paddingTopRef.value = paddingTop
-    const paddingBottom = frameStyle ? parseFloat(frameStyle.paddingBottom) || 0 : 0
-    const frameOffset = paddingTop + paddingBottom
 
-    sectionStart.value = contRef.value.getBoundingClientRect().top - paddingTop
+    const frameOffset = paddingTop*2
 
     const offset = (viewportH - frameOffset) / 2 - (itemH / 2)
     centerY.value = viewportH / 2 - (itemH / 2)
@@ -58,7 +55,7 @@ function computeLayout() {
     const topPad = Math.max(0, offset)
 
     container.style.paddingTop = `${topPad}px`
-    container.style.paddingBottom = `${topPad}px`
+    container.style.paddingBottom = `${topPad + paddingTop}px`
     container.style.display = 'flex'
     container.style.flexDirection = 'column'
     container.style.justifyContent = 'flex-start'
@@ -75,8 +72,8 @@ function setRotation(container, scro) {
     const containerPos = contRef.value.getBoundingClientRect().top
     
     Array.from(container.children).forEach((el) => {
-        const scroll = scro ? scro + el.offsetTop : containerPos + el.offsetTop
-        const rotation = Math.round((scroll - centerY.value) * 10) / 10
+        const scroll = scro ?? containerPos
+        const rotation = Math.round((scroll + el.offsetTop - centerY.value) * 10) / 10
         el.style.transform = `rotateX(${(rotation / -6) % 180}deg) translateZ(${-Math.abs(rotation) / 2}px)`
     })
 }
