@@ -85,7 +85,7 @@ onBeforeUnmount(() => {
 
 <template>
   <nav ref="nav"
-    class="fixed flex rounded-full top-[6dvh] z-50 bg-[#0004] outline-2 outline-[#aaa8] backdrop-blur-sm">
+    class="fixed flex rounded-full top-[4dvw] z-50 bg-[#0004] outline-2 outline-[#aaa8] backdrop-blur-sm">
     <div ref="indicator" id="indicator" class="bg-white absolute inset-0 rounded-full h-full"></div>
 
     <a v-for="section in sections" :key="section.id"
