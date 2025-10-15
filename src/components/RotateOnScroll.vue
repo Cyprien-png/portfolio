@@ -82,7 +82,7 @@ const handleScroll = () => {
         setRotation(contentContainerRef.value, scrollPositionStart + followingFramePaddingRef.value)
     } else if (scrollPositionCurrent < scrollPositionEnd) {
         scrollPositionCurrent = scrollPositionEnd
-        setRotation(contentContainerRef.value, scrollPositionEnd + followingFramePaddingRef)
+        setRotation(contentContainerRef.value, scrollPositionEnd + followingFramePaddingRef.value)
     } else {
         setRotation(contentContainerRef.value)
     }
