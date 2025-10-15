@@ -5,17 +5,18 @@ import { useScrollContext } from '@/composables/useScrollContext'
 
 const { containerRef } = useScrollContext()
 const contactSectionRef = ref(null)
-const translation = ref(0)
+const translationRef = ref(0)
+const paddingTopRef = ref(0)
+
 
 // Compute an action based on the scroll
 const handleScroll = () => {
     const relativeScrollPosition = contactSectionRef.value.parentNode.getBoundingClientRect().top;
-    const paddingTop = parseFloat(getComputedStyle(contactSectionRef.value).paddingTop) * .5
-
-    translation.value = Math.round(relativeScrollPosition + paddingTop)
+    translationRef.value = Math.round(relativeScrollPosition + paddingTopRef.value * .75)
 }
 
 onMounted(async () => {
+    paddingTopRef.value = parseFloat(getComputedStyle(contactSectionRef.value).paddingTop)
     containerRef.value.addEventListener('scroll', handleScroll)
 });
 </script>
@@ -45,7 +46,7 @@ onMounted(async () => {
                 </div>
             </div>
 
-            <div class="h-full w-full bg-sky-400 transition-transform duration-75" :style="`transform: translateY(${translation}px)`"></div>
+            <div class="h-full w-full bg-sky-400 transition-transform duration-75" :style="`transform: translateY(${translationRef}px)`"></div>
         </div>
     </FramedMainSection>
 </template>
