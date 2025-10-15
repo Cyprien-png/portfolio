@@ -1,10 +1,28 @@
 <script setup>
+import { onMounted, ref } from 'vue';
 import FramedMainSection from '@/layouts/FramedMainSection.vue';
+import { useScrollContext } from '@/composables/useScrollContext'
+
+const { containerRef } = useScrollContext()
+const contactSectionRef = ref(null)
+const translation = ref(0)
+
+// Compute an action based on the scroll
+const handleScroll = () => {
+    const relativeScrollPosition = contactSectionRef.value.parentNode.getBoundingClientRect().top;
+    const paddingTop = parseFloat(getComputedStyle(contactSectionRef.value).paddingTop) * .5
+
+    translation.value = Math.round(relativeScrollPosition + paddingTop)
+}
+
+onMounted(async () => {
+    containerRef.value.addEventListener('scroll', handleScroll)
+});
 </script>
 
 <template>
     <FramedMainSection id="contact" class="h-dvh">
-        <div class="h-full w-full rounded-4xl flex flex-col pt-20">
+        <div ref="contactSectionRef" class="h-full w-full rounded-4xl flex flex-col pt-20">
             <div class="grid grid-cols-3 w-full gap-8">
                 <div class="h-full w-full">
                     <h2 class="font-rubik border-b-3 border-dashed">Hire me</h2>
@@ -27,7 +45,7 @@ import FramedMainSection from '@/layouts/FramedMainSection.vue';
                 </div>
             </div>
 
-            <div class="h-full w-full bg-sky-400 translate-y-[3dvw]"></div>
+            <div class="h-full w-full bg-sky-400 transition-transform duration-75" :style="`transform: translateY(${translation}px)`"></div>
         </div>
     </FramedMainSection>
 </template>
