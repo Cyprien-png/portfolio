@@ -3,7 +3,7 @@
         "title": "Game Engine",
         "description": "A lightweight, modular TypeScript game engine designed for modern browsers. Only 50kb when minified, but packed with powerful features for creating impressive 2D and 3D games.",
         "link": "https://sprunk-engine.com/",
-        "image": "/placeholder.png"
+        "image": "/sprunk.png"
     },
     {
         "title": "Portfolio",
@@ -21,7 +21,7 @@
         "title": "Flappy Bot",
         "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
         "link": "#",
-        "image": "https://www.metroparks.net/wp-content/uploads/2017/06/1080p_HBK_autumn-morning_GI.jpg"
+        "image": "/flappy-bird.png"
     },
     {
         "title": "SeaCracker",

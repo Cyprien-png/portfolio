@@ -28,7 +28,7 @@ const { isOpen, toggle } = useSingleToggle()
                             <div class="h-full w-full text-black overflow-hidden flex flex-col gap-6">
                                 <div class="flex gap-6 flex-col md:flex-row">
                                     <img :src="project.image" :alt="project.title"
-                                    class="object-cover rounded-xl border-2 border-white h-[20dvh]">
+                                    class="object-cover rounded-xl border-2 bg-white border-white h-[20dvh]">
                                     <p class="rounded-xl text-justify text-white">{{ project.description }}</p>
                                 </div>
                                     
