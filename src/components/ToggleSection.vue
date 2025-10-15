@@ -11,7 +11,7 @@ const emit = defineEmits(['toggle', 'hover', 'leave'])
 
 <template>
   <div
-    class="flex-none group relative p-4 w-full items-center font-rubik cursor-pointer text-[2dvw] bg-white overflow-hidden transition-all"
+    class="flex-1 group relative p-4 w-full items-center font-rubik cursor-pointer text-[2dvw] bg-white overflow-hidden transition-all"
     @click="emit('toggle')"
     @mouseover="emit('hover')"
     @mouseleave="emit('leave')">
@@ -31,7 +31,7 @@ const emit = defineEmits(['toggle', 'hover', 'leave'])
   </div>
 
   <div class="w-full overflow-hidden bg-black text-white"
-    :class="props.open ? 'h-full p-6 transition-none' : 'h-0 transition-none'">
+    :class="props.open ? 'h-fit transition-none' : 'h-0 transition-none'">
     <slot name="content"></slot>
   </div>
 </template>
