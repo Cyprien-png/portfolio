@@ -11,7 +11,7 @@ const emit = defineEmits(['toggle', 'hover', 'leave'])
 
 <template>
   <div
-    class="flex-1 group relative p-4 w-full items-center font-rubik cursor-pointer text-[2dvw] bg-white overflow-hidden transition-all"
+    class="flex-1 group relative p-4 w-full items-center font-rubik cursor-pointer text-xl lg:text-[2dvw] bg-white overflow-hidden transition-all"
     @click="emit('toggle')"
     @mouseover="emit('hover')"
     @mouseleave="emit('leave')">
@@ -22,7 +22,7 @@ const emit = defineEmits(['toggle', 'hover', 'leave'])
     </div>
 
     <!-- content -->
-    <div class="relative z-10 w-full h-full grid grid-cols-3 items-center text-white mix-blend-difference">
+    <div class="relative z-10 w-full h-full flex justify-between items-center text-white mix-blend-difference">
       <slot name="header"></slot>
       <div class="h-full flex justify-center items-center">
         <ArrowIcon class="h-[2dvw] block transition-all" :class="props.open ? 'rotate-90' : 'rotate-0'" />
