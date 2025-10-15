@@ -14,7 +14,7 @@ import RotateOnScroll from '@/components/RotateOnScroll.vue'
                     <div
                         class="h-full w-full overflow-hidden rounded-4xl flex flex-col justify-center items-center p-[3dvw] z-20">
                         <div :ref="registerHighLight"
-                            class="rounded-full z-20 transition-all duration-500 outline-[50dvw] outline-sky-500 relative">
+                            class="rounded-full z-20 outline-[50dvw] outline-sky-500 relative">
                             <div
                                 class="h-full w-full top-0 left-0 bg-linear-[white_2%,transparent_25%,transparent_75%,white_98%] ">
                             </div>

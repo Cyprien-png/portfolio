@@ -13,7 +13,7 @@ const { isOpen, toggle } = useSingleToggle()
 <template>
     <ImageAsCursor />
     <FramedMainSection id="projects" :class="'min-h-[100dvh] flex h-auto'">
-        <div class="flex-1 w-full bg-fit flex flex-col text-center pt-18">
+        <div class="flex-1 w-full bg-fit flex flex-col text-center pt-20">
             <div class="w-full h-full flex flex-col">
                 <ToggleSection v-for="(project, pi) in projects" :key="pi" :open="isOpen(pi)" @toggle="toggle(pi)" @hover="setImage(project.image), open()" @leave="close()">
                     <template v-slot:header>
