@@ -31,7 +31,7 @@ const emit = defineEmits(['toggle', 'hover', 'leave'])
   </div>
 
   <div class="w-full overflow-hidden bg-black text-white"
-    :class="props.open ? 'h-fit transition-none' : 'h-0 transition-none'">
+    :class="props.open ? 'h-auto' : 'h-0'">
     <slot name="content"></slot>
   </div>
 </template>

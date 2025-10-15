@@ -28,12 +28,12 @@ const { isOpen, toggle } = useSingleToggle()
                             <div class="h-full w-full text-black overflow-hidden flex flex-col gap-6">
                                 <div class="flex gap-6 flex-col md:flex-row">
                                     <img :src="project.image" :alt="project.title"
-                                    class="object-cover rounded-2xl border-2 border-white h-[20dvh]">
-                                    <p class="rounded-2xl text-justify text-white">{{ project.description }}</p>
+                                    class="object-cover rounded-xl border-2 border-white h-[20dvh]">
+                                    <p class="rounded-xl text-justify text-white">{{ project.description }}</p>
                                 </div>
                                     
                                 <a :href="project.link" target="_blank"
-                                    class="border-2 border-white h-[5dvh] flex justify-center rounded-2xl bg-[url('/external-link.svg')] bg-[length:3dvh] bg-blend-difference animate-[bg-move_5s_linear_infinite]">
+                                    class="border-2 border-white h-[5dvh] flex justify-center rounded-xl bg-[url('/external-link.svg')] bg-[length:3dvh] bg-blend-difference animate-[bg-move_5s_linear_infinite]">
                                 </a>
                             </div>
                         </div>
