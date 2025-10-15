@@ -23,8 +23,8 @@ onMounted(async () => {
 
 <template>
     <FramedMainSection id="contact" class="h-dvh">
-        <div ref="contactSectionRef" class="h-full w-full rounded-4xl flex flex-col pt-20">
-            <div class="grid grid-cols-3 w-full gap-8">
+        <div ref="contactSectionRef" class="h-full w-full rounded-4xl flex flex-col pt-20 bg-gray-200">
+            <div class="grid grid-cols-3 w-full gap-8 px-8">
                 <div class="h-full w-full">
                     <h2 class="font-rubik border-b-3 border-dashed">Hire me</h2>
                     <ul class="pt-4 text-2xl flex flex-col gap-2 text-gray-600">
