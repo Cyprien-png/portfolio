@@ -18,7 +18,7 @@ const { isOpen, toggle } = useSingleToggle()
                 <ToggleSection v-for="(project, pi) in projects" :key="pi" :open="isOpen(pi)" @toggle="toggle(pi)"
                     @hover="setImage(project.image), open()" @leave="close()">
                     <template v-slot:header>
-                        <h1 class="tracking-[-0.3dvw]">
+                        <h1 class="tracking-[-0.3dvw] hidden md:flex">
                             00-{{ (pi + 1).toLocaleString('en-US', { minimumIntegerDigits: 2 }) }}
                         </h1>
                         <h1>{{ project.title }}</h1>
@@ -28,7 +28,7 @@ const { isOpen, toggle } = useSingleToggle()
                             <div class="h-full w-full text-black overflow-hidden flex flex-col gap-6">
                                 <div class="flex gap-6 flex-col md:flex-row">
                                     <img :src="project.image" :alt="project.title"
-                                    class="object-cover rounded-xl border-2 bg-white border-white h-[20dvh]">
+                                    class="object-cover aspect-[3/2] md:aspect-auto rounded-xl border-2 bg-white border-white h-[24dvh]">
                                     <p class="rounded-xl text-justify text-white">{{ project.description }}</p>
                                 </div>
                                     
