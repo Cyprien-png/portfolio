@@ -89,9 +89,9 @@ onBeforeUnmount(() => {
     <div ref="indicator" id="indicator" class="bg-white absolute inset-0 rounded-full h-full"></div>
 
     <a v-for="section in sections" :key="section.id"
-      class="nav-element cursor-pointer px-4 py-2 relative text-white mix-blend-difference first-letter:capitalize"
+      class="nav-element cursor-pointer px-4 py-2 h-10 relative text-white mix-blend-difference first-letter:capitalize"
       :data-section="section.id" @click="selectSection(section.id)">
-      <ArrowIcon v-if="section.id == 'home'" class="h-5 w-4 translate-y-0.5 transition-all" :class="currentSection=='home'? 'rotate-90':'-rotate-90'" />
+      <ArrowIcon v-if="section.id == 'home'" class="translate-y-0.5 transition-all" :class="currentSection=='home'? 'rotate-90':'-rotate-90'" />
       <span v-else>{{ section.id.replace('-', ' ') }}</span>
     </a>
   </nav>

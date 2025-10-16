@@ -24,8 +24,8 @@ const emit = defineEmits(['toggle', 'hover', 'leave'])
     <!-- content -->
     <div class="relative z-10 w-full h-full flex justify-between items-center text-white mix-blend-difference">
       <slot name="header"></slot>
-      <div class="h-full flex justify-center items-center">
-        <ArrowIcon class="h-[2dvw] block transition-all" :class="props.open ? 'rotate-90' : 'rotate-0'" />
+      <div class="lg:w-[2dvw] w-6  aspect-square flex justify-center items-center">
+        <ArrowIcon class="block transition-all" :class="props.open ? 'rotate-90' : 'rotate-0'" />
       </div>
     </div>
   </div>
