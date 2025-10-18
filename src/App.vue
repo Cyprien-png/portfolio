@@ -8,6 +8,7 @@ import Testimonials from './views/Testimonials.vue';
 import TestimonialsMobile from './views/TestimonialsMobile.vue';
 import Contact from './views/Contact.vue';
 import { provideScrollContext } from '@/composables/useScrollContext'
+import { md } from '@/utils/deviceSize'
 
 const { containerRef, contentRef } = provideScrollContext()
 </script>
@@ -20,7 +21,8 @@ const { containerRef, contentRef } = provideScrollContext()
       <AboutMe />
       <Projects />
       <Awards />
-      <TestimonialsMobile />
+      <Testimonials v-if="md()" />
+      <TestimonialsMobile v-else />
       <Contact />
     </div>
   </div>
