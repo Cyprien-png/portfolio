@@ -1,4 +1,4 @@
-import { ref, provide, inject, onMounted, onBeforeUnmount } from 'vue'
+import { ref, provide, inject, computed, onMounted, onBeforeUnmount } from 'vue'
 
 const key = Symbol('scrollContext')
 
@@ -17,10 +17,16 @@ export function provideScrollContext() {
     sections.value = sections.value.filter(s => s.id !== id)
   }
 
+  const getSectionById = (id) => computed(() => {
+    const section = sections.value.find(s => s.id === id)
+    return section ? section.el : null
+  })
+
   provide(key, {
     containerRef,
     contentRef,
     sections,
+    getSectionById,
     registerSection,
     unregisterSection,
   })
@@ -33,7 +39,8 @@ export function useScrollContext() {
     containerRef: ref(null),
     contentRef: ref(null),
     sections: ref([]),
-    registerSection: () => {},
-    unregisterSection: () => {},
+    getSectionById: () => { },
+    registerSection: () => { },
+    unregisterSection: () => { },
   })
 }
