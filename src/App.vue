@@ -2,6 +2,7 @@
 import Navbar from '@/components/Navbar.vue';
 import Home from '@/views/Home.vue'
 import AboutMe from '@/views/AboutMe.vue';
+import AboutMeMobile from './views/AboutMeMobile.vue';
 import Projects from '@/views/Projects.vue';
 import Awards from '@/views/Awards.vue';
 import Testimonials from './views/Testimonials.vue';
@@ -18,7 +19,8 @@ const { containerRef, contentRef } = provideScrollContext()
     <Navbar />
     <div ref="contentRef" id="content" class="w-full flex flex-col">
       <Home />
-      <AboutMe />
+      <AboutMe v-if="md()"/>
+      <AboutMeMobile v-else />
       <Projects />
       <Awards />
       <Testimonials v-if="md()" />
