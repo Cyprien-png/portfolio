@@ -42,7 +42,7 @@ watch(getSectionById(props.sectionId), (el) => {
 </script>
 
 <template>
-    <div ref="frameRef" class="h-dvh w-dvw absolute top-0 left-0 pointer-events-none">
+    <div ref="frameRef" class="h-dvh w-dvw z-20 absolute top-0 left-0 pointer-events-none">
         <slot></slot>
     </div>
 </template>

@@ -3,6 +3,13 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import { useScrollContext } from '@/composables/useScrollContext'
 import FollowingFrame from './FollowingFrame.vue'
 
+defineProps({
+    sectionId: {
+        type: String,
+        required: true
+    }
+})
+
 const { containerRef } = useScrollContext()
 
 // Internal refs
@@ -95,7 +102,7 @@ onUnmounted(() => {
 
 <template>
     <!-- Frame -->
-    <FollowingFrame sectionId="testimonials">
+    <FollowingFrame :sectionId>
         <slot name="highlight" :registerFollowingFrame="registerFollowingFrame" :registerHighLight="registerHighlight">
         </slot>
     </FollowingFrame>

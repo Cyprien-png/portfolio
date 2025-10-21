@@ -6,11 +6,11 @@ import RotateOnScroll from '@/components/RotateOnScroll.vue'
 
 <template>
     <FramedMainSection id="testimonials" class="min-h-[100dvh] flex relative">
-        <RotateOnScroll>
+        <RotateOnScroll sectionId="testimonials">
             <!-- Frame -->
             <template #highlight="{ registerHighLight, registerFollowingFrame }">
                 <div :ref="registerFollowingFrame"
-                    class="h-dvh w-full absolute z-20 top-0 left-0 border-white border-[3dvw] pointer-events-none">
+                    class="h-dvh w-full top-0 left-0 border-white border-[3dvw] pointer-events-none">
                     <div
                         class="h-full w-full overflow-hidden rounded-4xl flex flex-col justify-center items-center p-[3dvw] z-20">
                         <div :ref="registerHighLight"
