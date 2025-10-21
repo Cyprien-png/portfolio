@@ -70,7 +70,7 @@ const handleScroll = () => {
 
 onMounted(() => {
   containerRef.value.addEventListener('scroll', handleScroll, { passive: true })
-  containerRef.value.addEventListener('wheel', handleScroll)
+  containerRef.value.addEventListener('wheel', handleScroll, { passive: true })
   containerRef.value.addEventListener('touchmove', handleScroll, { passive: true })
 
   nextTick(updateNav)
