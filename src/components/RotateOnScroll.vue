@@ -1,18 +1,15 @@
 <script setup>
-import { ref, onMounted, onUnmounted, nextTick } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import { useScrollContext } from '@/composables/useScrollContext'
+import FollowingFrame from './FollowingFrame.vue'
 
 const { containerRef } = useScrollContext()
 
 // Internal refs
 const contentContainerRef = ref(null)
 const highlightEl = ref(null)
-const followingFrameRef = ref(null)
 const followingFrameInnerAreaRef = ref(null)
 const followingFramePaddingRef = ref(0)
-
-let resizeObserver = null
-let rafId = null
 
 // Refs auto setters
 const registerHighlight = (el) => {
@@ -24,7 +21,6 @@ const registerContainer = (el) => {
 }
 
 const registerFollowingFrame = (el) => {
-    followingFrameRef.value = el
     followingFrameInnerAreaRef.value = el.firstChild
 }
 
@@ -32,7 +28,7 @@ const registerFollowingFrame = (el) => {
 const computeLayout = () => {
     if (!contentContainerRef.value) return
 
-    const items = contentContainerRef.value.querySelectorAll('.testimonial-item')
+    const items = contentContainerRef.value.children;
     if (!items.length) return
 
     const frameStyle = followingFrameInnerAreaRef.value ? getComputedStyle(followingFrameInnerAreaRef.value) : null
@@ -50,7 +46,7 @@ const computeLayout = () => {
             if (i.offsetHeight > maxHeight) maxHeight = i.offsetHeight;
             if (i.offsetWidth > maxWidth) maxWidth = i.offsetWidth;
         })
-     
+
         highlightEl.value.style.height = `${maxHeight * 2}px`
         highlightEl.value.style.width = `${maxWidth * 1.2}px`
     }
@@ -59,7 +55,7 @@ const computeLayout = () => {
 // Apply the transformations
 const setRotation = (container, scro) => {
     const containerPos = contentContainerRef.value.getBoundingClientRect().top
-    
+
     Array.from(container.children).forEach((el) => {
         const scroll = scro ?? containerPos;
         const centerY = window.innerHeight / 2 - (el.offsetHeight / 2);
@@ -75,57 +71,34 @@ const handleScroll = () => {
 
     const scrollPositionStart = 0
     const scrollPositionEnd = -contentContainerRef.value.getBoundingClientRect().height + followingFrameInnerAreaRef.value.offsetHeight
-    let scrollPositionCurrent = contentContainerRef.value.getBoundingClientRect().top - followingFramePaddingRef.value
+    const scrollPositionCurrent = contentContainerRef.value.getBoundingClientRect().top - followingFramePaddingRef.value
+    let scrollValue = undefined;
 
     if (scrollPositionCurrent > scrollPositionStart) {
-        scrollPositionCurrent = scrollPositionStart
-        setRotation(contentContainerRef.value, scrollPositionStart + followingFramePaddingRef.value)
+        scrollValue = scrollPositionStart + followingFramePaddingRef.value;
     } else if (scrollPositionCurrent < scrollPositionEnd) {
-        scrollPositionCurrent = scrollPositionEnd
-        setRotation(contentContainerRef.value, scrollPositionEnd + followingFramePaddingRef.value)
-    } else {
-        setRotation(contentContainerRef.value)
+        scrollValue = scrollPositionEnd + followingFramePaddingRef.value;
     }
 
-    followingFrameRef.value.style.transform = `translateY(${-scrollPositionCurrent}px)`
+    setRotation(contentContainerRef.value, scrollValue)
 }
 
 onMounted(async () => {
-    await nextTick()
     computeLayout()
-
     containerRef.value.addEventListener('scroll', handleScroll)
-
-    const onResize = () => {
-        if (rafId) cancelAnimationFrame(rafId)
-        rafId = requestAnimationFrame(() => computeLayout())
-    }
-
-    window.addEventListener('resize', onResize)
-
-    if (window.ResizeObserver) {
-        resizeObserver = new ResizeObserver(() => {
-            if (rafId) cancelAnimationFrame(rafId)
-            rafId = requestAnimationFrame(() => computeLayout())
-        })
-        if (contentContainerRef.value) resizeObserver.observe(contentContainerRef.value)
-        contentContainerRef.value.querySelectorAll('.testimonial-item').forEach(el => resizeObserver.observe(el))
-    }
 })
 
 onUnmounted(() => {
-    window.removeEventListener('resize', computeLayout)
     containerRef.value?.removeEventListener('scroll', handleScroll)
-    if (resizeObserver) resizeObserver.disconnect()
 })
-
-defineExpose({ highlightEl })
 </script>
 
 <template>
     <!-- Frame -->
-    <slot name="highlight" :registerFollowingFrame="registerFollowingFrame" :registerHighLight="registerHighlight">
-    </slot>
+    <FollowingFrame sectionId="testimonials">
+        <slot name="highlight" :registerFollowingFrame="registerFollowingFrame" :registerHighLight="registerHighlight">
+        </slot>
+    </FollowingFrame>
 
     <!-- Scrollable content -->
     <slot name="content" :registerContainer="registerContainer">
