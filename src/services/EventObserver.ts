@@ -12,7 +12,7 @@ interface Action {
  * A custom action that is triggered by the event listener
  * @property {Action[]} actions - The actions per components that runs on listener emit
  */
-export class CustomEventListener {
+export class EventObserver {
     public actions: Action[] = [];
 
     /**

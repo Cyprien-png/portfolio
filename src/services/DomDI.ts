@@ -1,17 +1,17 @@
-import { CustomDomElement } from "./CustomDomElement";
+import { DomElement } from "./DomElement";
 
 /**
  * Class DI class that stores all the listened Dom elements
  * @property {DomDI} instance - The "self" instance of the DI service
- * @property {CustomDomElement[]} domElements - List of the Dom elements
+ * @property {DomElement[]} domElements - List of the Dom elements
  */
 export class DomDI {
     static instance: DomDI;
-    private domElements: CustomDomElement[] = [];
+    private domElements: DomElement[] = [];
 
     /**
      * Get or instanciate the DomDI
-     * @returns the single CustomDomElement instance
+     * @returns the single DomElement instance
      */
     public static getInstance(): DomDI {
         if (!DomDI.instance) DomDI.instance = new DomDI();
@@ -46,6 +46,6 @@ export class DomDI {
      */
     private registerDomElement(el: HTMLElement): void {
         if (this.domElements.some(e => e.element == el)) return;
-        this.domElements.push(new CustomDomElement(el));
+        this.domElements.push(new DomElement(el));
     }
 }

@@ -1,13 +1,13 @@
-import { CustomEventListener } from "@/services/CustomEventListener";
+import { EventObserver } from "@/services/EventObserver";
 
 /**
  * Class that represent a Dom element to which is listened (watched/observed)
  * @property {HTMLElement} element - The Dom element that is listened
- * @property {[key: string]: CustomEventListener} listeners - List of listeners attached to the Dom element
+ * @property {[key: string]: EventObserver} listeners - List of listeners attached to the Dom element
  */
-export class CustomDomElement {
+export class DomElement {
     public element: HTMLElement;
-    private listeners: { [key: string]: CustomEventListener } = {};
+    private listeners: { [key: string]: EventObserver } = {};
 
     constructor(el: HTMLElement) {
         this.element = el;
@@ -20,7 +20,7 @@ export class CustomDomElement {
      * @param componentAction Action to trigger when listener emit
      */
     public addListener(event: string, componentId: string, componentAction: () => void): void {
-        if (!this.listeners[event]) this.createCustomEventListener(event);
+        if (!this.listeners[event]) this.createEventObserver(event);
         this.listeners[event].addAction(componentId, componentAction);
     }
 
@@ -31,7 +31,7 @@ export class CustomDomElement {
     public removeListenersByComponentId(componentId: string): void {
         Object.entries(this.listeners).forEach(([event, listener]) => {
             listener.removeAction(componentId);
-            if (listener.actions.length === 0) this.removeCustomEventListener(event, listener);
+            if (listener.actions.length === 0) this.removeEventObserver(event, listener);
         });
     }
 
@@ -39,8 +39,8 @@ export class CustomDomElement {
      * Add an event listener with custom listener emi
      * @param event Event type to listen
      */
-    private createCustomEventListener(event: string): void {
-        const listener = new CustomEventListener;
+    private createEventObserver(event: string): void {
+        const listener = new EventObserver;
         this.element.addEventListener(event, listener.emit.bind(listener), { passive: true });
         this.listeners[event] = listener;
     }
@@ -48,9 +48,9 @@ export class CustomDomElement {
     /**
      * Remove the event listener and custom listener
      * @param event Event type to listen
-     * @param listener The CustomEventListener that is triggered by the native listener 
+     * @param listener The EventObserver that is triggered by the native listener 
      */
-    private removeCustomEventListener(event: string, listener: CustomEventListener): void {
+    private removeEventObserver(event: string, listener: EventObserver): void {
         this.element.removeEventListener(event, listener.emit.bind(listener));
         delete this.listeners[event];
     }
