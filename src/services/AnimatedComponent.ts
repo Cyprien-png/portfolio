@@ -14,18 +14,17 @@ export class AnimatedComponent {
     public id: symbol;
     public areAnimationsEnabled: boolean;
     public domSection: HTMLElement;
-    public enableAnimations: () => void;
-    public disableAnimations: () => void;
-    public prepareForAnimations: () => void;
-    public tick: () => void;
+    public enableAnimations: () => void = ()=>{};
+    public disableAnimations: () => void = ()=>{};
+    public prepareForAnimations: () => void = ()=>{};
+    public tick: () => void = ()=>{};
 
-    constructor(domSection: HTMLElement, enableAnimations: () => void, disableAnimations: () => void, prepareForAnimations: () => void, tick: () => void) {
+    /**
+     * @param domSection The section / container that must be visible to enable the animation
+     */
+    constructor(domSection: HTMLElement) {
         this.id = Symbol()
         this.domSection = domSection;
-        this.enableAnimations = enableAnimations;
-        this.disableAnimations = disableAnimations;
-        this.prepareForAnimations = prepareForAnimations;
-        this.tick = tick;
     }
 
     /**
