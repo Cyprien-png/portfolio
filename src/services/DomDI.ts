@@ -23,11 +23,11 @@ export class DomDI {
      * @param el Dom element to listen
      * @param event Event type to listen
      * @param componentId Unique ID of the component instance
-     * @param componentAction Action to trigger when listener emit
+     * @param callback Action to trigger when listener emit
      */
-    public addEventListener(el: HTMLElement, event: string, componentId: symbol, componentAction: () => void): void {
+    public addEventListener(el: HTMLElement, event: string, componentId: symbol, callback: () => void): void {
         this.registerDomElement(el);
-        this.domElements.find(e => e.element == el).addListener(event, componentId, componentAction);
+        this.domElements.find(e => e.element == el).addListener(event, componentId, callback);
     }
 
     /**

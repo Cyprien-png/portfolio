@@ -17,11 +17,11 @@ export class DomElement {
      * Attach a component action to an event listener
      * @param event Event type to listen
      * @param componentId Unique ID of the component instance
-     * @param componentAction Action to trigger when listener emit
+     * @param callback Action to trigger when listener emit
      */
-    public addListener(event: string, componentId: symbol, componentAction: () => void): void {
+    public addListener(event: string, componentId: symbol, callback: () => void): void {
         if (!this.listeners[event]) this.createEventObserver(event);
-        this.listeners[event].addAction(componentId, componentAction);
+        this.listeners[event].addAction(componentId, callback);
     }
 
     /**

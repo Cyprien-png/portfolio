@@ -50,7 +50,6 @@ export class AnimatedComponent {
      * Add a cutom event listener on a component that will be used to trigger this animation
      * @param el The Dom element that is listened
      * @param event Event type to listen 
-     * @param callback Action to trigger when listener emit
      */
     public addAnimationTrigger(el: HTMLElement, event: string): void {
         DomDI.getInstance().addEventListener(el, event, this.id, this.animate.bind(this));

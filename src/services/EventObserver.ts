@@ -5,7 +5,7 @@
  */
 interface Action {
     componentId: symbol; 
-    onEmit: () => void;
+    callback: () => void;
 }
 
 /**
@@ -19,16 +19,16 @@ export class EventObserver {
      * Run all the listeners's actions 
      */
     public emit(): void {
-        this.actions.forEach((a) => a.onEmit());
+        this.actions.forEach((a) => a.callback());
     }
 
     /**
      * Register a new action to run on the emit
      * @param componentId Unique ID of the component instance
-     * @param onEmit Action to run when the listener emits
+     * @param callback Action to run when the listener emits
      */
-    public addAction(componentId: symbol, onEmit: () => void): void {
-        this.actions.push({ componentId, onEmit });
+    public addAction(componentId: symbol, callback: () => void): void {
+        this.actions.push({ componentId, callback });
     }
 
     /**
