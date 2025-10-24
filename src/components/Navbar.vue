@@ -2,84 +2,83 @@
 import { ref, onMounted, onBeforeUnmount, nextTick } from 'vue'
 import { useScrollContext } from '@/composables/useScrollContext'
 import ArrowIcon from '@/icons/ArrowIcon.vue'
+import { DomDI } from '@/services/DomDI'
+import { AnimatedComponent } from '@/services/AnimatedComponent'
 
-const { containerRef, sections, contentRef } = useScrollContext()
+const { containerRef, sections, contentRef } = useScrollContext();
 
-const currentSection = ref('home')
-const isProgrammaticScroll = ref(false)
+const component = ref(null)
+const currentSection = ref('home');
+const isProgrammaticScroll = ref(false);
+const nav = ref(null);
+const indicator = ref(null);
 
-const nav = ref(null)
-const indicator = ref(null)
-
-let scrollTimeout
+let scrollTimeout;
 
 const selectSection = async (sectionId) => {
-  currentSection.value = sectionId
-  await nextTick()
-  updateNav()
-  updateScroll(sectionId)
+  currentSection.value = sectionId;
+  await nextTick();
+  updateNav();
+  updateScroll(sectionId);
 }
 
 const updateNav = () => {
-  const navEl = nav.value
+  const navEl = nav.value;
 
-  const activeEl = navEl.querySelector(`[data-section="${currentSection.value}"]`)
-  if (!activeEl || !indicator.value || !navEl) return
+  const activeEl = navEl.querySelector(`[data-section="${currentSection.value}"]`);
+  if (!activeEl || !indicator.value || !navEl) return;
 
-  const width = activeEl.offsetWidth
-  const position = activeEl.getBoundingClientRect().left - navEl.getBoundingClientRect().left
+  const width = activeEl.offsetWidth;
+  const position = activeEl.getBoundingClientRect().left - navEl.getBoundingClientRect().left;
 
-  indicator.value.style.width = `${width}px`
-  indicator.value.style.transform = `translateX(${position}px)`
+  indicator.value.style.width = `${width}px`;
+  indicator.value.style.transform = `translateX(${position}px)`;
 }
 
 const updateScroll = (sectionId) => {
-  const section = document.getElementById(sectionId)
-  const sectionY = section.getBoundingClientRect().top - contentRef.value.getBoundingClientRect().top
+  const section = document.getElementById(sectionId);
+  const sectionY = section.getBoundingClientRect().top - contentRef.value.getBoundingClientRect().top;
 
-  isProgrammaticScroll.value = true
-  containerRef.value.scrollTo({ top: sectionY, left: 0, behavior: 'smooth' })
+  isProgrammaticScroll.value = true;
+  containerRef.value.scrollTo({ top: sectionY, left: 0, behavior: 'smooth' });
 
   clearTimeout(scrollTimeout)
   scrollTimeout = setTimeout(() => {
     isProgrammaticScroll.value = false
-  }, 1000)
+  }, 1000);
 }
 
 const handleScroll = () => {
-  if (isProgrammaticScroll.value) return
-  const sectionsEls = Array.from(document.querySelectorAll('.window'))
-  let current = sectionsEls[0]
-  const isAtBottom =
-    Math.ceil(containerRef.value.scrollTop + containerRef.value.clientHeight) >= containerRef.value.scrollHeight
-
+  if (isProgrammaticScroll.value) return;
+  const sectionsEls = Array.from(document.querySelectorAll('.window'));
+  let current = sectionsEls[0];
 
   sectionsEls.forEach((section) => {
-    const rect = section.getBoundingClientRect()
-    const containerRect = containerRef.value.getBoundingClientRect()
-    const offsetTop = rect.top - containerRect.top
+    const rect = section.getBoundingClientRect();
+    const containerRect = containerRef.value.getBoundingClientRect();
+    const offsetTop = rect.top - containerRect.top;
     if (offsetTop <= 0 && current.getBoundingClientRect().top < section.getBoundingClientRect().top) {
-      current = section
+      current = section;
     }
   })
 
-  const matchedSection = sections.value.find((s) => s.id === current.id)
-  if (matchedSection) currentSection.value = matchedSection.id
-  updateNav()
+  const matchedSection = sections.value.find((s) => s.id === current.id);
+  if (matchedSection) currentSection.value = matchedSection.id;
+  updateNav();
 }
 
 onMounted(() => {
-  containerRef.value.addEventListener('scroll', handleScroll, { passive: true })
-  containerRef.value.addEventListener('wheel', handleScroll, { passive: true })
-  containerRef.value.addEventListener('touchmove', handleScroll, { passive: true })
-
-  nextTick(updateNav)
+  component.value = new AnimatedComponent();
+  component.value.tick = handleScroll;
+  component.value.addAnimationTrigger(containerRef.value, "scroll");
+  component.value.addAnimationTrigger(containerRef.value, "wheel");
+  component.value.addAnimationTrigger(containerRef.value, "touchmove");
+  
+  nextTick(updateNav);
 })
 
 onBeforeUnmount(() => {
-  containerRef.value?.removeEventListener('scroll', handleScroll)
-  containerRef.value?.removeEventListener('wheel', handleScroll)
-  containerRef.value?.removeEventListener('touchmove', handleScroll)
+  component.value.removeAnimationTriggers();
 })
 </script>
 

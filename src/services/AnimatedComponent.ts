@@ -12,7 +12,7 @@ import { DomDI } from "@/services/DomDI";
  */
 export class AnimatedComponent {
     public id: symbol;
-    public areAnimationsEnabled: boolean;
+    public areAnimationsEnabled: boolean = false;
     public domSection: HTMLElement;
     public enableAnimations: () => void = ()=>{};
     public disableAnimations: () => void = ()=>{};
@@ -22,9 +22,9 @@ export class AnimatedComponent {
     /**
      * @param domSection The section / container that must be visible to enable the animation
      */
-    constructor(domSection: HTMLElement) {
+    constructor(domSection?: HTMLElement) {
         this.id = Symbol()
-        this.domSection = domSection;
+        this.domSection = domSection ?? null;
     }
 
     /**
@@ -55,10 +55,19 @@ export class AnimatedComponent {
     }
 
     /**
+     * Remove all the listeners dedicated to this animation
+     */
+    public removeAnimationTriggers(): void {
+        DomDI.getInstance().removeEventListeners(this.id)
+    }
+
+    /**
      * Check if the animation is on a visible section
      * @returns True if the animation is visible
      */
     private isVisibleOnScreen(): boolean {
+        if (!this.domSection) return true
+
         const isAboveScreen = this.domSection.getBoundingClientRect().bottom < 0;
         const isBelowScreen = this.domSection.getBoundingClientRect().top - window.innerHeight > 0
         return !isAboveScreen && !isBelowScreen
