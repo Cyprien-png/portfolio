@@ -14,7 +14,7 @@ const paddingTopRef = ref(0)
 
 // Compute an action based on the scroll
 const handleScroll = () => {
-    const relativeScrollPosition = contactSectionRef.value.parentNode.getBoundingClientRect().top;
+    const relativeScrollPosition = frameRef.value.sectionRef.getBoundingClientRect().top;
     translationRef.value = Math.round(relativeScrollPosition + paddingTopRef.value * .75)
 }
 
