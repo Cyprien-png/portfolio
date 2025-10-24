@@ -4,35 +4,43 @@ import stories from '@/data/about-me.json'
 import { useScrollContext } from '@/composables/useScrollContext';
 import { ref, onMounted } from 'vue';
 import FollowingFrame from '@/components/FollowingFrame.vue';
+import { AnimatedComponent } from '@/services/AnimatedComponent';
 
+const component = ref(null)
+const frameRef = ref(null)
 const { containerRef } = useScrollContext()
 const contentRef = ref(null)
 const triggerSectionRef = ref(null)
 const triggerSections = ref([])
+const translationY = ref(0)
 
-const handleScroll = () => {
+
+const prepareAnimation = () => {
     let triggerCount = 0;
 
     triggerSections.value.forEach((el) => {
         if (el.getBoundingClientRect().top <= 0) triggerCount++;
     });
 
-    if (triggerCount == stories.length) {
-        triggerCount--;
-    }
+    if (triggerCount == stories.length) triggerCount--;
+    translationY.value = -100 * triggerCount
+} 
 
-    contentRef.value.style.transform = `translateY(-${100 * triggerCount}%)`
+const tick = () => {
+    contentRef.value.style.transform = `translateY(${translationY.value}%)`
 }
 
 onMounted(async () => {
     triggerSections.value = Array.from(triggerSectionRef.value.children);
-    containerRef.value.addEventListener('scroll', handleScroll)
+    component.value = new AnimatedComponent(frameRef.value.sectionRef);
+    component.value.prepareForAnimations = prepareAnimation;
+    component.value.tick = tick;
+    component.value.addAnimationTrigger(containerRef.value, "scroll")
 })
-
 </script>
 
 <template>
-    <FramedMainSection id="about-me" class="min-h-[100dvh] h-[200dvh] flex items-center relative">
+    <FramedMainSection ref="frameRef" id="about-me" class="min-h-[100dvh] flex items-center relative">
         <!-- Frame -->
         <FollowingFrame sectionId="about-me">
             <div class="h-full w-full bg-white p-[3dvw]">
@@ -51,10 +59,8 @@ onMounted(async () => {
             </div>
         </FollowingFrame>
 
-
-        <div ref="triggerSectionRef" class="w-full flex flex-col justify-between py-[3dvw]">
-            <div v-for="story in [...stories]" class="h-[50dvh] border-2"></div>
+        <div ref="triggerSectionRef" class="w-full flex flex-col justify-between py-[40dvh]">
+            <div v-for="story in [...stories]" class="h-[60dvh]"></div>
         </div>
-
     </FramedMainSection>
 </template>
