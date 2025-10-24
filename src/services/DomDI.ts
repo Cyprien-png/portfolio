@@ -25,7 +25,7 @@ export class DomDI {
      * @param componentId Unique ID of the component instance
      * @param componentAction Action to trigger when listener emit
      */
-    public addEventListener(el: HTMLElement, event: string, componentId: string, componentAction: () => void): void {
+    public addEventListener(el: HTMLElement, event: string, componentId: symbol, componentAction: () => void): void {
         this.registerDomElement(el);
         this.domElements.find(e => e.element == el).addListener(event, componentId, componentAction);
     }
@@ -34,7 +34,7 @@ export class DomDI {
      * Remove all the listeners linked to a component instance
      * @param componentId Unique ID of the component instance
      */
-    public removeEventListeners(componentId: string): void {
+    public removeEventListeners(componentId: symbol): void {
         this.domElements.forEach(el => {
             el.removeListenersByComponentId(componentId)
         })
