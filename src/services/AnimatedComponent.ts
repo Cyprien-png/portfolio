@@ -17,8 +17,13 @@ export class AnimatedComponent {
     public prepareForAnimations: () => void;
     public tick: () => void;
 
-    constructor(el: HTMLElement) {
-        this.domSection = el;
+    constructor(domSection: HTMLElement, enableAnimations: () => void, disableAnimations: () => void, prepareForAnimations: () => void, tick: () => void) {
+        this.id = Symbol()
+        this.domSection = domSection;
+        this.enableAnimations = enableAnimations;
+        this.disableAnimations = disableAnimations;
+        this.prepareForAnimations = prepareForAnimations;
+        this.tick = tick;
     }
 
     /**
