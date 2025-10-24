@@ -2,7 +2,10 @@
 import { onMounted, ref } from 'vue';
 import FramedMainSection from '@/layouts/FramedMainSection.vue';
 import { useScrollContext } from '@/composables/useScrollContext'
+import { AnimatedComponent } from '@/services/AnimatedComponent';
 
+const component = ref(null)
+const frameRef = ref(null)
 const { containerRef } = useScrollContext()
 const contactSectionRef = ref(null)
 const translationRef = ref(0)
@@ -17,12 +20,15 @@ const handleScroll = () => {
 
 onMounted(async () => {
     paddingTopRef.value = parseFloat(getComputedStyle(contactSectionRef.value).paddingTop)
-    containerRef.value.addEventListener('scroll', handleScroll)
+
+    component.value = new AnimatedComponent(frameRef.value.sectionRef);
+    component.value.tick = handleScroll;
+    component.value.addAnimationTrigger(containerRef.value, "scroll");
 });
 </script>
 
 <template>
-    <FramedMainSection id="contact" class="h-dvh">
+    <FramedMainSection ref="frameRef"  id="contact" class="h-dvh">
         <div ref="contactSectionRef" class="h-full w-full rounded-4xl flex flex-col pt-20 bg-gray-200">
             <div class="grid grid-cols-1 md:grid-cols-3 w-full gap-8 px-8">
                 <div class="h-full w-full">
