@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, onBeforeUnmount, defineProps } from 'vue'
+import { ref, defineExpose, onMounted, onBeforeUnmount, defineProps } from 'vue'
 import { useScrollContext } from '@/composables/useScrollContext'
 
 const props = defineProps({
@@ -9,11 +9,12 @@ const props = defineProps({
   }
 })
 
-const sectionRef = ref(null)
-const { registerSection, unregisterSection } = useScrollContext()
+const sectionRef = ref(null);
+const { registerSection, unregisterSection } = useScrollContext();
 
-onMounted(() => registerSection(props.id, sectionRef.value))
-onBeforeUnmount(() => unregisterSection(props.id))
+onMounted(() => registerSection(props.id, sectionRef.value));
+onBeforeUnmount(() => unregisterSection(props.id));
+defineExpose({ sectionRef });
 </script>
 
 <template>
