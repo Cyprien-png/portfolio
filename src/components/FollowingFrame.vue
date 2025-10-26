@@ -1,44 +1,47 @@
 <script setup>
-import { ref, watch } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useScrollContext } from '@/composables/useScrollContext'
+import { AnimatedComponent } from '@/services/AnimatedComponent';
 
-const { containerRef, getSectionById, sections } = useScrollContext()
-const contentContainerRef = ref(null)
-const frameRef = ref(null)
+const { containerRef } = useScrollContext();
+const frameRef = ref(null);
+const component = ref(null);
+const animPosition = ref();
+const animTranslateY = ref();
 
 const props = defineProps({
-    sectionId: {
-        type: String,
+    contentSection: {
+        type: HTMLElement,
         required: true
     }
 })
 
-const handleScroll = () => {
-    if (!frameRef.value) return
+const prepareAnimation = () => {
+    if (!frameRef.value) return;
 
-    const scrollPositionStart = 0
-    const scrollPositionEnd = -contentContainerRef.value.getBoundingClientRect().height + frameRef.value.offsetHeight
-    const scrollPositionCurrent = contentContainerRef.value.getBoundingClientRect().top
-    let position = "fixed";
-    let translateY = 0;
+    const scrollPositionEnd = -props.contentSection.getBoundingClientRect().height + frameRef.value.offsetHeight;
+    const scrollPositionCurrent = props.contentSection.getBoundingClientRect().top;
+    animPosition.value = "absolute";
+    animTranslateY.value = 0;
 
-    if (scrollPositionCurrent > scrollPositionStart) {
-        position = "absolute";
+    if (scrollPositionCurrent <= 0 && scrollPositionCurrent >= scrollPositionEnd) {
+        animPosition.value = "fixed";
     } else if (scrollPositionCurrent < scrollPositionEnd) {
-        position = "absolute";
-        translateY = scrollPositionEnd;
+        animTranslateY.value = scrollPositionEnd;
     }
-
-    frameRef.value.style.transform = `translateY(${-translateY}px)`
-    frameRef.value.style.position = position;
 }
 
-watch(getSectionById(props.sectionId), (el) => {
-    if (el) {
-        contentContainerRef.value = el
-        containerRef.value?.addEventListener('scroll', handleScroll)
-    }
-}, { immediate: true })
+const tick = () => {
+    frameRef.value.style.transform = `translateY(${-animTranslateY.value}px)`;
+    frameRef.value.style.position = animPosition.value;
+}
+
+onMounted(async () => {
+    component.value = new AnimatedComponent(frameRef.value);
+    component.value.addAnimationTrigger(containerRef.value, "scroll");
+    component.value.prepareForAnimations = prepareAnimation;
+    component.value.tick = tick;
+});
 </script>
 
 <template>

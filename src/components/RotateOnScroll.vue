@@ -4,8 +4,8 @@ import { useScrollContext } from '@/composables/useScrollContext'
 import FollowingFrame from './FollowingFrame.vue'
 
 defineProps({
-    sectionId: {
-        type: String,
+    contentSection: {
+        type: HTMLElement,
         required: true
     }
 })
@@ -102,7 +102,7 @@ onUnmounted(() => {
 
 <template>
     <!-- Frame -->
-    <FollowingFrame :sectionId>
+    <FollowingFrame :contentSection="contentSection">
         <slot name="highlight" :registerFollowingFrame="registerFollowingFrame" :registerHighLight="registerHighlight">
         </slot>
     </FollowingFrame>

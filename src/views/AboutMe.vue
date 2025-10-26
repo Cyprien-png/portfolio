@@ -8,6 +8,7 @@ import { AnimatedComponent } from '@/services/AnimatedComponent';
 
 const component = ref(null)
 const frameRef = ref(null)
+const frameSectionRef = ref(null)
 const { containerRef } = useScrollContext()
 const contentRef = ref(null)
 const triggerSectionRef = ref(null)
@@ -31,6 +32,7 @@ const tick = () => {
 }
 
 onMounted(async () => {
+    frameSectionRef.value = frameRef.value.sectionRef;
     triggerSections.value = Array.from(triggerSectionRef.value.children);
     component.value = new AnimatedComponent(frameRef.value.sectionRef);
     component.value.prepareForAnimations = prepareAnimation;
@@ -42,7 +44,7 @@ onMounted(async () => {
 <template>
     <FramedMainSection ref="frameRef" id="about-me" class="min-h-[100dvh] flex items-center relative">
         <!-- Frame -->
-        <FollowingFrame sectionId="about-me">
+        <FollowingFrame v-if="frameSectionRef" :contentSection="frameSectionRef">
             <div class="h-full w-full bg-white p-[3dvw]">
                 <div class="h-full w-full flex justify-center items-center bg-gray-200 rounded-4xl">
 

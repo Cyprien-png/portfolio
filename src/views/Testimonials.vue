@@ -1,12 +1,20 @@
 <script setup>
+import { ref, onMounted } from 'vue';
 import FramedMainSection from '@/layouts/FramedMainSection.vue'
 import testimonials from '@/data/testimonials.json'
 import RotateOnScroll from '@/components/RotateOnScroll.vue'
+
+const frameRef = ref(null);
+const frameSectionRef = ref(null);
+
+onMounted(async () => {
+    frameSectionRef.value = frameRef.value.sectionRef;
+})
 </script>
 
 <template>
-    <FramedMainSection id="testimonials" class="min-h-[100dvh] flex relative">
-        <RotateOnScroll sectionId="testimonials">
+    <FramedMainSection ref="frameRef" id="testimonials" class="min-h-[100dvh] flex relative">
+        <RotateOnScroll v-if="frameSectionRef" :contentSection="frameSectionRef">
             <!-- Frame -->
             <template #highlight="{ registerHighLight, registerFollowingFrame }">
                 <div :ref="registerFollowingFrame"
