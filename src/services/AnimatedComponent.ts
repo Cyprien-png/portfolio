@@ -1,4 +1,5 @@
 import { DomDI } from "@/services/DomDI";
+import { AutoAnimations } from "@/services/AutoAnimations"
 
 /**
  * A vue component adapter used to delegate the animations management to optimized services
@@ -14,10 +15,10 @@ export class AnimatedComponent {
     public id: symbol;
     public areAnimationsEnabled: boolean = false;
     public domSection: HTMLElement;
-    public enableAnimations: () => void = ()=>{};
-    public disableAnimations: () => void = ()=>{};
-    public prepareForAnimations: () => void = ()=>{};
-    public tick: () => void = ()=>{};
+    public enableAnimations: () => void = () => { };
+    public disableAnimations: () => void = () => { };
+    public prepareForAnimations: () => void = () => { };
+    public tick: () => void = () => { };
 
     /**
      * @param domSection The section / container that must be visible to enable the animation
@@ -45,6 +46,10 @@ export class AnimatedComponent {
         requestAnimationFrame(this.tick);
     }
 
+    public autoAnimate(): void {
+        AutoAnimations.getInstance().addAnimation(this.id, this.animate.bind(this))
+    }
+
     /**
      * Add a cutom event listener on a component that will be used to trigger this animation
      * @param el The Dom element that is listened
@@ -58,14 +63,15 @@ export class AnimatedComponent {
      * Remove all the listeners dedicated to this animation
      */
     public removeAnimationTriggers(): void {
-        DomDI.getInstance().removeEventListeners(this.id)
+        DomDI.getInstance().removeEventListeners(this.id);
+        AutoAnimations.getInstance().removeAnimation(this.id);
     }
 
     /**
      * Check if the animation is on a visible section
      * @returns True if the animation is visible
      */
-    private isVisibleOnScreen(): boolean {
+    public isVisibleOnScreen(): boolean {
         if (!this.domSection) return true
 
         const isAboveScreen = this.domSection.getBoundingClientRect().bottom < 0;

@@ -28,7 +28,7 @@ onMounted(async () => {
 </script>
 
 <template>
-    <FramedMainSection ref="frameRef"  id="contact" class="h-dvh">
+    <FramedMainSection ref="frameRef" id="contact" class="h-dvh">
         <div ref="contactSectionRef" class="h-full w-full rounded-4xl flex flex-col pt-20 bg-gray-200">
             <div class="grid grid-cols-1 md:grid-cols-3 w-full gap-8 px-8">
                 <div class="h-full w-full">
