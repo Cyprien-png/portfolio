@@ -52,15 +52,21 @@ const handleScroll = () => {
   if (isProgrammaticScroll.value) return;
   const sectionsEls = Array.from(document.querySelectorAll('.window'));
   let current = sectionsEls[0];
+  const isAtBottom = Math.ceil(containerRef.value.scrollTop + containerRef.value.clientHeight) >= containerRef.value.scrollHeight
 
-  sectionsEls.forEach((section) => {
-    const rect = section.getBoundingClientRect();
-    const containerRect = containerRef.value.getBoundingClientRect();
-    const offsetTop = rect.top - containerRect.top;
-    if (offsetTop <= 0 && current.getBoundingClientRect().top < section.getBoundingClientRect().top) {
-      current = section;
-    }
-  })
+  if (isAtBottom) {
+    current = sectionsEls[sectionsEls.length-1]
+  } else {
+
+    sectionsEls.forEach((section) => {
+      const rect = section.getBoundingClientRect();
+      const containerRect = containerRef.value.getBoundingClientRect();
+      const offsetTop = rect.top - containerRect.top;
+      if (offsetTop <= 0 && current.getBoundingClientRect().top < section.getBoundingClientRect().top) {
+        current = section;
+      }
+    })
+  }
 
   const matchedSection = sections.value.find((s) => s.id === current.id);
   if (matchedSection) currentSection.value = matchedSection.id;
