@@ -6,3 +6,9 @@
   --font-rubik: "Rubik Mono One", monospace;
   --font-cantarell: "Cantarell", sans-serif;
 }
+
+@layer utilities {
+   .pause {
+     animation-play-state: paused !important;
+   }
+}
