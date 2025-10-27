@@ -1,49 +1,49 @@
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, defineProps } from 'vue'
 import { useImageAsCursor } from '@/composables/useImageAsCursor'
+import { AnimatedComponent } from '@/services/AnimatedComponent'
 
-const { imageUrl, isOpen } = useImageAsCursor()
+const props = defineProps({
+    contentSection: {
+        type: HTMLElement,
+        required: true
+    }
+})
 
-// reactive cursor position
-const x = ref(window.innerWidth / 2)
-const y = ref(window.innerHeight / 2)
-
-// smooth interpolation
-let targetX = x.value
-let targetY = y.value
-let rafId = null
+const { imageUrl, isOpen } = useImageAsCursor();
+const component = ref();
+const loopComponent = ref();
+const x = ref(window.innerWidth / 2);
+const y = ref(window.innerHeight / 2);
+const imagePositions = ref({x: x.value, y: y.value});
 
 const updatePosition = (e) => {
-  targetX = e.clientX
-  targetY = e.clientY
+  imagePositions.value.x = e.clientX;
+  imagePositions.value.y = e.clientY;
 }
 
 const shouldMove = (position, targetPosition) => {
   return Math.round(position.value * 100) / 100 != targetPosition && !!isOpen.value
 }
 
+const animatePos = (currentPos, newPos) => {
+  if (!shouldMove(currentPos.value, newPos)) return;
+  currentPos.value += (newPos - currentPos.value) * 0.2;
+}
+
 const animate = () => {
-  // smooth easing
-  if (shouldMove(x.value, targetX)) {
-    x.value += (targetX - x.value) * 0.2
-  }
-
-  if (shouldMove(y.value, targetY)) {
-    y.value += (targetY - y.value) * 0.2
-  }
-
-  rafId = requestAnimationFrame(animate)
+  animatePos(x, imagePositions.value.x);
+  animatePos(y, imagePositions.value.y);
 }
 
 onMounted(() => {
-  window.addEventListener('mousemove', updatePosition)
+  component.value = new AnimatedComponent(props.contentSection);
+  component.value.tick = updatePosition;
+  component.value.addAnimationTrigger(window, "mousemove");
 
-  animate()
-})
-
-onUnmounted(() => {
-  window.removeEventListener('mousemove', updatePosition)
-  cancelAnimationFrame(rafId)
+  loopComponent.value = new AnimatedComponent(props.contentSection);
+  loopComponent.value.tick = animate;
+  loopComponent.value.autoAnimate();
 })
 </script>
 

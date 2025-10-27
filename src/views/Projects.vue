@@ -1,4 +1,5 @@
 <script setup>
+import { ref, onMounted } from 'vue';
 import FramedMainSection from '@/layouts/FramedMainSection.vue';
 import ToggleSection from '@/components/ToggleSection.vue';
 import { useSingleToggle } from '@/composables/useSingleToggle.js'
@@ -8,11 +9,17 @@ import projects from '@/data/projects.json'
 
 const { setImage, open, close } = useImageAsCursor()
 const { isOpen, toggle } = useSingleToggle()
+const frameRef = ref()
+const containerRef = ref();
+
+onMounted(() => {
+    containerRef.value = frameRef.value.sectionRef;
+})
 </script>
 
 <template>
-    <ImageAsCursor />
-    <FramedMainSection id="projects" :class="'min-h-[100dvh] flex h-auto'">
+    <ImageAsCursor v-if="containerRef" :contentSection="containerRef" />
+    <FramedMainSection ref="frameRef" id="projects" :class="'min-h-[100dvh] flex h-auto'">
         <div class="flex-1 w-full bg-fit flex flex-col text-center pt-20">
             <div class="w-full h-full flex flex-col">
                 <ToggleSection v-for="(project, pi) in projects" :key="pi" :open="isOpen(pi)" @toggle="toggle(pi)"
@@ -28,10 +35,10 @@ const { isOpen, toggle } = useSingleToggle()
                             <div class="h-full w-full text-black overflow-hidden flex flex-col gap-6">
                                 <div class="flex gap-6 flex-col md:flex-row">
                                     <img :src="project.image" :alt="project.title"
-                                    class="object-cover aspect-[3/2] md:aspect-auto rounded-xl border-2 bg-white border-white h-[24dvh]">
+                                        class="object-cover aspect-[3/2] md:aspect-auto rounded-xl border-2 bg-white border-white h-[24dvh]">
                                     <p class="rounded-xl text-justify text-white">{{ project.description }}</p>
                                 </div>
-                                    
+
                                 <a :href="project.link" target="_blank"
                                     class="border-2 border-white h-[5dvh] flex justify-center rounded-xl bg-[url('/external-link.svg')] bg-[length:3dvh] bg-blend-difference animate-[bg-move_5s_linear_infinite]">
                                 </a>
