@@ -2,48 +2,50 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useScrollContext } from '@/composables/useScrollContext'
 import FollowingFrame from './FollowingFrame.vue'
+import { AnimatedComponent } from '@/services/AnimatedComponent'
 
-defineProps({
+const props = defineProps({
     contentSection: {
         type: HTMLElement,
         required: true
     }
 })
 
-const { containerRef } = useScrollContext()
+const { containerRef } = useScrollContext();
 
-// Internal refs
-const contentContainerRef = ref(null)
-const highlightEl = ref(null)
-const followingFrameInnerAreaRef = ref(null)
-const followingFramePaddingRef = ref(0)
+const component = ref();
+const contentContainerRef = ref(null);
+const highlightEl = ref(null);
+const followingFrameInnerAreaRef = ref(null);
+const followingFramePaddingRef = ref(0);
+const scrollPos = ref();
 
 // Refs auto setters
 const registerHighlight = (el) => {
-    highlightEl.value = el
+    highlightEl.value = el;
 }
 
 const registerContainer = (el) => {
-    contentContainerRef.value = el
+    contentContainerRef.value = el;
 }
 
 const registerFollowingFrame = (el) => {
-    followingFrameInnerAreaRef.value = el.firstChild
+    followingFrameInnerAreaRef.value = el.firstChild;
 }
 
 // Set the base positions
 const computeLayout = () => {
-    if (!contentContainerRef.value) return
+    if (!contentContainerRef.value) return;
 
     const items = contentContainerRef.value.children;
-    if (!items.length) return
+    if (!items.length) return;
 
-    const frameStyle = followingFrameInnerAreaRef.value ? getComputedStyle(followingFrameInnerAreaRef.value) : null
-    const offset = followingFrameInnerAreaRef.value.offsetHeight / 2 - (items[0].offsetHeight / 2)
-    followingFramePaddingRef.value = frameStyle ? parseFloat(frameStyle.paddingTop) || 0 : 0
+    const frameStyle = followingFrameInnerAreaRef.value ? getComputedStyle(followingFrameInnerAreaRef.value) : null;
+    const offset = followingFrameInnerAreaRef.value.offsetHeight / 2 - (items[0].offsetHeight / 2);
+    followingFramePaddingRef.value = frameStyle ? parseFloat(frameStyle.paddingTop) || 0 : 0;
 
-    contentContainerRef.value.style.paddingTop = `${offset}px`
-    contentContainerRef.value.style.paddingBottom = `${offset}px`
+    contentContainerRef.value.style.paddingTop = `${offset}px`;
+    contentContainerRef.value.style.paddingBottom = `${offset}px`;
 
     if (highlightEl.value) {
         let maxHeight = items[0].offsetHeight;
@@ -54,49 +56,46 @@ const computeLayout = () => {
             if (i.offsetWidth > maxWidth) maxWidth = i.offsetWidth;
         })
 
-        highlightEl.value.style.height = `${maxHeight * 2}px`
-        highlightEl.value.style.width = `${maxWidth * 1.2}px`
+        highlightEl.value.style.height = `${maxHeight * 2}px`;
+        highlightEl.value.style.width = `${maxWidth * 1.2}px`;
     }
 }
 
 // Apply the transformations
-const setRotation = (container, scro) => {
-    const containerPos = contentContainerRef.value.getBoundingClientRect().top
+const tick = () => {
+    const containerPos = contentContainerRef.value.getBoundingClientRect().top;
 
-    Array.from(container.children).forEach((el) => {
-        const scroll = scro ?? containerPos;
+    Array.from(contentContainerRef.value.children).forEach((el) => {
+        const scroll = scrollPos.value ?? containerPos;
         const centerY = window.innerHeight / 2 - (el.offsetHeight / 2);
-        const rotation = Math.round((scroll + el.offsetTop - centerY) * 10) / 10
+        const rotation = Math.round((scroll + el.offsetTop - centerY) * 10) / 10;
 
-        el.style.transform = `rotateX(${(rotation / -6) % 180}deg) translateZ(${-Math.abs(rotation) / 2}px)`
-    })
+        el.style.transform = `rotateX(${(rotation / -6) % 180}deg) translateZ(${-Math.abs(rotation) / 2}px)`;
+    })    
 }
 
 // Compute an action based on the scroll
-const handleScroll = () => {
-    if (!contentContainerRef.value) return
+const prepareAnimation = () => {
+    if (!contentContainerRef.value) return;
 
-    const scrollPositionStart = 0
-    const scrollPositionEnd = -contentContainerRef.value.getBoundingClientRect().height + followingFrameInnerAreaRef.value.offsetHeight
-    const scrollPositionCurrent = contentContainerRef.value.getBoundingClientRect().top - followingFramePaddingRef.value
-    let scrollValue = undefined;
+    const scrollPositionStart = 0;
+    const scrollPositionEnd = -contentContainerRef.value.getBoundingClientRect().height + followingFrameInnerAreaRef.value.offsetHeight;
+    const scrollPositionCurrent = contentContainerRef.value.getBoundingClientRect().top - followingFramePaddingRef.value;
+    scrollPos.value = undefined;
 
     if (scrollPositionCurrent > scrollPositionStart) {
-        scrollValue = scrollPositionStart + followingFramePaddingRef.value;
+        scrollPos.value = scrollPositionStart + followingFramePaddingRef.value;
     } else if (scrollPositionCurrent < scrollPositionEnd) {
-        scrollValue = scrollPositionEnd + followingFramePaddingRef.value;
+        scrollPos.value = scrollPositionEnd + followingFramePaddingRef.value;
     }
-
-    setRotation(contentContainerRef.value, scrollValue)
 }
 
 onMounted(async () => {
     computeLayout()
-    containerRef.value.addEventListener('scroll', handleScroll)
-})
-
-onUnmounted(() => {
-    containerRef.value?.removeEventListener('scroll', handleScroll)
+    component.value = new AnimatedComponent(props.contentSection);
+    component.value.prepareForAnimations = prepareAnimation;
+    component.value.tick = tick;
+    component.value.addAnimationTrigger(containerRef.value, "scroll");
 })
 </script>
 
