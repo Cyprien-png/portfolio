@@ -18,7 +18,7 @@ export class AnimatedComponent {
     public enableAnimations: () => void = () => { };
     public disableAnimations: () => void = () => { };
     public prepareForAnimations: () => void = () => { };
-    public tick: () => void = () => { };
+    public tick: (e?: Event | number) => void = () => { };
 
     /**
      * @param domSection The section / container that must be visible to enable the animation
@@ -31,7 +31,7 @@ export class AnimatedComponent {
     /**
      * Compute and run the animation
      */
-    public animate(): void {
+    public animate(e?: Event): void {
         // Ensure that the animation is visible
         if (!this.isVisibleOnScreen()) {
             if (this.areAnimationsEnabled) this.toggleAnimationStatus();
@@ -43,7 +43,7 @@ export class AnimatedComponent {
         this.prepareForAnimations();
 
         // Delegate the animation sync to the browser
-        requestAnimationFrame(this.tick);
+        e ? requestAnimationFrame(() => this.tick(e)) : requestAnimationFrame(this.tick);
     }
 
     public autoAnimate(): void {

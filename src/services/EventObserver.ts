@@ -5,7 +5,7 @@
  */
 interface Action {
     componentId: symbol; 
-    callback: () => void;
+    callback: (e: Event) => void;
 }
 
 /**
@@ -18,8 +18,8 @@ export class EventObserver {
     /**
      * Run all the listeners's actions 
      */
-    public emit(): void {
-        this.actions.forEach((a) => a.callback());
+    public emit(e: Event): void {
+        this.actions.forEach((a) => a.callback(e));
     }
 
     /**
