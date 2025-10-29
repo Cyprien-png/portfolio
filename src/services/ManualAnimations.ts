@@ -2,20 +2,20 @@ import { DomElement } from "./DomElement";
 
 /**
  * Class DI class that stores all the listened Dom elements
- * @property {DomDI} instance - The "self" instance of the DI service
+ * @property {ManualAnimations} instance - The "self" instance of the DI service
  * @property {DomElement[]} domElements - List of the Dom elements
  */
-export class DomDI {
-    static instance: DomDI;
+export class ManualAnimations {
+    static instance: ManualAnimations;
     private domElements: DomElement[] = [];
 
     /**
-     * Get or instanciate the DomDI
-     * @returns the single DomElement instance
+     * Get or instanciate the ManualAnimations
+     * @returns the single ManualAnimations instance
      */
-    public static getInstance(): DomDI {
-        if (!DomDI.instance) DomDI.instance = new DomDI();
-        return DomDI.instance;
+    public static getInstance(): ManualAnimations {
+        if (!ManualAnimations.instance) ManualAnimations.instance = new ManualAnimations();
+        return ManualAnimations.instance;
     }
 
     /**

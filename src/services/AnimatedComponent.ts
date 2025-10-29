@@ -1,4 +1,4 @@
-import { DomDI } from "@/services/DomDI";
+import { ManualAnimations } from "@/services/ManualAnimations";
 import { AutoAnimations } from "@/services/AutoAnimations"
 
 /**
@@ -56,14 +56,14 @@ export class AnimatedComponent {
      * @param event Event type to listen 
      */
     public addAnimationTrigger(el: HTMLElement, event: string): void {
-        DomDI.getInstance().addEventListener(el, event, this.id, this.animate.bind(this));
+        ManualAnimations.getInstance().addEventListener(el, event, this.id, this.animate.bind(this));
     }
 
     /**
      * Remove all the listeners dedicated to this animation
      */
     public removeAnimationTriggers(): void {
-        DomDI.getInstance().removeEventListeners(this.id);
+        ManualAnimations.getInstance().removeEventListeners(this.id);
         AutoAnimations.getInstance().removeAnimation(this.id);
     }
 
