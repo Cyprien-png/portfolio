@@ -15,7 +15,7 @@ const { containerRef, contentRef } = provideScrollContext()
 </script>
 
 <template>
-  <div ref="containerRef" id="container" class="overflow-auto h-dvh flex flex-col items-center font-cantarell">
+  <div ref="containerRef" id="container" class="overflow-auto h-dvh flex flex-col items-center font-ledger">
     <Navbar />
     <div ref="contentRef" id="content" class="w-full flex flex-col">
       <Home />
