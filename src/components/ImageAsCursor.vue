@@ -28,7 +28,7 @@ const shouldMove = (position, targetPosition) => {
 
 const animatePos = (currentPos, newPos) => {
   if (!shouldMove(currentPos.value, newPos)) return;
-  currentPos.value += (newPos - currentPos.value) * 0.2;
+  currentPos.value += (newPos - currentPos.value) * .08;
 }
 
 const animate = () => {
@@ -49,7 +49,7 @@ onMounted(() => {
 
 <template>
   <div
-    class="aspect-video absolute shadow-[#0003] shadow-lg z-40 -translate-x-1/2 -translate-y-1/2 pointer-events-none rounded-full overflow-hidden transition-all duration-75"
+    class="aspect-video absolute shadow-[#0003] shadow-lg z-40 -translate-x-1/2 -translate-y-1/2 pointer-events-none rounded-full overflow-hidden ease-linear transition-all duration-75"
     :class="isOpen ? 'w-[30dvh]' : 'w-0'" :style="`left: ${x}px; top: ${y}px`">
     <img :src="imageUrl" alt="" class="w-full h-full object-cover bg-white" />
   </div>
