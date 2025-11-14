@@ -5,6 +5,7 @@ import ToggleSection from '@/components/ToggleSection.vue';
 import { useSingleToggle } from '@/composables/useSingleToggle.js'
 import ImageAsCursor from '@/components/ImageAsCursor.vue';
 import { useImageAsCursor } from '@/composables/useImageAsCursor'
+import ExternalLinkIcon from '@/icons/ExternalLinkIcon.vue';
 import projects from '@/data/projects.json'
 
 const { setImage, open, close } = useImageAsCursor()
@@ -31,19 +32,22 @@ onMounted(() => {
                         <h1>{{ project.title }}</h1>
                     </template>
                     <template v-slot:content>
-                        <div class="px-6 pb-6">
-                            <div class="h-full w-full text-black overflow-hidden flex flex-col gap-6">
-                                <div class="flex gap-6 flex-col md:flex-row">
-                                    <img :src="project.image" :alt="project.title"
-                                        class="object-cover aspect-[3/2] md:aspect-auto rounded-xl border-2 bg-white border-white h-[24dvh]">
-                                    <p class="rounded-xl text-justify text-white">{{ project.description }}</p>
-                                </div>
 
-                                <a :href="project.link" target="_blank"
-                                    class="border-2 border-white h-[5dvh] flex justify-center rounded-xl bg-[url('/external-link.svg')] bg-[length:3dvh] bg-blend-difference animate-[bg-move_5s_linear_infinite]">
+                        <div class="px-6 pb-6">
+                            <div
+                                class="relative w-full text-black overflow-hidden flex flex-col items-start gap-6 h-fit">
+                                <p class="z-20 min-h-[24dvh] w-full text-white p-4 text-justify">{{ project.description
+                                    }}</p>
+                                <a :href="project.link" class="group relative w-full flex p-4 bg-center bg-neutral-800 text-white" target="_blank">
+                                    <span class="z-30 flex gap-1 mix-blend-difference">
+                                        View more
+                                        <ExternalLinkIcon class="p-1" />
+                                    </span>
+                                    <img :src="project.image" class="left-0 -translate-x-full ease-in duration-200 group-hover:-translate-x-0 transition-all absolute object-cover w-full h-full top-1/2 -translate-y-1/2"/>
                                 </a>
                             </div>
                         </div>
+
                     </template>
                 </ToggleSection>
             </div>
