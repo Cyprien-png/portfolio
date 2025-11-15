@@ -14,64 +14,49 @@ const props = defineProps({
 const { containerRef } = useScrollContext();
 
 const component = ref();
-const contentContainerRef = ref(null);
-const highlightEl = ref(null);
-const followingFrameInnerAreaRef = ref(null);
-const followingFramePaddingRef = ref(0);
+const contentContainerRef = ref();
+const scrollableSectionRef = ref();
+const scrollableSectionPadding = ref()
+const highlightEl = ref();
+const followingFrameInnerAreaRef = ref();
 const scrollPos = ref();
-
-// Refs auto setters
-const registerHighlight = (el) => {
-    highlightEl.value = el;
-}
 
 const registerContainer = (el) => {
     contentContainerRef.value = el;
 }
 
-const registerFollowingFrame = (el) => {
-    followingFrameInnerAreaRef.value = el.firstChild;
-}
-
 // Set the base positions
 const computeLayout = () => {
-    if (!contentContainerRef.value) return;
-
     const items = contentContainerRef.value.children;
     if (!items.length) return;
 
-    const frameStyle = followingFrameInnerAreaRef.value ? getComputedStyle(followingFrameInnerAreaRef.value) : null;
-    const offset = followingFrameInnerAreaRef.value.offsetHeight / 2 - (items[0].offsetHeight / 2);
-    followingFramePaddingRef.value = frameStyle ? parseFloat(frameStyle.paddingTop) || 0 : 0;
+    const maxHeight = Array.from(items).reduce(
+        (max, el) => Math.max(max, el.offsetHeight),
+        items[0].offsetHeight
+    );
 
-    contentContainerRef.value.style.paddingTop = `${offset}px`;
-    contentContainerRef.value.style.paddingBottom = `${offset}px`;
+    highlightEl.value.style.height = `${maxHeight}px`;
 
-    if (highlightEl.value) {
-        let maxHeight = items[0].offsetHeight;
-        let maxWidth = items[0].offsetWidth;
-
-        Array.from(items).forEach((i) => {
-            if (i.offsetHeight > maxHeight) maxHeight = i.offsetHeight;
-            if (i.offsetWidth > maxWidth) maxWidth = i.offsetWidth;
-        })
-
-        highlightEl.value.style.height = `${maxHeight * 2}px`;
-        highlightEl.value.style.width = `${maxWidth * 1.2}px`;
-    }
+    const padding = window.innerHeight - (items[0].offsetHeight + items[items.length - 1].offsetHeight) / 2
+    scrollableSectionPadding.value = parseFloat(getComputedStyle(highlightEl.value.parentElement).padding)
+    scrollableSectionRef.value.style.height = `${contentContainerRef.value.offsetHeight + padding - scrollableSectionPadding.value}px`
 }
 
 // Apply the transformations
 const tick = () => {
-    const containerPos = contentContainerRef.value.getBoundingClientRect().top;
+    const translation = scrollableSectionRef.value.getBoundingClientRect().top
+
+    if (translation < 0 && scrollableSectionRef.value.getBoundingClientRect().bottom - window.innerHeight + scrollableSectionPadding.value > 0) {
+        contentContainerRef.value.style.transform = `translateY(${translation}px)`;
+    }
 
     Array.from(contentContainerRef.value.children).forEach((el) => {
-        const scroll = scrollPos.value ?? containerPos;
-        const centerY = window.innerHeight / 2 - (el.offsetHeight / 2);
-        const rotation = Math.round((scroll + el.offsetTop - centerY) * 10) / 10;
+        // const scroll = scrollPos.value ?? containerPos;
+        // const centerY = window.innerHeight / 2 - (el.offsetHeight / 2);
+        // const rotation = Math.round((scroll + el.offsetTop - centerY) * 10) / 10;
 
-        el.style.transform = `rotateX(${(rotation / -6) % 180}deg) translateZ(${-Math.abs(rotation) / 2}px)`;
-    })    
+        // el.style.transform = `rotateX(${(rotation / -6) % 180}deg) translateZ(${-Math.abs(rotation) / 2}px)`;
+    })
 }
 
 // Compute an action based on the scroll
@@ -79,21 +64,21 @@ const prepareAnimation = () => {
     if (!contentContainerRef.value) return;
 
     const scrollPositionStart = 0;
-    const scrollPositionEnd = -contentContainerRef.value.getBoundingClientRect().height + followingFrameInnerAreaRef.value.offsetHeight;
-    const scrollPositionCurrent = contentContainerRef.value.getBoundingClientRect().top - followingFramePaddingRef.value;
+    const scrollPositionEnd = -contentContainerRef.value.getBoundingClientRect().height;
+    const scrollPositionCurrent = scrollableSectionRef.value.getBoundingClientRect().top;
     scrollPos.value = undefined;
 
     if (scrollPositionCurrent > scrollPositionStart) {
-        scrollPos.value = scrollPositionStart + followingFramePaddingRef.value;
+        scrollPos.value = scrollPositionStart;
     } else if (scrollPositionCurrent < scrollPositionEnd) {
-        scrollPos.value = scrollPositionEnd + followingFramePaddingRef.value;
+        scrollPos.value = scrollPositionEnd;
     }
 }
 
 onMounted(async () => {
     computeLayout()
     component.value = new AnimatedComponent(props.contentSection);
-    component.value.prepareForAnimations = prepareAnimation;
+    // component.value.prepareForAnimations = prepareAnimation;
     component.value.tick = tick;
     component.value.addAnimationTrigger(containerRef.value, "scroll");
 })
@@ -102,11 +87,22 @@ onMounted(async () => {
 <template>
     <!-- Frame -->
     <FollowingFrame :contentSection="contentSection">
-        <slot name="highlight" :registerFollowingFrame="registerFollowingFrame" :registerHighLight="registerHighlight">
-        </slot>
+        <div ref="followingFrameInnerAreaRef"
+            class="relative h-dvh w-full top-0 left-0 border-[3dvw] border-white pointer-events-none">
+            <div class="absolute w-full h-full rounded-4xl outline-[3dvw] outline-white">
+                <div
+                    class="h-full w-full overflow-hidden rounded-4xl flex flex-col justify-center items-center p-[3dvw] z-20">
+                    <div ref="highlightEl" class="rounded-full w-3/4 z-20 relative bg-green-400 overflow-visible">
+
+                        <slot name="content" :registerContainer="registerContainer"></slot>
+                        <!-- <div class="h-full w-full top-0 left-0 bg-linear-[white_2%,transparent_25%,transparent_75%,white_98%] "> </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
     </FollowingFrame>
 
     <!-- Scrollable content -->
-    <slot name="content" :registerContainer="registerContainer">
-    </slot>
+    <div ref="scrollableSectionRef" class="w-full bg-linear-to-b from-violet-500 to-yellow-500">
+    </div>
 </template>
