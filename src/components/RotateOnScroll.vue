@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useScrollContext } from '@/composables/useScrollContext'
 import FollowingFrame from './FollowingFrame.vue'
 import { AnimatedComponent } from '@/services/AnimatedComponent'
@@ -44,18 +44,22 @@ const computeLayout = () => {
 
 // Apply the transformations
 const tick = () => {
-    const translation = scrollableSectionRef.value.getBoundingClientRect().top
+    let translation = scrollableSectionRef.value.getBoundingClientRect().top;
+    const bottomLimit = scrollableSectionRef.value.getBoundingClientRect().bottom - window.innerHeight + scrollableSectionPadding.value;
 
-    if (translation < 0 && scrollableSectionRef.value.getBoundingClientRect().bottom - window.innerHeight + scrollableSectionPadding.value > 0) {
-        contentContainerRef.value.style.transform = `translateY(${translation}px)`;
+    if (translation >= 0) {
+        translation = 0
+    } else if (bottomLimit < 0) {
+        translation = highlightEl.value.offsetHeight - contentContainerRef.value.offsetHeight;
     }
+    
+    contentContainerRef.value.style.transform = `translateY(${translation}px)`;
+
+    const relativeScroll = highlightEl.value.getBoundingClientRect().top
 
     Array.from(contentContainerRef.value.children).forEach((el) => {
-        // const scroll = scrollPos.value ?? containerPos;
-        // const centerY = window.innerHeight / 2 - (el.offsetHeight / 2);
-        // const rotation = Math.round((scroll + el.offsetTop - centerY) * 10) / 10;
-
-        // el.style.transform = `rotateX(${(rotation / -6) % 180}deg) translateZ(${-Math.abs(rotation) / 2}px)`;
+        const rotation = Math.round(relativeScroll - el.getBoundingClientRect().top)
+        el.style.transform = `rotateX(${rotation / 3}deg) translateZ(${-Math.abs(rotation  / 2)}px)`;
     })
 }
 
@@ -87,18 +91,15 @@ onMounted(async () => {
 <template>
     <!-- Frame -->
     <FollowingFrame :contentSection="contentSection">
-        <div ref="followingFrameInnerAreaRef"
-            class="relative h-dvh w-full top-0 left-0 border-[3dvw] border-white pointer-events-none">
-            <div class="absolute w-full h-full rounded-4xl outline-[3dvw] outline-white">
-                <div
-                    class="h-full w-full overflow-hidden rounded-4xl flex flex-col justify-center items-center p-[3dvw] z-20">
-                    <div ref="highlightEl" class="rounded-full w-3/4 z-20 relative bg-green-400 overflow-visible">
-
-                        <slot name="content" :registerContainer="registerContainer"></slot>
-                        <!-- <div class="h-full w-full top-0 left-0 bg-linear-[white_2%,transparent_25%,transparent_75%,white_98%] "> </div> -->
+        <div ref="followingFrameInnerAreaRef" class="relative h-dvh w-full top-0 left-0 pointer-events-none">
+                <div class="h-full w-full overflow-hidden z-20 p-[3dvw]">
+                    <div class="h-full w-full flex flex-row justify-center items-center rounded-4xl outline-[6dvw] outline-white">
+                        <div ref="highlightEl" class="rounded-full w-3/4 z-20 relative overflow-visible">
+                            <slot name="content" :registerContainer="registerContainer"></slot>
+                            <!-- <div class="h-full w-full top-0 left-0 bg-linear-[white_2%,transparent_25%,transparent_75%,white_98%] "> </div> -->
+                        </div>
                     </div>
                 </div>
-            </div>
         </div>
     </FollowingFrame>
 
