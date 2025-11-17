@@ -52,7 +52,7 @@ onMounted(async () => {
                 </div>
             </div>
 
-            <div class="h-full w-full bg-sky-400 transition-transform duration-75" :style="`transform: translateY(${translationRef}px)`"></div>
+            <div class="h-full w-full bg-sky-400" :style="`transform: translateY(${translationRef}px)`"></div>
         </div>
     </FramedMainSection>
 </template>
