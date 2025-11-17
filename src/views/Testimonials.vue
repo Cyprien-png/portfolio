@@ -19,11 +19,11 @@ onMounted(async () => {
 
             <!-- Scrollable content -->
             <template #content="{ registerContainer }">
-                <div class="h-full w-full bg-cover rounded-4xl text-center flex items-start relative bg-red-500">
+                <div class="h-full w-full bg-cover rounded-4xl text-center flex items-start relative">
                     <div :ref="registerContainer"
-                        class="flex flex-col items-center gap-[6dvh] w-fit z-30 perspective-distant text-black" style="height: auto;">
+                        class="flex flex-col relative items-center w-fit z-30 perspective-distant text-black" style="height: auto;">
                         <div v-for="(testimonial, i) in testimonials" :key="i"
-                            class="testimonial-item w-full text-justify flex items-center p-4">
+                            class="testimonial-item w-full text-justify flex items-center bg-orange-700 p-12">
                             {{ testimonial.description }}
                         </div>
                     </div>
