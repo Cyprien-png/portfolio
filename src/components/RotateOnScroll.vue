@@ -38,13 +38,12 @@ const computeLayout = () => {
     highlightEl.value.style.height = `${maxParagraphSize.value}px`;
 
     const padding = window.innerHeight - (items[0].offsetHeight + items[items.length - 1].offsetHeight) / 2
-    scrollableSectionPadding.value = parseFloat(getComputedStyle(highlightEl.value.parentElement).padding)
-    scrollableSectionRef.value.style.height = `${contentContainerRef.value.offsetHeight + padding - scrollableSectionPadding.value}px`
-    applyParagraphsTransform(true)
+    scrollableSectionPadding.value = parseFloat(getComputedStyle(highlightEl.value.parentElement.parentElement).padding)
+    scrollableSectionRef.value.style.height = `${contentContainerRef.value.offsetHeight + padding - 2*scrollableSectionPadding.value}px`
+    applyParagraphsTransform(0, true)
 }
 
-const applyParagraphsTransform = (isSetup = false) => {
-    const scroll = isSetup ? 0 : scrollableSectionRef.value.getBoundingClientRect().top;
+const applyParagraphsTransform = (scroll, isSetup = false) => {
     Array.from(contentContainerRef.value.children).forEach((el) => {
         if (isSetup || el.getBoundingClientRect().top < highlightEl.value.getBoundingClientRect().bottom && el.getBoundingClientRect().bottom > highlightEl.value.getBoundingClientRect().top) {
             // ensure that the rotation value is between -200 and 200
@@ -56,7 +55,7 @@ const applyParagraphsTransform = (isSetup = false) => {
 
 // Apply the transformations
 const tick = () => {
-    let translation = scrollableSectionRef.value.getBoundingClientRect().top;
+    let translation = scrollableSectionRef.value.getBoundingClientRect().top - scrollableSectionPadding.value;
     const bottomLimit = scrollableSectionRef.value.getBoundingClientRect().bottom - window.innerHeight + scrollableSectionPadding.value;
 
     if (translation >= 0) {
@@ -64,7 +63,7 @@ const tick = () => {
     } else if (bottomLimit < 0) {
         translation = maxParagraphSize.value.offsetHeight - contentContainerRef.value.offsetHeight;
     } else {
-        applyParagraphsTransform()
+        applyParagraphsTransform(translation)
     }
     contentContainerRef.value.style.transform = `translateY(${translation}px)`;
 }
@@ -82,12 +81,10 @@ onMounted(async () => {
     <FollowingFrame :contentSection="contentSection">
         <div class="relative h-dvh w-full top-0 left-0 pointer-events-none">
             <div class="h-full w-full overflow-hidden z-20 p-[3dvw]">
-                <div
-                    class="h-full w-full flex flex-row justify-center items-center rounded-4xl outline-[6dvw] outline-white">
+                <div class="h-full w-full flex flex-row justify-center items-center rounded-4xl outline-[6dvw] outline-white">
                     <div ref="highlightEl" class="rounded-full bg-white w-3/4 z-20 relative overflow-hidden">
                         <slot name="content" :registerContainer="registerContainer"></slot>
-                        <div
-                            class="absolute h-full w-full top-0 left-0 z-30 bg-linear-[white_3%,transparent_15%,transparent_85%,white_97%]">
+                        <div class="absolute h-full w-full top-0 left-0 z-30 bg-linear-[white_0%,transparent_15%,transparent_85%,white_100%]">
                         </div>
                     </div>
                 </div>
@@ -97,5 +94,6 @@ onMounted(async () => {
 
     <!-- Scrollable content -->
     <div ref="scrollableSectionRef" class="w-full bg-linear-to-b from-violet-500 to-yellow-500">
+        <slot name="background"></slot>
     </div>
 </template>
