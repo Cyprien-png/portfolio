@@ -23,7 +23,7 @@ onMounted(async () => {
                     <div :ref="registerContainer"
                         class="flex flex-col relative items-center w-fit z-30 perspective-distant text-black" style="height: auto;">
                         <div v-for="(testimonial, i) in testimonials" :key="i"
-                            class="testimonial-item w-full text-justify flex items-center bg-orange-700 p-12">
+                            class="testimonial-item w-full text-justify flex items-center py-8 px-20">
                             {{ testimonial.description }}
                         </div>
                     </div>

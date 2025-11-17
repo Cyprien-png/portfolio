@@ -18,7 +18,6 @@ const contentContainerRef = ref();
 const scrollableSectionRef = ref();
 const scrollableSectionPadding = ref()
 const highlightEl = ref();
-const followingFrameInnerAreaRef = ref();
 const maxParagraphSize = ref(0);
 
 const registerContainer = (el) => {
@@ -81,14 +80,14 @@ onMounted(async () => {
 <template>
     <!-- Frame -->
     <FollowingFrame :contentSection="contentSection">
-        <div ref="followingFrameInnerAreaRef" class="relative h-dvh w-full top-0 left-0 pointer-events-none">
+        <div class="relative h-dvh w-full top-0 left-0 pointer-events-none">
             <div class="h-full w-full overflow-hidden z-20 p-[3dvw]">
                 <div
                     class="h-full w-full flex flex-row justify-center items-center rounded-4xl outline-[6dvw] outline-white">
-                    <div ref="highlightEl" class="rounded-full w-3/4 z-20 relative overflow-visible">
+                    <div ref="highlightEl" class="rounded-full bg-white w-3/4 z-20 relative overflow-hidden">
                         <slot name="content" :registerContainer="registerContainer"></slot>
                         <div
-                            class="absolute h-full w-full top-0 left-0 z-30 bg-linear-[white_2%,transparent_25%,transparent_75%,white_98%]">
+                            class="absolute h-full w-full top-0 left-0 z-30 bg-linear-[white_3%,transparent_15%,transparent_85%,white_97%]">
                         </div>
                     </div>
                 </div>
