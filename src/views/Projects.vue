@@ -26,6 +26,7 @@ onMounted(() => {
                 <ToggleSection v-for="(project, pi) in projects" :key="pi" :open="isOpen(pi)" @toggle="toggle(pi)"
                     @hover="setImage(project.image), open()" @leave="close()">
                     <template v-slot:header>
+                        <img :src="project.image" class="absolute h-full w-full top-0 left-0 -z-20 brightness-50 object-cover"/>
                         <h1 class="tracking-[-0.3dvw] hidden md:flex">
                             00-{{ (pi + 1).toLocaleString('en-US', { minimumIntegerDigits: 2 }) }}
                         </h1>
