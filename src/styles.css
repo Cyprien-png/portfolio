@@ -11,4 +11,8 @@
    .pause {
      animation-play-state: paused !important;
    }
+
+   .parallax {
+    pointer-events: none;
+   }
 }

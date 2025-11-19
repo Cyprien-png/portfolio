@@ -37,8 +37,7 @@ onMounted(() => {
                         <div class="px-6 pb-6">
                             <div
                                 class="relative w-full text-black overflow-hidden flex flex-col items-start gap-6 h-fit">
-                                <p class="z-20 min-h-[24dvh] w-full text-white p-4 text-justify">{{ project.description
-                                    }}</p>
+                                <p class="z-20 min-h-[24dvh] w-full text-white p-4 text-justify">{{ project.description }}</p>
                                 <a :href="project.link" class="group relative w-full flex p-4 bg-center bg-neutral-800 text-white" target="_blank">
                                     <span class="z-30 flex gap-1 mix-blend-difference">
                                         View more
