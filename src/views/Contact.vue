@@ -64,7 +64,7 @@ onMounted(async () => {
                     <div class="max-h-full relative w-1/2 md:w-full aspect-[9/16]">
 
                         <img src="/contact/body.png" data-parallax-value=".1" class="absolute h-full w-full top-0 left-0 object-contain parallax"/>
-                        <img src="/contact/arm.png" data-parallax-value=".12" class="absolute h-full w-full top-0 left-0 object-contain parallax"/>
+                        <img src="/contact/arm.png" data-parallax-value=".13" class="absolute h-full w-full top-0 left-0 object-contain parallax"/>
                     </div>
                 </div>
             </div>
