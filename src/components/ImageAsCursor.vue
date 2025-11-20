@@ -12,6 +12,7 @@ const props = defineProps({
     }
 })
 
+const { containerRef } = useScrollContext();
 const { getPositions } = useCursorContext();
 const { imageUrl, isOpen } = useImageAsCursor();
 const component = ref();
@@ -44,6 +45,7 @@ onMounted(() => {
   component.value = new AnimatedComponent(props.contentSection);
   component.value.tick = updatePosition;
   component.value.addAnimationTrigger(window, "mousemove");
+  component.value.addAnimationTrigger(containerRef.value, "scroll");
 
   loopComponent.value = new AnimatedComponent(props.contentSection);
   loopComponent.value.tick = animate;
