@@ -11,16 +11,19 @@ const onEnter = () => isEnabled.value = true;
 const onLeave = () => isEnabled.value = false;
 
 const updatePosition = (e) => {
+  const rootRect = rootRef.value.getBoundingClientRect();
+  const relativeCursorX = rootRect.width / 2 + rootRect.left
+  const relativeCursorY = rootRect.height / 2 + rootRect.top
+
   if (!isEnabled.value) return
   parallaxItems.value.forEach(el => {
     const multiplicator = el.dataset.parallaxValue;
-    const x = (rootRef.value.offsetWidth / 2 - e.offsetX) * multiplicator;
-    const y = (rootRef.value.offsetHeight / 2 - e.offsetY) * multiplicator;
+    const x = (relativeCursorX - e.screenX) * multiplicator;
+    const y = (relativeCursorY - e.screenY) * multiplicator;
 
     el.style.transform = `translateX(${x}px) translateY(${y}px)`
   })
 }
-
 
 onMounted(() => {
   parallaxItems.value = Array.from(rootRef.value.getElementsByClassName("parallax")) ;
