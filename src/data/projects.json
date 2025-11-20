@@ -27,6 +27,6 @@
         "title": "SeaCracker",
         "description": "SeaCracker is another open-source project that I developed with the same team as the game engine, but several months earlier. With this project, we wanted to focus on design patterns and the architecture of a web application. We therefore developed SeaCracker, a Kahoot-like platform. The concept is that users can create quizzes with multiple-choice questions, which can then be played in game sessions. In practice, the host acts as the presenter, displaying questions one by one on their screen. Each player connects to the game using their phone and uses it as a remote control to submit their answers. Between each question, the presenter displays the leaderboard to make the experience more engaging. This project was particularly interesting for me because it introduced me to state machines, event-driven architectures, and it was my first real experience working with WebSockets.",
         "link": "#",
-        "image": "/backgrounds/mountains.png"
+        "image": "/projects/sea-cracker.png"
     }
 ]
