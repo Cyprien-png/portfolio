@@ -10,8 +10,24 @@ import TestimonialsMobile from './views/TestimonialsMobile.vue';
 import Contact from './views/Contact.vue';
 import { provideScrollContext } from '@/composables/useScrollContext'
 import { md } from '@/utils/deviceSize'
+import { useCursorContext } from './composables/useCursorContext';
+import { ref, onMounted } from 'vue';
+import { AnimatedComponent } from './services/AnimatedComponent';
 
-const { containerRef, contentRef } = provideScrollContext()
+const { containerRef, contentRef } = provideScrollContext();
+const { setPositions } = useCursorContext();
+
+const component = ref();
+
+const setCursorPos = (e) => {
+  if (e instanceof MouseEvent) setPositions(e.screenX, e.screenY);
+}
+
+onMounted(() => {
+  component.value = new AnimatedComponent();
+  component.value.tick = setCursorPos;
+  component.value.addAnimationTrigger(window, "mousemove");
+})
 </script>
 
 <template>

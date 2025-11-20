@@ -1,27 +1,28 @@
 <script setup>
-import { ref, onMounted, nextTick } from 'vue'
+import { ref, onMounted } from 'vue'
 import { AnimatedComponent } from '@/services/AnimatedComponent'
+import { useScrollContext } from '@/composables/useScrollContext';
+import { useCursorContext } from '@/composables/useCursorContext';
 
-const rootRef = ref()
-const isEnabled = ref(false);
+const { containerRef} = useScrollContext();
+const { getPositions } = useCursorContext();
+
+const rootRef = ref();
 const component = ref();
-const parallaxItems = ref([])
+const parallaxItems = ref([]);
 
-const onEnter = () => isEnabled.value = true;
-const onLeave = () => isEnabled.value = false;
-
-const updatePosition = (e) => {
+const updatePosition = () => {
   const rootRect = rootRef.value.getBoundingClientRect();
-  const relativeCursorX = rootRect.width / 2 + rootRect.left
-  const relativeCursorY = rootRect.height / 2 + rootRect.top
+  const relativeCursorX = rootRect.width / 2 + rootRect.left;
+  const relativeCursorY = rootRect.height / 2 + rootRect.top;
+  const cur = getPositions();
 
-  if (!isEnabled.value) return
   parallaxItems.value.forEach(el => {
     const multiplicator = el.dataset.parallaxValue;
-    const x = (relativeCursorX - e.screenX) * multiplicator;
-    const y = (relativeCursorY - e.screenY) * multiplicator;
+    const x = (relativeCursorX - cur.x) * multiplicator;
+    const y = (relativeCursorY - cur.y) * multiplicator;
 
-    el.style.transform = `translateX(${x}px) translateY(${y}px)`
+    el.style.transform = `translateX(${x}px) translateY(${y}px)`;
   })
 }
 
@@ -30,11 +31,12 @@ onMounted(() => {
   component.value = new AnimatedComponent(rootRef.value);
   component.value.tick = updatePosition;
   component.value.addAnimationTrigger(window, "mousemove");
+  component.value.addAnimationTrigger(containerRef.value, "scroll");
 })
 </script>
 
 <template>
-  <div ref="rootRef" class="parallax-wrapper h-full w-full" @pointerenter="onEnter" @pointerleave="onLeave">
+  <div ref="rootRef" class="parallax-wrapper h-full w-full">
     <slot></slot>
   </div>
 </template>
