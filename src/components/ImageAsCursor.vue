@@ -1,7 +1,9 @@
 <script setup>
-import { ref, onMounted, onUnmounted, defineProps } from 'vue'
+import { ref, onMounted, defineProps } from 'vue'
 import { useImageAsCursor } from '@/composables/useImageAsCursor'
 import { AnimatedComponent } from '@/services/AnimatedComponent'
+import { useCursorContext } from '@/composables/useCursorContext'
+import { useScrollContext } from '@/composables/useScrollContext'
 
 const props = defineProps({
     contentSection: {
@@ -10,6 +12,7 @@ const props = defineProps({
     }
 })
 
+const { getPositions } = useCursorContext();
 const { imageUrl, isOpen } = useImageAsCursor();
 const component = ref();
 const loopComponent = ref();
@@ -18,12 +21,13 @@ const y = ref(window.innerHeight / 2);
 const imagePositions = ref({x: x.value, y: y.value});
 
 const updatePosition = (e) => {
-  imagePositions.value.x = e.clientX;
-  imagePositions.value.y = e.clientY;
+  const cur = getPositions();
+  imagePositions.value.x = cur.x;
+  imagePositions.value.y = cur.y;
 }
 
 const shouldMove = (position, targetPosition) => {
-  return Math.round(position.value * 100) / 100 != targetPosition && !!isOpen.value
+  return Math.round(position.value * 100) / 100 != targetPosition;
 }
 
 const animatePos = (currentPos, newPos) => {
@@ -49,7 +53,7 @@ onMounted(() => {
 
 <template>
   <div
-    class="aspect-video absolute shadow-[#0003] shadow-lg z-40 -translate-x-1/2 -translate-y-1/2 pointer-events-none rounded-full overflow-hidden ease-linear transition-all duration-75"
+    class="aspect-video absolute shadow-[#0003] shadow-lg z-40 -translate-x-1/2 -translate-y-full pointer-events-none rounded-full overflow-hidden ease-linear transition-all duration-75"
     :class="isOpen ? 'w-[30dvh]' : 'w-0'" :style="`left: ${x}px; top: ${y}px`">
     <img :src="imageUrl" alt="" class="w-full h-full object-cover bg-white" />
   </div>
