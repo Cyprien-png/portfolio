@@ -25,7 +25,7 @@ onMounted(async () => {
                         :texts="['Build', 'Develop', 'Impact', 'Change', 'Design']" 
                         :container="containerRef" 
                         :duration="2.5" 
-                        :class="'text-[#DE2E2E]'" 
+                        :class="'text-red-custom'" 
                     />
                 </p>
                 <p class="flex h-[8.4dvw] xl:h-[11dvh] ">the future</p>
