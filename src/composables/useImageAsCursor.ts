@@ -2,6 +2,7 @@ import { ref } from 'vue'
 
 const imageUrl = ref(null)
 const isOpen = ref(false)
+const isUrl = ref(false)
 
 export function useImageAsCursor() {
   const open = () => {
@@ -16,5 +17,9 @@ export function useImageAsCursor() {
     imageUrl.value = url;
   }
 
-  return { imageUrl, isOpen, open, close, setImage }
+  const setIsUrl = (value) => {
+    isUrl.value = value;
+  }
+
+  return { imageUrl, isOpen, isUrl, open, close, setImage, setIsUrl }
 }

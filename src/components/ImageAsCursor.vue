@@ -4,6 +4,7 @@ import { useImageAsCursor } from '@/composables/useImageAsCursor'
 import { AnimatedComponent } from '@/services/AnimatedComponent'
 import { useCursorContext } from '@/composables/useCursorContext'
 import { useScrollContext } from '@/composables/useScrollContext'
+import ExternalLinkIcon from '@/icons/ExternalLinkIcon.vue'
 
 const props = defineProps({
     contentSection: {
@@ -14,7 +15,7 @@ const props = defineProps({
 
 const { containerRef } = useScrollContext();
 const { getPositions } = useCursorContext();
-const { imageUrl, isOpen } = useImageAsCursor();
+const { imageUrl, isOpen, isUrl } = useImageAsCursor();
 const component = ref();
 const loopComponent = ref();
 const x = ref(window.innerWidth / 2);
@@ -57,6 +58,11 @@ onMounted(() => {
   <div
     class="aspect-video absolute shadow-[#0003] shadow-lg z-40 -translate-x-1/2 -translate-y-full pointer-events-none rounded-full overflow-hidden ease-linear transition-all duration-75"
     :class="isOpen ? 'w-[30dvh]' : 'w-0'" :style="`left: ${x}px; top: ${y}px`">
-    <img :src="imageUrl" alt="" class="w-full h-full object-cover bg-white" />
+    <div class="relative w-full h-full">
+      <div :class="`${isUrl ? 'opacity-60' : 'opacity-0'}`" class="absolute h-full w-full transition-all inset-0 bg-black flex justify-center items-center">
+        <ExternalLinkIcon class="h-1/2 w-1/2 text-white"/>
+      </div>
+      <img :src="imageUrl" alt="" class="w-full h-full object-cover" />
+    </div>
   </div>
 </template>

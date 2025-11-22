@@ -7,8 +7,9 @@ import ImageAsCursor from '@/components/ImageAsCursor.vue';
 import { useImageAsCursor } from '@/composables/useImageAsCursor'
 import ExternalLinkIcon from '@/icons/ExternalLinkIcon.vue';
 import projects from '@/data/projects.json'
+import CustomA from '@/components/CustomA.vue';
 
-const { setImage, open, close } = useImageAsCursor()
+const { setImage, setIsUrl, open, close } = useImageAsCursor()
 const { isOpen, toggle } = useSingleToggle()
 const frameRef = ref()
 const containerRef = ref();
@@ -38,12 +39,9 @@ onMounted(() => {
                             <div
                                 class="relative w-full text-black overflow-hidden flex flex-col items-start gap-6 h-fit">
                                 <p class="z-20 min-h-[24dvh] w-full text-white p-4 text-justify">{{ project.description }}</p>
-                                <a :href="project.link" class="group relative w-full flex p-4 bg-center bg-neutral-800 text-white" target="_blank">
-                                    <span class="z-30 flex gap-1 mix-blend-difference">
-                                        View more
-                                        <ExternalLinkIcon class="p-1" />
-                                    </span>
-                                    <img :src="project.image" class="left-0 -translate-x-full ease-in duration-200 group-hover:-translate-x-0 transition-all absolute object-cover w-full h-full top-1/2 -translate-y-1/2"/>
+                                <a @mouseenter="setIsUrl(true)" @mouseleave="setIsUrl(false)" :href="project.link" class="relative w-full flex bg-center bg-cover text-white" target="_blank">
+                                    <CustomA text="View more" :href="project.link" target="_blank" class="z-10 h-full w-full p-4"/>
+                                    <img :src="project.image" class="absolute top-0 left-0 object-cover w-full h-full brightness-75"/>
                                 </a>
                             </div>
                         </div>
