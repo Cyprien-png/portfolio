@@ -1,5 +1,7 @@
 <script setup>
 import Navbar from '@/components/Navbar.vue';
+import LiquidNavbar from './components/LiquidNavbar.vue';
+import LiquidFilter from './filter/LiquidFilter.vue';
 import Home from '@/views/Home.vue'
 import AboutMe from '@/views/AboutMe.vue';
 import AboutMeMobile from './views/AboutMeMobile.vue';
@@ -31,8 +33,9 @@ onMounted(() => {
 </script>
 
 <template>
+  <LiquidFilter />
   <div ref="containerRef" id="container" class="overflow-auto h-dvh flex flex-col items-center font-ledger">
-    <Navbar />
+    <LiquidNavbar />
     <div ref="contentRef" id="content" class="w-full flex flex-col">
       <Home />
       <AboutMe v-if="md()"/>
