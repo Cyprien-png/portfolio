@@ -3,6 +3,7 @@ import { onMounted, ref } from 'vue';
 import FramedMainSection from '@/layouts/FramedMainSection.vue';
 import { useScrollContext } from '@/composables/useScrollContext'
 import { AnimatedComponent } from '@/services/AnimatedComponent';
+import CustomA from '@/components/CustomA.vue';
 import Parallax from '@/components/Parallax.vue';
 
 const component = ref(null)
@@ -37,20 +38,20 @@ onMounted(async () => {
                     <div class="h-full w-full">
                         <h2 class="font-rubik border-b-3 border-dashed">Hire me</h2>
                         <ul class="pt-4 text-2xl flex flex-col gap-2">
-                            <li class="w-fit hover:underline"><a href="mailto:cyprien@jaquier.dev">cyprien@jaquier.dev</a></li>
+                            <li class="w-fit"><CustomA text="cyprien@jaquier.dev" href="mailto:cyprien@jaquier.dev"/></li>
                         </ul>
                     </div>
                     <div class="h-full w-full">
                         <h2 class="font-rubik border-b-3 border-dashed">Social</h2>
                         <ul class="pt-4 text-2xl flex flex-col gap-2">
-                            <li class="w-fit hover:underline"><a target="_blank" href="https://www.linkedin.com/in/cyprien-jaquier">LinkedIn</a></li>
+                            <li class="w-fit"><CustomA text="LinkedIn" target="_blank" href="https://www.linkedin.com/in/cyprien-jaquier"/></li>
                         </ul>
                     </div>
                     <div class="h-full w-full">
                         <h2 class="font-rubik border-b-3 border-dashed">Open source</h2>
                         <ul class="pt-4 text-2xl flex flex-col gap-2">
-                            <li class="w-fit hover:underline"><a target="_blank" href="https://github.com/Cyprien-png">GitHub</a></li>
-                            <li class="w-fit hover:underline"><a target="_blank" href="https://codepen.io/R0kkxRyuk">CodePen</a></li>
+                            <li class="w-fit"><CustomA text="GitHub" target="_blank" href="https://github.com/Cyprien-png"/></li>
+                            <li class="w-fit"><CustomA text="CodePen" target="_blank" href="https://codepen.io/R0kkxRyuk"/></li>
                         </ul>
                     </div>
                 </div>
