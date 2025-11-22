@@ -47,12 +47,16 @@ onMounted(async () => {
         <FollowingFrame v-if="frameSectionRef" :contentSection="frameSectionRef">
             <div class="h-full w-full bg-white p-[3dvw]">
                 <div class="h-full w-full relative flex justify-center items-center rounded-4xl overflow-hidden">
-                    <div class="absolute h-full w-full top-0 left-0 brightness-50 bg-[url('/backgrounds/room.png')] bg-cover bg-bottom "></div>
+                    <div class="absolute h-full w-full top-0 left-0 bg-[url('/backgrounds/room.png')] bg-cover bg-bottom"></div>
                     <div class="h-1/2 w-full overflow-hidden px-[3dvw] z-10">
                         <div ref="contentRef" class="h-full w-full transition-transform duration-400 text-white">
                             <div v-for="story in stories" class="h-full w-full aspect-square flex items-center gap-6">
-                                <p class="flex-1 h-fit text-justify">{{ story.description }}</p>
-                                <img :src="story.image" class="w-1/4 aspect-[9/16] brightness-[.6] max-h-full object-contain object-bottom"/>
+                                
+                                <p class="flex-1 h-fit text-justify">
+                                    <span class="font-bold text-3xl leading-none">{{ story.when }}</span>
+                                    {{ story.description }}
+                                </p>
+                                <img :src="story.image" class="w-1/2 aspect-[9/16] max-h-full object-contain object-bottom"/>
                             </div>
                         </div>
                     </div>
