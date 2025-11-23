@@ -1,0 +1,32 @@
+[
+    {
+        "title": "Game Engine",
+        "description": "Sprunk-engine is an open-source web game engine (available on npm) that I developed with some friends. We wanted to create a concrete and challenging project with a strong focus on architecture, which is why we decided to build a game engine. To push the challenge even further, we chose to use almost no external libraries and remain completely independent throughout the project. The engine allows developers to create 2D games that run directly in the browser. We also developed two \"proof of concept\" games, which you can find on the official website. In this project, I personally developed our own math library, the physics engine (responsible for handling all interactions in the 2D space such as collision detection and response), and I am currently working on a new 3D engine. This project is something I’m proud of, as it allowed me to deepen my understanding of algorithms, optimization, mathematics, and collaborative work on open-source projects.",
+        "link": "https://sprunk-engine.com/",
+        "image": "/projects/sprunk.png"
+    },
+    {
+        "title": "Find your tribe",
+        "description": "Find your tribe (Retrouve ta tribu) is a small project born from an idea I had a few years ago after spending a few days at a music festival abroad with some friends. The festival hosts over 60,000 people each day which makes it extremely difficult to find each other quickly when the group splits up especially due to the lack of landmarks the crowd and the noise. My idea was to address this problem by developing an app that allows users to create friend groups where they can chat, see each other’s live locations, define and share landmarks on a map and use 3D arrows that rely on the phone’s gyroscope to indicate the exact direction of their friends in real time. The 3D arrow feature is implemented using the \"game engine\" project as it is fully modular.",
+        "link": "#",
+        "image": "/projects/find-your-tribe.png"
+    },
+    {
+        "title": "Portfolio",
+        "description": "The portfolio project is the very website you’re on right now. Although most of my other projects are mainly focused on architecture, algorithms, and data science, I’ve always had a strong passion for frontend development. In fact, I’ve long dreamed of holding the title of \"Creative Developer\" as I deeply admire both the technical mastery and the artistic vision that these professionals bring to their work. I regularly browse websites on awwwards.com to find inspiration and to learn more about the technical side behind certain visual effects. This portfolio project is not only a way to showcase my profile and skills, but also a way to stay true to my original ambitions. At the time of writing this, development is still in progress, but I’m considering submitting it to Awwwards once it’s complete. If you have any suggestions or feedback, feel free to reach out to me ;)",
+        "link": "#",
+        "image": "/backgrounds/mountains.png"
+    },
+    {
+        "title": "Flappy Bot",
+        "description": "Flappy Bot is a small project I developed on my own to take my first steps into the field of machine learning. After reading several articles and watching fascinating videos showing how people train AIs to play video games, I wanted to try it myself. I started by learning about the neat-python library and neural networks so I could train my own AI. I then developed a small Flappy Bird clone using the Monogame library, added a scoring system, and implemented the AI training logic. I defined all the inputs, actions (jump or wait) as outputs of the neural network, and added a reward system. After that, I trained models over multiple generations, and one of them reached a high enough score to stop the training and save it as the \"best genome.\" The genome is available in the repository and achieves incredibly high scores (I’m not even sure it ever loses).",
+        "link": "#",
+        "image": "/projects/flappy-bird.png"
+    },
+    {
+        "title": "SeaCracker",
+        "description": "SeaCracker is another open-source project that I developed with the same team as the game engine, but several months earlier. With this project, we wanted to focus on design patterns and the architecture of a web application. We therefore developed SeaCracker, a Kahoot-like platform. The concept is that users can create quizzes with multiple-choice questions, which can then be played in game sessions. In practice, the host acts as the presenter, displaying questions one by one on their screen. Each player connects to the game using their phone and uses it as a remote control to submit their answers. Between each question, the presenter displays the leaderboard to make the experience more engaging. This project was particularly interesting for me because it introduced me to state machines, event-driven architectures, and it was my first real experience working with WebSockets.",
+        "link": "#",
+        "image": "/projects/sea-cracker.png"
+    }
+]

@@ -1,0 +1,67 @@
+<script setup>
+import { ref, onMounted } from 'vue';
+import FramedMainSection from '@/layouts/FramedMainSection.vue';
+import ToggleSection from '@/components/ToggleSection.vue';
+import { useSingleToggle } from '@/composables/useSingleToggle.js'
+import ImageAsCursor from '@/components/ImageAsCursor.vue';
+import { useImageAsCursor } from '@/composables/useImageAsCursor'
+import ExternalLinkIcon from '@/icons/ExternalLinkIcon.vue';
+import projects from '@/data/projects.json'
+import CustomA from '@/components/CustomA.vue';
+
+const { setImage, setIsUrl, open, close } = useImageAsCursor()
+const { isOpen, toggle } = useSingleToggle()
+const frameRef = ref()
+const containerRef = ref();
+
+onMounted(() => {
+    containerRef.value = frameRef.value.sectionRef;
+})
+</script>
+
+<template>
+    <ImageAsCursor v-if="containerRef" :contentSection="containerRef" />
+    <FramedMainSection ref="frameRef" id="projects" :class="'min-h-[100dvh] flex h-auto'">
+        <div class="flex-1 w-full bg-fit flex flex-col text-center pt-20">
+            <div class="w-full h-full flex flex-col">
+                <ToggleSection v-for="(project, pi) in projects" :key="pi" :open="isOpen(pi)" @toggle="toggle(pi)"
+                    @hover="setImage(project.image), open()" @leave="close()">
+                    <template v-slot:header>
+                        <img :src="project.image" class="absolute h-full w-full top-0 left-0 -z-20 brightness-50 object-cover"/>
+                        <h1 class="tracking-[-0.3dvw] hidden md:flex">
+                            00-{{ (pi + 1).toLocaleString('en-US', { minimumIntegerDigits: 2 }) }}
+                        </h1>
+                        <h1>{{ project.title }}</h1>
+                    </template>
+                    <template v-slot:content>
+
+                        <div class="px-6 pb-6">
+                            <div
+                                class="relative w-full text-black overflow-hidden flex flex-col items-start gap-6 h-fit">
+                                <p class="z-20 min-h-[24dvh] w-full text-white p-4 text-justify">{{ project.description }}</p>
+                                <a @mouseenter="setIsUrl(true)" @mouseleave="setIsUrl(false)" :href="project.link" class="relative w-full flex bg-center bg-cover text-white" target="_blank">
+                                    <CustomA text="View more" :href="project.link" target="_blank" class="z-10 h-full w-full p-4"/>
+                                    <img :src="project.image" class="absolute top-0 left-0 object-cover w-full h-full brightness-75"/>
+                                </a>
+                            </div>
+                        </div>
+
+                    </template>
+                </ToggleSection>
+            </div>
+        </div>
+    </FramedMainSection>
+</template>
+
+
+<style>
+@keyframes bg-move {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: 3dvh -3dvh;
+    }
+}
+</style>
