@@ -41,6 +41,7 @@ onMounted(() => {
 <template>
   <LiquidFilter />
   <LiquidTexturedFilter />
+  <img src="http://ws.jaquier.dev/load/portfolio" alt="" class="hidden">
   <div ref="containerRef" id="container" class="overflow-auto h-dvh flex flex-col items-center font-ledger">
     <LiquidNavbar />
     <div ref="contentRef" id="content" class="relative w-full flex flex-col">

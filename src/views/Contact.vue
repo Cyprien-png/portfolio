@@ -35,7 +35,7 @@ onBeforeUnmount(() => {
         <Parallax>
             <div ref="contactSectionRef" class="h-full w-full relative rounded-4xl flex flex-col pt-20">
                 <div class="absolute h-full w-full top-0 left-0 rounded-4xl brightness-[.85] bg-[url('/backgrounds/city.png')] bg-cover -z-10"></div>
-                <div class="grid grid-cols-1 md:grid-cols-3 w-full gap-8 px-8 text-white">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full gap-8 px-8 text-white">
                     <div class="h-full w-full">
                         <h2 class="font-rubik border-b-3 border-dashed">Hire me</h2>
                         <ul class="pt-4 text-2xl flex flex-col gap-2">
@@ -63,7 +63,7 @@ onBeforeUnmount(() => {
                 </div>
 
                 <div class="h-full w-full flex justify-center items-end absolute pointer-events-none bg-red-400a" :style="`transform: translateY(${translationRef}px)`">
-                    <div class="max-h-full relative w-1/2 md:w-full aspect-[9/16]">
+                    <div class="max-h-full relative w-2/3 md:w-full aspect-[9/16]">
 
                         <img src="/contact/body.png" data-parallax-value=".1" class="absolute h-full w-full top-0 left-0 object-contain parallax"/>
                         <img src="/contact/arm.png" data-parallax-value=".13" class="absolute h-full w-full top-0 left-0 object-contain parallax"/>
