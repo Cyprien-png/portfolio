@@ -1,4 +1,4 @@
-import { ref, provide, inject, computed, onMounted, onBeforeUnmount } from 'vue'
+import { ref, provide, inject } from 'vue'
 
 const key = Symbol('scrollContext')
 
@@ -8,19 +8,28 @@ export function provideScrollContext() {
   const sections = ref([])
 
   const registerSection = (id, el) => {
-    if (!sections.value.find(s => s.id === id)) {
-      sections.value.push({ id, el })
+    const existingSection = sections.value.find(s => s.id === id);
+
+    if (!existingSection) {
+      sections.value.push({ id, el });
+    } else if (!existingSection.el) {
+      existingSection.el = el;
     }
   }
 
   const unregisterSection = (id) => {
-    sections.value = sections.value.filter(s => s.id !== id)
+    sections.value.find(s => s.id === id).el = null;
   }
 
-  const getSectionById = (id) => computed(() => {
-    const section = sections.value.find(s => s.id === id)
-    return section ? section.el : null
-  })
+  const getSections = () => {
+    const sec = [];
+
+    sections.value.forEach(s => {
+      if (s.el) sec.push(s);
+    })
+
+    return sec
+  }
 
   const scroll = (section) => {
     const sectionY = section.getBoundingClientRect().top - contentRef.value.getBoundingClientRect().top;
@@ -31,7 +40,7 @@ export function provideScrollContext() {
     containerRef,
     contentRef,
     sections,
-    getSectionById,
+    getSections,
     scroll,
     registerSection,
     unregisterSection,
@@ -45,7 +54,7 @@ export function useScrollContext() {
     containerRef: ref(null),
     contentRef: ref(null),
     sections: ref([]),
-    getSectionById: () => { },
+    getSections: () => { },
     scroll: () => { },
     registerSection: () => { },
     unregisterSection: () => { },
