@@ -15,7 +15,7 @@ const updatePosition = () => {
 
   if (window.innerWidth < 768) {
     autoAnimDegree.value = (autoAnimDegree.value + 0.005)%360;
-    const hyp = 500;
+    const hyp = 300;
 
     cur.x = hyp * Math.cos(autoAnimDegree.value * 1.5)
     cur.y = hyp * Math.sin(autoAnimDegree.value)    
