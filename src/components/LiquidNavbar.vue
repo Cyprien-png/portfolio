@@ -3,11 +3,14 @@ import { ref, onMounted, nextTick } from 'vue';
 import { useScrollContext } from '@/composables/useScrollContext';
 import CustomA from '@/components/CustomA.vue';
 import { AnimatedComponent } from '@/services/AnimatedComponent';
+import BurgerIcon from '@/icons/BurgerIcon.vue';
+import CrossIcon from '@/icons/CrossIcon.vue';
 
 const { containerRef, sections, contentRef } = useScrollContext();
 
 const component = ref();
 const navContainerRef = ref();
+const currentSection = ref();
 
 const scroll = (e, section) => {
     e.preventDefault();
@@ -26,6 +29,7 @@ const computeIndicator = () => {
         let percent = 0;
 
         if (relativeRelScroll >= 0 && relativeRelScroll <= sectionHeight) {
+            currentSection.value = sections.value[i].id;
             percent = relativeRelScroll * 100 / sectionHeight;
             if (i == navChildren.length - 1) percent = 100;
         } else if (relativeRelScroll > sectionHeight) {
@@ -49,13 +53,29 @@ onMounted(async () => {
 
 <template>
     <nav ref="nav"
-        class="text-neutral-300 fixed flex-col p-4 top-[4dvw] z-50 rounded-3xl backdrop-filter-[url('#liquidFilter')] before:content-[''] before:rounded-3xl before:absolute before:inset-0 before:shadow-[inset_0_0_8px_1px_rgba(100,100,100,0.6)]">
-        <div ref="navContainerRef" class="flex gap-4 relative">
+        class="text-neutral-300 fixed flex-col top-[4dvw] z-50 rounded-3xl filter backdrop-filter-[url('#liquidFilter')]">
+        <div ref="navContainerRef" class="hidden md:flex gap-4 p-4 relative">
             <CustomA v-for="(s, si) in sections" :text="s.id" href="" @click="(e) => scroll(e, s.el)"
                 class="navLink relative after:content-[''] after:h-[1px] after:left-0 after:bottom-0 after:absolute after:bg-neutral-300"
                 :class="{ 'after:transition-all after:duration-300': si === sections.length - 1 }" />
         </div>
+
+        <div class="flex md:hidden gap-4 transition-all p-4">
+            <BurgerIcon />
+            <span>{{ currentSection }}</span>
+        </div>
+
     </nav>
+    <section
+        class="flex md:hidden fixed inset-0 h-full w-full filter backdrop-filter-[url('#liquidTexturedFilter')] z-50 pointer-events-none">
+        <div class="absolute inset-0 w-full h-full bg-black opacity-75 -z-10"></div>
+        <div class="h-full w-full flex flex-col items-center text-white p-16 font-rubik">
+            <CrossIcon class="absolute top-4 left-4 h-12 w-12"/>
+            <a v-for="s in sections" href="" @click="(e) => scroll(e, s.el)"
+                class="flex-1 w-fit text-3xl flex items-center justify-center transition-all pointer-events-auto"
+                :class="{ 'text-red-custom': s.id === currentSection }">{{ s.id }}</a>
+        </div>
+    </section>
 </template>
 
 <style scoped>

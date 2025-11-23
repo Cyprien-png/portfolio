@@ -1,6 +1,7 @@
 <script setup>
 import LiquidNavbar from './components/LiquidNavbar.vue';
 import LiquidFilter from './filter/LiquidFilter.vue';
+import LiquidTexturedFilter from './filter/LiquidTexturedFilter.vue';
 import Home from '@/views/Home.vue'
 import AboutMe from '@/views/AboutMe.vue';
 import AboutMeMobile from './views/AboutMeMobile.vue';
@@ -33,6 +34,7 @@ onMounted(() => {
 
 <template>
   <LiquidFilter />
+  <LiquidTexturedFilter />
   <div ref="containerRef" id="container" class="overflow-auto h-dvh flex flex-col items-center font-ledger">
     <LiquidNavbar />
     <div ref="contentRef" id="content" class="w-full flex flex-col">

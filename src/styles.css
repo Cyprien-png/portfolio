@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Ledger&display=swap');
 
 @import "tailwindcss";
+
 @theme {
   --font-rubik: "Rubik Mono One", monospace;
   --font-ledger: "Ledger", serif;
@@ -9,11 +10,15 @@
 }
 
 @layer utilities {
-   .pause {
-     animation-play-state: paused !important;
-   }
+  .pause {
+    animation-play-state: paused !important;
+  }
 
-   .parallax {
+  .parallax {
     pointer-events: none;
-   }
+  }
+
+  .filter {
+    @apply before:content-[''] before:rounded-3xl before:absolute before:inset-0 before:shadow-[inset_0_0_8px_1px_rgba(100, 100, 100, 0.6)];
+  }
 }
