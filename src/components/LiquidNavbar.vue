@@ -20,7 +20,7 @@ const computeIndicator = () => {
 
     for (let i = 0; i <= navChildren.length - 1; i++) {
         const sectionRect = sections.value[i].el.getBoundingClientRect()
-        const relativeRelScroll = -1 * Math.round(sectionRect.top - window.innerHeight)
+        const relativeRelScroll = -1 * Math.round(sectionRect.top)
         const sectionHeight = Math.round(sectionRect.height)
 
         let percent = 0
