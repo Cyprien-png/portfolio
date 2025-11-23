@@ -1,5 +1,4 @@
 <script setup>
-import Navbar from '@/components/Navbar.vue';
 import LiquidNavbar from './components/LiquidNavbar.vue';
 import LiquidFilter from './filter/LiquidFilter.vue';
 import Home from '@/views/Home.vue'

@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted, nextTick } from 'vue';
 import { useScrollContext } from '@/composables/useScrollContext';
-import CustomA from './CustomA.vue';
+import CustomA from '@/components/CustomA.vue';
 import { AnimatedComponent } from '@/services/AnimatedComponent';
 
 const { containerRef, sections, contentRef, getSectionById } = useScrollContext();
@@ -50,7 +50,7 @@ onMounted(async () => {
 
 <template>
     <nav ref="nav"
-        class="text-white fixed flex-col p-4 top-[4dvw] z-50 rounded-xl backdrop-filter-[url('#liquidFilter')] backdrop-brightness-125 before:content-[''] before:rounded-xl before:absolute before:inset-0 before:shadow-[inset_0_0_8px_1px_rgba(255,255,255,0.7)]">
+        class="text-white fixed flex-col p-4 top-[4dvw] z-50 rounded-3xl backdrop-filter-[url('#liquidFilter')] backdrop-brightness-125 before:content-[''] before:rounded-3xl before:absolute before:inset-0 before:shadow-[inset_0_0_8px_1px_rgba(255,255,255,0.7)]">
         <div ref="navContainerRef" class="flex gap-4 relative">
             <CustomA v-for="s in sections" :text="s.id" href="" @click="(e) => scroll(e, s.el)" />
         </div>
