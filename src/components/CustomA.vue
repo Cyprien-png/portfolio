@@ -15,7 +15,7 @@ const letters = computed(() => props.text.split('').map(l => l === ' ' ? '\u00A0
         <div class="relative overflow-hidden">
             <span class="flex">
                 <span v-for="(l, i) in letters" :key="i"
-                    class="block transition-all duration-200 group-hover:-translate-y-full pb-1"
+                    class="block transition-all duration-200 group-hover:-translate-y-[200%]"
                     :style="{ '--i': i, 'transition-delay': `calc(var(--i) * 30ms)` }">
                     {{ l }}
                 </span>
