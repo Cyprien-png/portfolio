@@ -1,4 +1,4 @@
-import { DomElement } from "./DomElement";
+import { DomElement } from "@/services/DomElement";
 
 /**
  * Class DI class that stores all the listened Dom elements

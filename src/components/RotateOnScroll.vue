@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { useScrollContext } from '@/composables/useScrollContext'
-import FollowingFrame from './FollowingFrame.vue'
+import FollowingFrame from '@/components/FollowingFrame.vue'
 import { AnimatedComponent } from '@/services/AnimatedComponent'
 
 const props = defineProps({
