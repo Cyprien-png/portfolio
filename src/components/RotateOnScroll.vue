@@ -30,6 +30,10 @@ const computeLayout = () => {
     const items = contentContainerRef.value.children;
     const iArr = Array.from(items);
 
+    iArr.map(i => i.style.height = "");
+    highlightEl.value.style.height = "";
+    scrollableSectionRef.value.style.height = "";
+
     maxParagraphSize.value = iArr.reduce(
         (max, el) => Math.max(max, el.offsetHeight),
         items[0].offsetHeight
