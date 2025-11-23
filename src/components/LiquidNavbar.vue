@@ -8,12 +8,11 @@ const { containerRef, sections, contentRef, getSectionById } = useScrollContext(
 
 const component = ref();
 const navContainerRef = ref();
-const virtualScrollRef = ref();
 
 const scroll = (e, section) => {
-  e.preventDefault();
-  const sectionY = section.getBoundingClientRect().top - contentRef.value.getBoundingClientRect().top;
-  containerRef.value.scrollTo({ top: sectionY, behavior: 'smooth' });
+    e.preventDefault();
+    const sectionY = section.getBoundingClientRect().top - contentRef.value.getBoundingClientRect().top;
+    containerRef.value.scrollTo({ top: sectionY, behavior: 'smooth' });
 }
 
 const computeIndicator = () => {
@@ -21,19 +20,18 @@ const computeIndicator = () => {
 
     for (let i = 0; i <= navChildren.length - 1; i++) {
         const sectionRect = sections.value[i].el.getBoundingClientRect()
-        const minRealScroll = sectionRect.top
-        const maxRelativeScrollValue = sectionRect.bottom;
+        const relativeRelScroll = -1 * Math.round(sectionRect.top - window.innerHeight)
+        const sectionHeight = Math.round(sectionRect.height)
 
-        if (minRealScroll <= window.innerWidth && sectionRect.bottom >= window.innerWidth) {
-            const minVirtualPx = (i == 0)? 0 : navChildren[i-1].offsetLeft;
-            const maxVirtualPx = navChildren[i].offsetLeft;
+        let percent = 0
 
-            const relativeRelScroll = sectionRect.height - (maxRelativeScrollValue - window.innerHeight)
-            const sectionVirtualPx = (relativeRelScroll / sectionRect.height) * (maxVirtualPx - minVirtualPx)
-
-            virtualScrollRef.value.style.width = `${sectionVirtualPx + minVirtualPx}px`;
+        if (relativeRelScroll >= 0 && relativeRelScroll <= sectionHeight) {
+            percent = relativeRelScroll * 100 / sectionHeight
+        } else if (relativeRelScroll > sectionHeight) {
+            percent = 100
         }
-        virtualScrollRef.value.style.marginLeft = `${navChildren[0].getBoundingClientRect().width * 0.5}px`
+
+        navChildren[i].style.setProperty('--after-width', `${percent}%`);
     }
 }
 
@@ -43,17 +41,23 @@ onMounted(async () => {
     component.value.addAnimationTrigger(containerRef.value, "scroll");
     component.value.addAnimationTrigger(containerRef.value, "wheel");
     component.value.addAnimationTrigger(containerRef.value, "touchmove");
-     await nextTick();
+    await nextTick();
     computeIndicator()
 })
 </script>
 
 <template>
     <nav ref="nav"
-        class="text-white fixed flex-col p-4 top-[4dvw] z-50 rounded-3xl backdrop-filter-[url('#liquidFilter')] before:content-[''] before:rounded-3xl before:absolute before:inset-0 before:shadow-[inset_0_0_8px_1px_rgba(255,255,255,0.7)]">
+        class="text-neutral-300 fixed flex-col p-4 top-[4dvw] z-50 rounded-3xl backdrop-filter-[url('#liquidFilter')] before:content-[''] before:rounded-3xl before:absolute before:inset-0 before:shadow-[inset_0_0_8px_1px_rgba(100,100,100,0.6)]">
         <div ref="navContainerRef" class="flex gap-4 relative">
-            <CustomA v-for="s in sections" :text="s.id" href="" @click="(e) => scroll(e, s.el)" />
+            <CustomA v-for="(s, si) in sections" :text="s.id" href="" @click="(e) => scroll(e, s.el)"
+                class="navLink relative after:content-[''] after:h-[1px] after:left-0 after:bottom-0 after:absolute after:bg-neutral-300" />
         </div>
-        <div ref="virtualScrollRef" class="h-[1px] rounded-full bg-white"></div>
     </nav>
 </template>
+
+<style scoped>
+.navLink::after {
+    width: var(--after-width);
+}
+</style>
