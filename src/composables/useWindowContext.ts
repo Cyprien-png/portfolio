@@ -9,7 +9,7 @@ export function useWindowContext() {
   }
 
   const lg = () => {
-    return screenWidth.value >= 768;
+    return window.innerWidth >= 768;
   }
 
   return { resetWidth, lg };
