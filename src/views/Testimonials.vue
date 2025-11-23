@@ -16,9 +16,6 @@ onMounted(async () => {
 <template>
     <FramedMainSection ref="frameRef" id="testimonials" class="min-h-[100dvh] flex relative">
         <RotateOnScroll v-if="frameSectionRef" :contentSection="frameSectionRef">
-            <!-- Frame -->
-
-            <!-- Scrollable content -->
             <template #content="{ registerContainer }">
                 <div class="h-full w-full bg-cover rounded-4xl text-center flex items-start relative">
                     <div :ref="registerContainer"

@@ -1,6 +1,6 @@
 <script setup>
-import FramedMainSection from '@/layouts/FramedMainSection.vue'
-import testimonials from '@/data/testimonials.json'
+import FramedMainSection from '@/layouts/FramedMainSection.vue';
+import testimonials from '@/data/testimonials.json';
 import TestimonialWriterCard from '@/components/TestimonialWriterCard.vue';
 </script>
 

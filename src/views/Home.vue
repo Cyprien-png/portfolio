@@ -6,7 +6,7 @@ import FramedMainSection from '@/layouts/FramedMainSection.vue';
 const frameRef = ref(null);
 const containerRef = ref(null);
 
-onMounted(async () => {
+onMounted(() => {
     containerRef.value = frameRef.value.sectionRef;
 });
 </script>

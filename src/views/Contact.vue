@@ -13,16 +13,13 @@ const contactSectionRef = ref(null)
 const translationRef = ref(0)
 const paddingTopRef = ref(0)
 
-
-// Compute an action based on the scroll
 const handleScroll = () => {
     const relativeScrollPosition = frameRef.value.sectionRef.getBoundingClientRect().top;
     translationRef.value = Math.round(relativeScrollPosition + paddingTopRef.value * 1.5)
 }
 
-onMounted(async () => {
+onMounted(() => {
     paddingTopRef.value = parseFloat(getComputedStyle(contactSectionRef.value).paddingTop)
-
     component.value = new AnimatedComponent(frameRef.value.sectionRef);
     component.value.tick = handleScroll;
     component.value.addAnimationTrigger(containerRef.value, "scroll");

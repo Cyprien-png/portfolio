@@ -16,9 +16,10 @@ const { containerRef } = useScrollContext();
 const component = ref();
 const contentContainerRef = ref();
 const scrollableSectionRef = ref();
-const scrollableSectionPadding = ref()
+const scrollableSectionPadding = ref();
 const highlightEl = ref();
 const maxParagraphSize = ref(0);
+const windowComponent = ref();
 
 const registerContainer = (el) => {
     contentContainerRef.value = el;
@@ -73,6 +74,10 @@ onMounted(async () => {
     component.value = new AnimatedComponent(props.contentSection);
     component.value.tick = tick;
     component.value.addAnimationTrigger(containerRef.value, "scroll");
+
+    windowComponent.value = new AnimatedComponent();
+    windowComponent.value.tick = computeLayout;
+    windowComponent.value.addAnimationTrigger(window, "resize");
 })
 </script>
 
