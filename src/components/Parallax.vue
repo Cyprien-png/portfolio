@@ -2,8 +2,11 @@
 import { ref, onMounted } from 'vue'
 import { AnimatedComponent } from '@/services/AnimatedComponent'
 import { useCursorContext } from '@/composables/useCursorContext';
+import { useWindowContext } from '@/composables/useWindowContext';
 
 const { getPositions } = useCursorContext();
+const { lg } = useWindowContext();
+
 
 const rootRef = ref();
 const component = ref();
@@ -13,7 +16,7 @@ const autoAnimDegree = ref(0);
 const updatePosition = () => {
   let cur = getPositions();
 
-  if (window.innerWidth < 768) {
+  if (!lg()) {
     autoAnimDegree.value = (autoAnimDegree.value + 0.005)%360;
     const hyp = 300;
 

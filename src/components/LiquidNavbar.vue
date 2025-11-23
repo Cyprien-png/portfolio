@@ -46,6 +46,7 @@ onMounted(async () => {
     component.value.addAnimationTrigger(containerRef.value, "scroll");
     component.value.addAnimationTrigger(containerRef.value, "wheel");
     component.value.addAnimationTrigger(containerRef.value, "touchmove");
+    component.value.addAnimationTrigger(window, "resize");
     await nextTick();
     computeIndicator()
 })
