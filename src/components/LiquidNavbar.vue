@@ -54,6 +54,6 @@ onMounted(async () => {
         <div ref="navContainerRef" class="flex gap-4 relative">
             <CustomA v-for="s in sections" :text="s.id" href="" @click="(e) => scroll(e, s.el)" />
         </div>
-        <div ref="virtualScrollRef" class="h-[2px] rounded-full bg-white"></div>
+        <div ref="virtualScrollRef" class="h-[1px] rounded-full bg-white"></div>
     </nav>
 </template>
