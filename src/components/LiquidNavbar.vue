@@ -11,6 +11,7 @@ const { containerRef, sections, contentRef } = useScrollContext();
 const component = ref();
 const navContainerRef = ref();
 const currentSection = ref();
+const isMobileMenuOpened = ref(false);
 
 const scroll = (e, section) => {
     e.preventDefault();
@@ -60,20 +61,24 @@ onMounted(async () => {
                 :class="{ 'after:transition-all after:duration-300': si === sections.length - 1 }" />
         </div>
 
-        <div class="flex md:hidden gap-4 transition-all p-4">
+        <div class="flex md:hidden relative gap-4 transition-all p-4 cursor-pointer rounded-3xl" @click="isMobileMenuOpened = true">
             <BurgerIcon />
             <span>{{ currentSection }}</span>
         </div>
 
     </nav>
-    <section
-        class="flex md:hidden fixed inset-0 h-full w-full filter backdrop-filter-[url('#liquidTexturedFilter')] z-50 pointer-events-none">
+    <section :class="{ '-translate-x-full': !isMobileMenuOpened }"
+        class="flex md:hidden transition-all fixed inset-0 h-full w-full filter backdrop-filter-[url('#liquidTexturedFilter')] z-50 ">
         <div class="absolute inset-0 w-full h-full bg-black opacity-75 -z-10"></div>
-        <div class="h-full w-full flex flex-col items-center text-white p-16 font-rubik">
-            <CrossIcon class="absolute top-4 left-4 h-12 w-12"/>
-            <a v-for="s in sections" href="" @click="(e) => scroll(e, s.el)"
-                class="flex-1 w-fit text-3xl flex items-center justify-center transition-all pointer-events-auto"
-                :class="{ 'text-red-custom': s.id === currentSection }">{{ s.id }}</a>
+        <div class="h-full w-full flex flex-col items-center text-white p-16 font-rubik z-0">
+            <CrossIcon class="absolute top-4 left-4 h-12 w-12 cursor-pointer" @click="isMobileMenuOpened = false" />
+            <span v-for="s in sections" class="flex-1 flex items-center">
+                <a href="" @click="(e) => { scroll(e, s.el); isMobileMenuOpened = false }"
+                    class="text-3xl flex items-center justify-center transition-all cursor-pointer pointer-events-auto"
+                    :class="{ 'text-red-custom': s.id === currentSection }">
+                    {{ s.id }}
+                </a>
+            </span>
         </div>
     </section>
 </template>
