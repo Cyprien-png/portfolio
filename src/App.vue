@@ -11,7 +11,6 @@ import Testimonials from './views/Testimonials.vue';
 import TestimonialsMobile from './views/TestimonialsMobile.vue';
 import Contact from './views/Contact.vue';
 import { provideScrollContext } from '@/composables/useScrollContext'
-import { md } from '@/utils/deviceSize'
 import { useCursorContext } from './composables/useCursorContext';
 import { ref, onMounted } from 'vue';
 import { AnimatedComponent } from './services/AnimatedComponent';
@@ -39,12 +38,12 @@ onMounted(() => {
     <LiquidNavbar />
     <div ref="contentRef" id="content" class="w-full flex flex-col">
       <Home />
-      <AboutMe v-if="md()"/>
-      <AboutMeMobile v-else />
+      <AboutMe class="hidden md:flex"/>
+      <AboutMeMobile class="flex md:hidden" />
       <Projects />
       <Awards />
-      <Testimonials v-if="md()" />
-      <TestimonialsMobile v-else />
+      <Testimonials class="hidden md:flex" />
+      <TestimonialsMobile class="flex md:hidden" />
       <Contact />
     </div>
   </div>
