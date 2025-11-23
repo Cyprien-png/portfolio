@@ -29,6 +29,18 @@ export class AnimatedComponent {
     }
 
     /**
+     * Reset the instance to default values
+     */
+    public reset(): void {
+        this.areAnimationsEnabled = false;
+        this.enableAnimations = ()=>{};
+        this.disableAnimations = ()=>{};
+        this.prepareForAnimations = ()=>{};
+        this.tick = ()=>{};
+        this.removeAnimationTriggers();
+    }
+
+    /**
      * Compute and run the animation
      */
     public animate(e?: Event): void {

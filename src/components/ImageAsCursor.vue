@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, defineProps } from 'vue'
+import { ref, onMounted, defineProps, onBeforeUnmount } from 'vue'
 import { useImageAsCursor } from '@/composables/useImageAsCursor'
 import { AnimatedComponent } from '@/services/AnimatedComponent'
 import { useCursorContext } from '@/composables/useCursorContext'
@@ -51,6 +51,11 @@ onMounted(() => {
   loopComponent.value = new AnimatedComponent(props.contentSection);
   loopComponent.value.tick = animate;
   loopComponent.value.autoAnimate();
+})
+
+onBeforeUnmount(() => {
+    component.value.reset();
+    loopComponent.value.reset();
 })
 </script>
 

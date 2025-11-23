@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, onBeforeUnmount } from 'vue';
 import FramedMainSection from '@/layouts/FramedMainSection.vue';
 import { useScrollContext } from '@/composables/useScrollContext'
 import { AnimatedComponent } from '@/services/AnimatedComponent';
@@ -24,6 +24,10 @@ onMounted(() => {
     component.value.tick = handleScroll;
     component.value.addAnimationTrigger(containerRef.value, "scroll");
 });
+
+onBeforeUnmount(() => {
+    component.value.reset();
+})
 </script>
 
 <template>

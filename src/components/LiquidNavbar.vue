@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, nextTick } from 'vue';
+import { ref, onMounted, nextTick, onBeforeUnmount } from 'vue';
 import { useScrollContext } from '@/composables/useScrollContext';
 import CustomA from '@/components/CustomA.vue';
 import { AnimatedComponent } from '@/services/AnimatedComponent';
@@ -49,6 +49,10 @@ onMounted(async () => {
     component.value.addAnimationTrigger(window, "resize");
     await nextTick();
     computeIndicator()
+})
+
+onBeforeUnmount(() => {
+    component.value.reset();
 })
 </script>
 

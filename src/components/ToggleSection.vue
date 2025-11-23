@@ -5,8 +5,7 @@ const props = defineProps({
   open: { type: Boolean, default: false }
 })
 
-const emit = defineEmits(['toggle', 'hover', 'leave'])
-
+const emit = defineEmits(['toggle', 'hover', 'leave']);
 </script>
 
 <template>

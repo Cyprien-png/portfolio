@@ -2,7 +2,7 @@
 import FramedMainSection from '@/layouts/FramedMainSection.vue'
 import stories from '@/data/about-me.json'
 import { useScrollContext } from '@/composables/useScrollContext';
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, onBeforeUnmount } from 'vue';
 import FollowingFrame from '@/components/FollowingFrame.vue';
 import { AnimatedComponent } from '@/services/AnimatedComponent';
 
@@ -39,6 +39,12 @@ onMounted(async () => {
     component.value.tick = tick;
     component.value.addAnimationTrigger(containerRef.value, "scroll")
 })
+
+onBeforeUnmount(() => {
+    component.value.reset();
+})
+
+
 </script>
 
 <template>

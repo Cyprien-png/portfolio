@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, computed, ref, useId } from 'vue'
+import { onMounted, computed, ref, useId, onBeforeUnmount } from 'vue'
 import { AnimatedComponent } from '@/services/AnimatedComponent';
 
 const props = defineProps({
@@ -78,6 +78,10 @@ onMounted(() => {
   component.value.enableAnimations = enableAnimations;
   component.value.disableAnimations = disableAnimations;
   component.value.autoAnimate();
+})
+
+onBeforeUnmount(() => {
+  component.value.reset();
 })
 </script>
 

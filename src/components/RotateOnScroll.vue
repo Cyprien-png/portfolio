@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { useScrollContext } from '@/composables/useScrollContext'
 import FollowingFrame from './FollowingFrame.vue'
 import { AnimatedComponent } from '@/services/AnimatedComponent'
@@ -69,7 +69,7 @@ const tick = () => {
     contentContainerRef.value.style.transform = `translateY(${translation}px)`;
 }
 
-onMounted(async () => {
+onMounted(() => {
     computeLayout()
     component.value = new AnimatedComponent(props.contentSection);
     component.value.tick = tick;
@@ -79,6 +79,12 @@ onMounted(async () => {
     windowComponent.value.tick = computeLayout;
     windowComponent.value.addAnimationTrigger(window, "resize");
 })
+
+onBeforeUnmount(() => {
+    component.value.reset();
+    windowComponent.value.reset();
+})
+
 </script>
 
 <template>

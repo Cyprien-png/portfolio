@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { useScrollContext } from '@/composables/useScrollContext'
 import { AnimatedComponent } from '@/services/AnimatedComponent';
 
@@ -42,6 +42,10 @@ onMounted(async () => {
     component.value.prepareForAnimations = prepareAnimation;
     component.value.tick = tick;
 });
+
+onBeforeUnmount(() => {
+    component.value.reset();
+})
 </script>
 
 <template>

@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { AnimatedComponent } from '@/services/AnimatedComponent'
 import { useCursorContext } from '@/composables/useCursorContext';
 import { useWindowContext } from '@/composables/useWindowContext';
@@ -42,6 +42,10 @@ onMounted(() => {
   component.value = new AnimatedComponent(rootRef.value);
   component.value.tick = updatePosition;
   component.value.autoAnimate();
+})
+
+onBeforeUnmount(() => {
+    component.value.reset();
 })
 </script>
 
