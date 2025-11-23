@@ -22,7 +22,7 @@ const x = ref(window.innerWidth / 2);
 const y = ref(window.innerHeight / 2);
 const imagePositions = ref({x: x.value, y: y.value});
 
-const updatePosition = (e) => {
+const updatePosition = () => {
   const cur = getPositions();
   imagePositions.value.x = cur.x;
   imagePositions.value.y = cur.y;

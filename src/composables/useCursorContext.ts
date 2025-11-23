@@ -7,9 +7,9 @@ export function useCursorContext() {
   const setPositions = (x: number, y: number) => {
     positions.value = {x, y};
   }
-
+  
   const getPositions = () => {
-    return positions.value;
+    return {x: positions.value.x, y: positions.value.y};
   }
 
   return { getPositions, setPositions };
