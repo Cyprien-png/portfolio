@@ -6,17 +6,16 @@ import { AnimatedComponent } from '@/services/AnimatedComponent';
 import BurgerIcon from '@/icons/BurgerIcon.vue';
 import CrossIcon from '@/icons/CrossIcon.vue';
 
-const { containerRef, sections, contentRef } = useScrollContext();
+const { containerRef, sections, contentRef, scroll } = useScrollContext();
 
 const component = ref();
 const navContainerRef = ref();
 const currentSection = ref();
 const isMobileMenuOpened = ref(false);
 
-const scroll = (e, section) => {
+const scrollTo = (e, section) => {
     e.preventDefault();
-    const sectionY = section.getBoundingClientRect().top - contentRef.value.getBoundingClientRect().top;
-    containerRef.value.scrollTo({ top: sectionY, behavior: 'smooth' });
+    scroll(section);
 }
 
 const computeIndicator = () => {
@@ -56,7 +55,7 @@ onMounted(async () => {
     <nav ref="nav"
         class="text-neutral-300 fixed flex-col top-[4dvw] z-50 rounded-3xl filter backdrop-filter-[url('#liquidFilter')]">
         <div ref="navContainerRef" class="hidden md:flex gap-4 p-4 relative">
-            <CustomA v-for="(s, si) in sections" :text="s.id" href="" @click="(e) => scroll(e, s.el)"
+            <CustomA v-for="(s, si) in sections" :text="s.id" href="" @click="(e) => scrollTo(e, s.el)"
                 class="navLink relative after:content-[''] after:h-[1px] after:left-0 after:bottom-0 after:absolute after:bg-neutral-300"
                 :class="{ 'after:transition-all after:duration-300': si === sections.length - 1 }" />
         </div>
@@ -73,7 +72,7 @@ onMounted(async () => {
         <div class="h-full w-full flex flex-col items-center text-white p-16 font-rubik z-0">
             <CrossIcon class="absolute top-4 left-4 h-12 w-12 cursor-pointer" @click="isMobileMenuOpened = false" />
             <span v-for="s in sections" class="flex-1 flex items-center">
-                <a href="" @click="(e) => { scroll(e, s.el); isMobileMenuOpened = false }"
+                <a href="" @click="(e) => { scrollTo(e, s.el); isMobileMenuOpened = false }"
                     class="text-3xl flex items-center justify-center transition-all cursor-pointer pointer-events-auto"
                     :class="{ 'text-red-custom': s.id === currentSection }">
                     {{ s.id }}

@@ -22,11 +22,17 @@ export function provideScrollContext() {
     return section ? section.el : null
   })
 
+  const scroll = (section) => {
+    const sectionY = section.getBoundingClientRect().top - contentRef.value.getBoundingClientRect().top;
+    containerRef.value.scrollTo({ top: sectionY, behavior: 'smooth' });
+  }
+
   provide(key, {
     containerRef,
     contentRef,
     sections,
     getSectionById,
+    scroll,
     registerSection,
     unregisterSection,
   })
@@ -40,6 +46,7 @@ export function useScrollContext() {
     contentRef: ref(null),
     sections: ref([]),
     getSectionById: () => { },
+    scroll: () => { },
     registerSection: () => { },
     unregisterSection: () => { },
   })
