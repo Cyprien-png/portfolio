@@ -44,7 +44,7 @@ onMounted(() => {
   <img src="https://ws.jaquier.dev/load/portfolio" alt="" class="hidden">
   <div ref="containerRef" id="container" class="overflow-auto h-dvh flex flex-col items-center font-ledger">
     <LiquidNavbar />
-    <div ref="contentRef" id="content" class="relative w-full flex flex-col">
+    <div ref="contentRef" id="content" class=" w-full flex flex-col">
       <Home />
       <AboutMe v-if="lg()"/>
       <AboutMeMobile v-else />
@@ -53,7 +53,9 @@ onMounted(() => {
       <Testimonials v-if="lg()" />
       <TestimonialsMobile v-else  />
       <Contact />
-      <span class="absolute bottom-0 text-sm p-[4dvw] opacity-35 text-white">© {{ new Date().getFullYear() }} Cyprien Jaquier. All rights reserved.</span>
+      <footer class="relative">
+        <span class="absolute bottom-0 text-sm p-[4dvw] opacity-35 text-white">© {{ new Date().getFullYear() }} Cyprien Jaquier. All rights reserved.</span>
+      </footer>
     </div>
   </div>
 </template>
