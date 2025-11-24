@@ -59,7 +59,7 @@ onBeforeUnmount(() => {
 
 <template>
     <nav ref="nav"
-        class="text-white fixed flex-col top-[4dvw] z-50 rounded-3xl filter backdrop-filter-[url('#liquidFilter')]">
+        class="text-white fixed flex-col top-[4dvw] z-50 rounded-3xl filter before:rounded-3xl backdrop-filter-[url('#liquidFilter')]">
                 <div class="absolute inset-0 w-full h-full bg-black opacity-25 -z-10 rounded-3xl"></div>
         <div ref="navContainerRef" class="hidden md:flex gap-4 p-4 relative">
             <CustomA v-for="(s, si) in getSections()" :key="s.id" :text="s.id" href="" @click="(e) => scrollTo(e, s.el)"
