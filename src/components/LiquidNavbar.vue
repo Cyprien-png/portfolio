@@ -48,6 +48,7 @@ onMounted(async () => {
     component.value.addAnimationTrigger(containerRef.value, "touchmove");
     component.value.addAnimationTrigger(window, "resize");
     await nextTick();
+    currentSection.value = getSections()[0];
     computeIndicator()
 })
 
