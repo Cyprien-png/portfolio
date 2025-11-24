@@ -24,7 +24,7 @@ const component = ref();
 const windowComponent = ref();
 
 const setCursorPos = (e) => {
-  if (e instanceof MouseEvent) setPositions(e.screenX, e.screenY);
+  if (e instanceof MouseEvent) setPositions(e.clientX, e.clientY);
 }
 
 onMounted(() => {
