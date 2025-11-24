@@ -53,7 +53,7 @@ onBeforeUnmount(() => {
         <FollowingFrame v-if="frameSectionRef" :contentSection="frameSectionRef">
             <div class="h-full w-full bg-white p-[3dvw]">
                 <div class="h-full w-full relative flex justify-center items-center rounded-4xl overflow-hidden">
-                    <div class="absolute h-full w-full top-0 left-0 bg-[url('/backgrounds/room.png')] bg-cover bg-bottom"></div>
+                    <div class="absolute h-full w-full top-0 left-0 bg-[url('/backgrounds/room.jpg')] bg-cover bg-bottom"></div>
                     <div class="h-1/2 w-full overflow-hidden px-[3dvw] z-10">
                         <div ref="contentRef" class="h-full w-full transition-transform duration-400 text-white">
                             <div v-for="story in stories" class="h-full w-full aspect-square flex items-center gap-6">

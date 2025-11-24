@@ -5,7 +5,7 @@ import stories from '@/data/about-me.json'
 
 <template>
     <FramedMainSection id="about-me" class="min-h-[100dvh] flex relative">
-        <div class="h-full w-full rounded-4xl bg-[url('/backgrounds/room.png')] bg-cover bg-right text-white flex justify-center items-end text-center p-4">
+        <div class="h-full w-full rounded-4xl bg-[url('/backgrounds/room.jpg')] bg-cover bg-right text-white flex justify-center items-end text-center p-4">
             <div class="grid grid-cols-1 md:grid-cols-3">
 
                 <div v-for="(story, i) in stories" :key="i"

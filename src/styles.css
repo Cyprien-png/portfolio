@@ -19,6 +19,6 @@
   }
 
   .filter {
-    @apply before:content-[''] before:rounded-3xl before:absolute before:inset-0 before:shadow-[inset_0_0_8px_1px_rgba(255,255,255,0.3)];
+    @apply before:content-[''] before:absolute before:inset-0 before:shadow-[inset_0_0_8px_1px_rgba(255,255,255,0.3)];
   }
 }
