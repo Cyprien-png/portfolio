@@ -35,7 +35,7 @@ onMounted(async () => {
                 </div>
             </template>
             <template #background>
-                <img src="/backgrounds/sky.png" class="h-full w-full"/>
+                <img src="/backgrounds/sky.jpg" class="h-full w-full"/>
             </template>
         </RotateOnScroll>
     </FramedMainSection>

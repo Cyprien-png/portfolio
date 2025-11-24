@@ -34,7 +34,7 @@ onBeforeUnmount(() => {
     <FramedMainSection ref="frameRef" id="contact" class="h-dvh">
         <Parallax>
             <div ref="contactSectionRef" class="h-full w-full relative rounded-4xl flex flex-col pt-20">
-                <div class="absolute h-full w-full top-0 left-0 rounded-4xl brightness-[.85] bg-[url('/backgrounds/city.png')] bg-cover -z-10"></div>
+                <div class="absolute h-full w-full top-0 left-0 rounded-4xl brightness-[.85] bg-[url('/backgrounds/city.jpg')] bg-cover -z-10"></div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full gap-8 px-8 text-white">
                     <div class="h-full w-full">
                         <h2 class="font-rubik border-b-3 border-dashed">Hire me</h2>
