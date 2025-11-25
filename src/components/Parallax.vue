@@ -5,7 +5,7 @@ import { useCursorContext } from '@/composables/useCursorContext';
 import { useWindowContext } from '@/composables/useWindowContext';
 
 const { getPositions } = useCursorContext();
-const { lg } = useWindowContext();
+const { md } = useWindowContext();
 
 
 const rootRef = ref();
@@ -14,24 +14,26 @@ const parallaxItems = ref([]);
 const autoAnimDegree = ref(0);
 
 const updatePosition = () => {
-  let cur = getPositions();
 
-  if (!lg()) {
+  const rootRect = rootRef.value.getBoundingClientRect();
+  let cur = getPositions();
+  let relativeCursorX = rootRect.width / 2 + rootRect.left
+  let relativeCursorY = rootRect.height / 2 + rootRect.top
+
+  if (!md.value) {
     autoAnimDegree.value = (autoAnimDegree.value + 0.005)%360;
     const hyp = 300;
 
     cur.x = hyp * Math.cos(autoAnimDegree.value * 1.5)
-    cur.y = hyp * Math.sin(autoAnimDegree.value)    
+    cur.y = hyp * Math.sin(autoAnimDegree.value)
+    relativeCursorX = 0
+    relativeCursorY = 0
   };
-
-  const rootRect = rootRef.value.getBoundingClientRect();
-  const relativeCursorX = rootRect.width / 2 + rootRect.left;
-  const relativeCursorY = rootRect.height / 2 + rootRect.top;
 
   parallaxItems.value.forEach(el => {
     const multiplicator = el.dataset.parallaxValue;
-    const x = (relativeCursorX - cur.x) * multiplicator;
-    const y = (relativeCursorY - cur.y) * multiplicator;
+    const x = (cur.x - relativeCursorX) * -multiplicator;
+    const y = (cur.y - relativeCursorY) * -multiplicator;
 
     el.style.transform = `translateX(${x}px) translateY(${y}px)`;
   })

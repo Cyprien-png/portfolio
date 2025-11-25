@@ -1,6 +1,6 @@
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 
-const screenWidth = ref(0);
+const screenWidth = ref(window.innerWidth);
 
 export function useWindowContext() {
 
@@ -8,9 +8,7 @@ export function useWindowContext() {
     screenWidth.value = window.innerWidth;
   }
 
-  const lg = () => {
-    return window.innerWidth >= 768;
-  }
+ const md = computed(() => screenWidth.value >= 768);
 
-  return { resetWidth, lg };
+  return { resetWidth, md };
 }

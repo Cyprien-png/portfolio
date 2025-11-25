@@ -18,13 +18,13 @@ import { AnimatedComponent } from '@/services/AnimatedComponent';
 
 const { containerRef, contentRef } = provideScrollContext();
 const { setPositions } = useCursorContext();
-const { resetWidth, lg } = useWindowContext();
+const { resetWidth, md } = useWindowContext();
 
 const component = ref();
 const windowComponent = ref();
 
 const setCursorPos = (e) => {
-  if (e instanceof MouseEvent) setPositions(e.screenX, e.screenY);
+  if (e instanceof MouseEvent) setPositions(e.clientX, e.clientY);
 }
 
 onMounted(() => {
@@ -46,11 +46,11 @@ onMounted(() => {
     <LiquidNavbar />
     <div ref="contentRef" id="content" class=" w-full flex flex-col">
       <Home />
-      <AboutMe v-if="lg()"/>
+      <AboutMe v-if="md"/>
       <AboutMeMobile v-else />
       <Projects />
       <Awards />
-      <Testimonials v-if="lg()" />
+      <Testimonials v-if="md" />
       <TestimonialsMobile v-else  />
       <Contact />
       <footer class="relative">

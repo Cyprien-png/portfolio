@@ -1,25 +1,26 @@
 import { ref } from 'vue'
 
-const imageUrl = ref(null)
-const isOpen = ref(false)
-const isUrl = ref(false)
+const imageUrl = ref();
+const isOpen = ref(false);
+const isUrl = ref(false);
+const isSmall = ref(false);
 
 export function useImageAsCursor() {
-  const open = () => {
-    isOpen.value = true;
+  const setIsOpen = (value: boolean) => {
+    isOpen.value = value;
   }
 
-  const close = () => {
-    isOpen.value = false;
+  const setIsSmall = (value: boolean) => {
+    isSmall.value = value;
   }
 
-  const setImage = (url) => {
+  const setImage = (url: string) => {
     imageUrl.value = url;
   }
 
-  const setIsUrl = (value) => {
+  const setIsUrl = (value: boolean) => {
     isUrl.value = value;
   }
 
-  return { imageUrl, isOpen, isUrl, open, close, setImage, setIsUrl }
+  return { imageUrl, isOpen, isUrl, isSmall, setIsOpen, setImage, setIsUrl, setIsSmall }
 }

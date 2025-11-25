@@ -12,7 +12,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <FramedMainSection ref="frameRef" id="home" class="h-dvh">
+    <FramedMainSection ref="frameRef" id="cyprien" class="h-dvh">
         <div 
             class="h-full w-full bg-fit bg-cover bg-position-[center_40%] rounded-4xl bg-[url('/backgrounds/mountains.jpg')] flex flex-col justify-center items-center text-center">
             <div
