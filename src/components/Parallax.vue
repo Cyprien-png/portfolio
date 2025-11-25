@@ -5,7 +5,7 @@ import { useCursorContext } from '@/composables/useCursorContext';
 import { useWindowContext } from '@/composables/useWindowContext';
 
 const { getPositions } = useCursorContext();
-const { lg } = useWindowContext();
+const { md } = useWindowContext();
 
 
 const rootRef = ref();
@@ -20,7 +20,7 @@ const updatePosition = () => {
   let relativeCursorX = rootRect.width / 2 + rootRect.left
   let relativeCursorY = rootRect.height / 2 + rootRect.top
 
-  if (!lg()) {
+  if (!md()) {
     autoAnimDegree.value = (autoAnimDegree.value + 0.005)%360;
     const hyp = 300;
 
