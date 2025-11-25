@@ -5,7 +5,8 @@ import stories from '@/data/about-me.json'
 
 <template>
     <FramedMainSection id="about-me" class="min-h-[100dvh] flex relative">
-        <div class="h-full w-full rounded-4xl bg-[url('/backgrounds/room.jpg')] bg-cover bg-right text-white flex justify-center items-end text-center p-4">
+        <div
+            class="h-full w-full rounded-4xl bg-[url('/backgrounds/room.jpg')] bg-cover bg-right text-white flex justify-center items-end text-center p-4">
             <div class="grid grid-cols-1 md:grid-cols-3">
 
                 <div v-for="(story, i) in stories" :key="i"
@@ -13,8 +14,10 @@ import stories from '@/data/about-me.json'
                     <div class="rounded-2xl object-contain aspect-video w-full overflow-hidden">
                         <img :src="story.image" class="h-full w-full object-contain" />
                     </div>
-                    <h1 class="text-2xl">{{ story.when }}</h1>
-                    <p class="text-justify">{{ story.description }}</p>
+                    <h1 class="font-bold text-xl leading-none font-rubik">{{ story.when }}</h1>
+                    <p class="flex-1 h-fit">
+                        {{ story.description }}
+                    </p>
                 </div>
             </div>
         </div>
