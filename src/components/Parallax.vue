@@ -20,7 +20,7 @@ const updatePosition = () => {
   let relativeCursorX = rootRect.width / 2 + rootRect.left
   let relativeCursorY = rootRect.height / 2 + rootRect.top
 
-  if (!md()) {
+  if (!md) {
     autoAnimDegree.value = (autoAnimDegree.value + 0.005)%360;
     const hyp = 300;
 
