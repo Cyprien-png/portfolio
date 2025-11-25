@@ -2,8 +2,7 @@
     "Hire me": [
         {
             "text": "cyprien@jaquier.dev",
-            "href": "mailto:cyprien@jaquier.dev",
-            "target": ""
+            "href": "mailto:cyprien@jaquier.dev"
         }
     ],
     "Social": [
@@ -11,6 +10,12 @@
             "text": "LinkedIn",
             "href": "https://www.linkedin.com/in/cyprien-jaquier",
             "target": "_blank"
+        },
+        {
+            "text": "You seem curious hahaha, you can also add me on Discord ;)",
+            "href": "r0kkxryuk",
+            "target": "",
+            "hidden": true
         }
     ],
     "Open source": [
