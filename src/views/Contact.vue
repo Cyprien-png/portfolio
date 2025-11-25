@@ -40,7 +40,7 @@ onBeforeUnmount(() => {
                     <div v-for="(value, key) in contact" :key="key" class="h-full w-full">
                         <h2 class="font-rubik border-b-2 border-dashed border-neutral-400 text-xl">{{ key }}</h2>
                         <ul class="pt-4 text-2xl flex flex-col gap-2">
-                            <li v-for="h in value" class="w-fit"><CustomA v-if="!h.hidden" :text="h.text" :href="h.href" :target="h.target"/></li>
+                            <li v-for="(h, index) in value" :key="index" class="w-fit"><CustomA v-if="!h.hidden" :text="h.text" :href="h.href" :target="h.target"/></li>
                         </ul>
                     </div>
                 </div>
