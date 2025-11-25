@@ -3,6 +3,7 @@ import { onMounted, ref, onBeforeUnmount } from 'vue';
 import FramedMainSection from '@/layouts/FramedMainSection.vue';
 import { useScrollContext } from '@/composables/useScrollContext'
 import { AnimatedComponent } from '@/services/AnimatedComponent';
+import contact from '@/data/contact.json'
 import CustomA from '@/components/CustomA.vue';
 import Parallax from '@/components/Parallax.vue';
 
@@ -36,23 +37,10 @@ onBeforeUnmount(() => {
             <div ref="contactSectionRef" class="h-full w-full relative rounded-4xl flex flex-col pt-20">
                 <div class="absolute h-full w-full top-0 left-0 rounded-4xl brightness-[.85] bg-[url('/backgrounds/city.jpg')] bg-cover -z-10"></div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full gap-8 px-8 text-white">
-                    <div class="h-full w-full">
-                        <h2 class="font-rubik border-b-3 border-dashed">Hire me</h2>
+                    <div v-for="(value, key) in contact" :key="key" class="h-full w-full">
+                        <h2 class="font-rubik border-b-3 border-dashed">{{ key }}</h2>
                         <ul class="pt-4 text-2xl flex flex-col gap-2">
-                            <li class="w-fit"><CustomA text="cyprien@jaquier.dev" href="mailto:cyprien@jaquier.dev"/></li>
-                        </ul>
-                    </div>
-                    <div class="h-full w-full">
-                        <h2 class="font-rubik border-b-3 border-dashed">Social</h2>
-                        <ul class="pt-4 text-2xl flex flex-col gap-2">
-                            <li class="w-fit"><CustomA text="LinkedIn" target="_blank" href="https://www.linkedin.com/in/cyprien-jaquier"/></li>
-                        </ul>
-                    </div>
-                    <div class="h-full w-full">
-                        <h2 class="font-rubik border-b-3 border-dashed">Open source</h2>
-                        <ul class="pt-4 text-2xl flex flex-col gap-2">
-                            <li class="w-fit"><CustomA text="GitHub" target="_blank" href="https://github.com/Cyprien-png"/></li>
-                            <li class="w-fit"><CustomA text="CodePen" target="_blank" href="https://codepen.io/R0kkxRyuk"/></li>
+                            <li v-for="h in value" class="w-fit"><CustomA :text="h.text" :href="h.href" :target="h.target"/></li>
                         </ul>
                     </div>
                 </div>

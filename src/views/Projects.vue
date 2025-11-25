@@ -5,7 +5,6 @@ import ToggleSection from '@/components/ToggleSection.vue';
 import { useSingleToggle } from '@/composables/useSingleToggle.js'
 import ImageAsCursor from '@/components/ImageAsCursor.vue';
 import { useImageAsCursor } from '@/composables/useImageAsCursor'
-import ExternalLinkIcon from '@/icons/ExternalLinkIcon.vue';
 import projects from '@/data/projects.json'
 import CustomA from '@/components/CustomA.vue';
 

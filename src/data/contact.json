@@ -1,0 +1,28 @@
+{
+    "Hire me": [
+        {
+            "text": "cyprien@jaquier.dev",
+            "href": "mailto:cyprien@jaquier.dev",
+            "target": ""
+        }
+    ],
+    "Social": [
+        {
+            "text": "LinkedIn",
+            "href": "https://www.linkedin.com/in/cyprien-jaquier",
+            "target": "_blank"
+        }
+    ],
+    "Open source": [
+        {
+            "text": "GitHub",
+            "href": "https://github.com/Cyprien-png",
+            "target": "_blank"
+        },
+        {
+            "text": "CodePen",
+            "href": "https://codepen.io/R0kkxRyuk",
+            "target": "_blank"
+        }
+    ]
+}
