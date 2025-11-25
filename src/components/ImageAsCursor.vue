@@ -15,7 +15,7 @@ const props = defineProps({
 
 const { containerRef } = useScrollContext();
 const { getPositions } = useCursorContext();
-const { imageUrl, isOpen, isUrl } = useImageAsCursor();
+const { imageUrl, isOpen, isUrl, isSmall } = useImageAsCursor();
 const component = ref();
 const loopComponent = ref();
 const x = ref(window.innerWidth / 2);
@@ -61,8 +61,8 @@ onBeforeUnmount(() => {
 
 <template>
   <div
-    class="aspect-video absolute shadow-[#0003] shadow-lg z-40 -translate-1/2 pointer-events-none rounded-full overflow-hidden ease-linear transition-all duration-75"
-    :class="isOpen ? 'w-[30dvh]' : 'w-0'" :style="`left: ${x}px; top: ${y}px`">
+    class="aspect-video absolute shadow-[#0003] shadow-lg z-40 -translate-1/2 pointer-events-none rounded-[4dvw] overflow-hidden ease-linear transition-all duration-75"
+    :class="isOpen ? (isSmall ? 'w-[20dvh]' : 'w-[30dvh]') : 'w-0'" :style="`left: ${x}px; top: ${y}px`">
     <div class="relative w-full h-full">
       <div :class="`${isUrl ? 'opacity-60' : 'opacity-0'}`" class="absolute h-full w-full transition-all inset-0 bg-black flex justify-center items-center">
         <ExternalLinkIcon class="h-1/2 w-1/2 text-white"/>

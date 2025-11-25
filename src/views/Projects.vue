@@ -8,8 +8,8 @@ import { useImageAsCursor } from '@/composables/useImageAsCursor'
 import projects from '@/data/projects.json'
 import CustomA from '@/components/CustomA.vue';
 
-const { setImage, setIsUrl, open, close } = useImageAsCursor()
-const { isOpen, toggle } = useSingleToggle()
+const { setImage, setIsUrl, setIsOpen, setIsSmall } = useImageAsCursor()
+const { isOpen, toggle, openIndex } = useSingleToggle()
 const frameRef = ref()
 const containerRef = ref();
 
@@ -24,7 +24,7 @@ onMounted(() => {
         <div class="flex-1 w-full bg-fit flex flex-col text-center pt-20">
             <div class="w-full h-full flex flex-col">
                 <ToggleSection v-for="(project, pi) in projects" :key="pi" :open="isOpen(pi)" @toggle="toggle(pi)"
-                    @hover="setImage(project.image), open()" @leave="close()">
+                    @hover="setImage(project.image), setIsOpen(true), openIndex == pi ? setIsSmall(true) : setIsSmall(false)" @leave="setIsOpen(false), setIsSmall(false)">
                     <template v-slot:header>
                         <img :src="project.image" class="absolute h-full w-full top-0 left-0 -z-20 brightness-50 object-cover"/>
                         <h1 class="tracking-[-0.3dvw] hidden md:flex">
