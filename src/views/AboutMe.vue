@@ -57,11 +57,12 @@ onBeforeUnmount(() => {
                     <div class="h-1/2 w-full overflow-hidden px-[3dvw] z-10">
                         <div ref="contentRef" class="h-full w-full transition-transform duration-400 text-white">
                             <div v-for="story in stories" class="h-full w-full aspect-square flex items-center gap-6">
-                                
-                                <p class="flex-1 h-fit text-justify">
-                                    <span class="font-bold text-3xl leading-none">{{ story.when }}</span>
-                                    {{ story.description }}
-                                </p>
+                                <div class="flex gap-2 flex-col">
+                                    <h1 class="font-bold text-xl leading-none font-rubik">{{ story.when }}</h1>
+                                    <p class="flex-1 h-fit">
+                                        {{ story.description }}
+                                    </p>
+                                </div>
                                 <img :src="story.image" class="w-1/2 aspect-[9/16] max-h-full object-contain object-bottom"/>
                             </div>
                         </div>
