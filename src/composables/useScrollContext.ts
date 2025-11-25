@@ -1,13 +1,13 @@
 import { ref, provide, inject } from 'vue'
 
-const key = Symbol('scrollContext')
+const key = Symbol('scrollContext');
 
 export function provideScrollContext() {
-  const containerRef = ref(null)
-  const contentRef = ref(null)
+  const containerRef = ref();
+  const contentRef = ref();
   const sections = ref([])
 
-  const registerSection = (id, el) => {
+  const registerSection = (id: string, el: HTMLElement) => {
     const existingSection = sections.value.find(s => s.id === id);
 
     if (!existingSection) {
@@ -17,7 +17,7 @@ export function provideScrollContext() {
     }
   }
 
-  const unregisterSection = (id) => {
+  const unregisterSection = (id: string) => {
     sections.value.find(s => s.id === id).el = null;
   }
 
@@ -28,10 +28,10 @@ export function provideScrollContext() {
       if (s.el) sec.push(s);
     })
 
-    return sec
+    return sec;
   }
 
-  const scroll = (section) => {
+  const scroll = (section: HTMLElement) => {
     const sectionY = section.getBoundingClientRect().top - contentRef.value.getBoundingClientRect().top;
     containerRef.value.scrollTo({ top: sectionY, behavior: 'smooth' });
   }
@@ -44,9 +44,9 @@ export function provideScrollContext() {
     scroll,
     registerSection,
     unregisterSection,
-  })
+  });
 
-  return { containerRef, contentRef, sections }
+  return { containerRef, contentRef, sections };
 }
 
 export function useScrollContext() {
@@ -58,5 +58,5 @@ export function useScrollContext() {
     scroll: () => { },
     registerSection: () => { },
     unregisterSection: () => { },
-  })
+  });
 }
