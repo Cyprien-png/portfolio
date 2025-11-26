@@ -21,7 +21,7 @@ const updatePosition = () => {
   let relativeCursorY = rootRect.height / 2 + rootRect.top
 
   if (!md.value) {
-    autoAnimDegree.value = (autoAnimDegree.value + 0.005)%360;
+    autoAnimDegree.value = (autoAnimDegree.value + 0.005) % 360;
     const hyp = 300;
 
     cur.x = hyp * Math.cos(autoAnimDegree.value * 1.5)
@@ -32,22 +32,26 @@ const updatePosition = () => {
 
   parallaxItems.value.forEach(el => {
     const multiplicator = el.dataset.parallaxValue;
-    const x = (cur.x - relativeCursorX) * -multiplicator;
-    const y = (cur.y - relativeCursorY) * -multiplicator;
+
+    const dx = cur.x - relativeCursorX;
+    const dy = cur.y - relativeCursorY;
+    const x = -(dx * multiplicator * 2) / Math.log(Math.abs(dx) + 2);
+    const y = -(dy * multiplicator * 2) / Math.log(Math.abs(dy) + 2);
+
 
     el.style.transform = `translateX(${x}px) translateY(${y}px)`;
   })
 }
 
 onMounted(() => {
-  parallaxItems.value = Array.from(rootRef.value.getElementsByClassName("parallax")) ;
+  parallaxItems.value = Array.from(rootRef.value.getElementsByClassName("parallax"));
   component.value = new AnimatedComponent(rootRef.value);
   component.value.tick = updatePosition;
   component.value.autoAnimate();
 })
 
 onBeforeUnmount(() => {
-    component.value.reset();
+  component.value.reset();
 })
 </script>
 
@@ -56,4 +60,3 @@ onBeforeUnmount(() => {
     <slot></slot>
   </div>
 </template>
-
