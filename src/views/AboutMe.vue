@@ -8,12 +8,14 @@ import { AnimatedComponent } from '@/services/AnimatedComponent';
 
 const component = ref(null)
 const frameRef = ref(null)
+const topRef = ref()
 const frameSectionRef = ref(null)
 const { containerRef } = useScrollContext()
 const contentRef = ref(null)
 const triggerSectionRef = ref(null)
 const triggerSections = ref([])
 const translationY = ref(0)
+const sectionPercent = ref(0)
 
 
 const prepareAnimation = () => {
@@ -23,9 +25,17 @@ const prepareAnimation = () => {
         if (el.getBoundingClientRect().top <= 0) triggerCount++;
     });
 
+    if (triggerCount <= triggerSections.value.length -1 && triggerSections.value[triggerCount].getBoundingClientRect().top <= triggerSections.value[triggerCount].offsetTop) {
+        const min = (triggerCount == 0) ? 0 : triggerSections.value[triggerCount - 1].offsetTop;
+        const max = Math.max(triggerSections.value[triggerCount].offsetTop - min, 100);
+        sectionPercent.value = (max - triggerSections.value[triggerCount].getBoundingClientRect().top) * 100 / max, 100;
+    } else if (triggerCount <= triggerSections.value.length -1 && triggerSections.value[triggerCount].getBoundingClientRect().top >= triggerSections.value[triggerCount].offsetTop) {
+        sectionPercent.value = 0;
+    }
+
     if (triggerCount == stories.length) triggerCount--;
-    translationY.value = -100 * triggerCount
-} 
+    translationY.value = -100 * triggerCount;
+}
 
 const tick = () => {
     contentRef.value.style.transform = `translateY(${translationY.value}%)`
@@ -51,10 +61,19 @@ onBeforeUnmount(() => {
     <FramedMainSection ref="frameRef" id="about-me" class="min-h-[100dvh] flex items-center relative">
         <!-- Frame -->
         <FollowingFrame v-if="frameSectionRef" :contentSection="frameSectionRef">
-            <div class="h-full w-full bg-white p-[3dvw]">
+            <div ref="topRef" class="h-full w-full bg-white p-[3dvw]">
                 <div class="h-full w-full relative flex justify-center items-center rounded-4xl overflow-hidden">
                     <div class="absolute h-full w-full top-0 left-0 bg-[url('/backgrounds/room.jpg')] bg-cover bg-bottom"></div>
                     <div class="h-1/2 w-full overflow-hidden px-[3dvw] z-10">
+
+                        <div class="absolute h-6 z-30 flex items-center gap-2 text-white">
+                            <span class="w-10">{{ stories[translationY / -100].from }}</span>
+                            <div class="h-full w-40 flex items-center border-x-2">
+                                <div class="h-1 bg-white" :style="`width: ${sectionPercent}%`"></div>
+                            </div>
+                            <span class="w-10">{{ stories[translationY / -100].to }}</span>
+                        </div>
+
                         <div ref="contentRef" class="h-full w-full transition-transform duration-400 text-white">
                             <div v-for="story in stories" class="h-full w-full aspect-square flex items-end justify-end gap-6">
                                 <div class="flex gap-2 flex-col">

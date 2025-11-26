@@ -2,16 +2,22 @@
     {
         "image": "/about/kid.png",
         "when": "When I was a child",
-        "description": "I was always curious about the world around me. I loved drawing, tinkering, and most of my questions began with \"how\" or \"why\". When I got my first video game console, something clicked. \"How does Mario know I want him to jump?\", \"Why does the game crash when I do this action?\", \"How does this Wi-Fi thing let me play with my friends?\""
+        "description": "I was always curious about the world around me. I loved drawing, tinkering, and most of my questions began with \"how\" or \"why\". When I got my first video game console, something clicked. \"How does Mario know I want him to jump?\", \"Why does the game crash when I do this action?\", \"How does this Wi-Fi thing let me play with my friends?\"",
+        "from": "2004",
+        "to": "2019"
     },
     {
         "image": "/about/teen.png",
-        "when" : "Reaching my teenage years",
-        "description": "I left my parents' home to live in the mountains and start an apprenticeship in computer science. There, I learned systems, networking, and the basics of software development. After my apprenticeship, I pursued advanced studies in development, mastering key areas of software engineering and team management, and most importantly, I became ready to take on any challenge."
+        "when": "Reaching my teenage years",
+        "description": "I left my parents' home to live in the mountains and start an apprenticeship in computer science. There, I learned systems, networking, and the basics of software development. After my apprenticeship, I pursued advanced studies in development, mastering key areas of software engineering and team management, and most importantly, I became ready to take on any challenge.",
+        "from": "2019",
+        "to": "2025"
     },
     {
         "image": "/about/adult.png",
         "when": "Today",
-        "description": "I'm proud of the journey I've taken so far, but my eyes are still on tomorrow. I keep learning in specific fields to satisfy my curiosity, I continuously improve my home lab, and I often dive into ambitious projects. I'm passionate, and since every project and every great story begins with an idea, feel free to reach out. I'd love to hear from you!"
+        "description": "I'm proud of the journey I've taken so far, but my eyes are still on tomorrow. I keep learning in specific fields to satisfy my curiosity, I continuously improve my home lab, and I often dive into ambitious projects. I'm passionate, and since every project and every great story begins with an idea, feel free to reach out. I'd love to hear from you!",
+        "from": "2025",
+        "to": "Today"
     }
 ]
