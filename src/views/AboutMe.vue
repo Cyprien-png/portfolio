@@ -56,14 +56,14 @@ onBeforeUnmount(() => {
                     <div class="absolute h-full w-full top-0 left-0 bg-[url('/backgrounds/room.jpg')] bg-cover bg-bottom"></div>
                     <div class="h-1/2 w-full overflow-hidden px-[3dvw] z-10">
                         <div ref="contentRef" class="h-full w-full transition-transform duration-400 text-white">
-                            <div v-for="story in stories" class="h-full w-full aspect-square flex items-center gap-6">
+                            <div v-for="story in stories" class="h-full w-full aspect-square flex items-end justify-end gap-6">
                                 <div class="flex gap-2 flex-col">
                                     <h1 class="font-bold text-xl leading-none font-rubik">{{ story.when }}</h1>
                                     <p class="flex-1 h-fit">
                                         {{ story.description }}
                                     </p>
                                 </div>
-                                <img :src="story.image" class="w-1/2 aspect-[9/16] max-h-full object-contain object-bottom"/>
+                                <img :src="story.image" class="mr-0 md:mr-[6dvw] lg:mr-[12dvw] w-fit aspect-[9/16] max-h-full object-contain object-bottom"/>
                             </div>
                         </div>
                     </div>
