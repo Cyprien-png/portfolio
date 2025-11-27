@@ -1,4 +1,4 @@
-# **Jaquier Dev Portfolio**
+# **Cyprien Jaquier's Portfolio**
 
 [![Vue.js](https://img.shields.io/badge/Vue.js-4FC08D?logo=vuedotjs&logoColor=fff)](#)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-%2338B2AC.svg?logo=tailwind-css&logoColor=white)](#)
@@ -8,7 +8,7 @@ A personal portfolio built with Vue JS and Tailwind CSS. Every component, intera
 The site is live at **[https://jaquier.dev](https://jaquier.dev)**.
 
 
-## **Local Installation**
+## **💻 Local Installation**
 
 To run the project locally:
 
@@ -18,7 +18,7 @@ npm run dev
 ```
 
 
-## **Custom Animation Engine**
+## **🌐 Custom Animation Engine**
 
 A key feature of this portfolio is a custom animation engine located in `src/services`.
 It synchronises animation updates with browser cycles, centralises event listeners, separates computation from rendering and computes only visible animations through a virtual bounding box system.
@@ -44,13 +44,13 @@ Handles the computation phase of the animation. This method is responsible for g
 Synchronises and applies the animation frame. This method runs during the animation loop and updates the DOM in a controlled and efficient way.
 
 
-## **Deployment and Workflow**
+## **🤖 Deployment and Workflow**
 
 The application is deployed through a CI/CD workflow on GitHub Pages.
 Every commit merged into `main` automatically builds and updates the live version.
 
 
-## **Conventions**
+## **📔 Conventions**
 
 In order to follow best practices and make the project easier to maintain, I followed the conventions below:
 
@@ -59,18 +59,18 @@ In order to follow best practices and make the project easier to maintain, I fol
 * All code changes go through pull requests. This allows me to review my work cleanly and maintain a structured workflow even as a solo developer.
 
 
-## **Feedback and Collaboration**
+## **🤝 Feedback and Collaboration**
 
 Anyone is welcome to open an issue to report bugs, suggest enhancements or start a discussion. You can also reach out through any of the contact methods listed in the portfolio.
 
 
-## **License**
+## **🛡 License**
 
 You are free to use the code in this repository, including the animation library, in your own projects.
 If you reuse or redistribute any part of it you must credit me clearly in your project and keep my name attached to the reused work.
 
 
-## **Acknowledgements**
+## **🙏 Acknowledgements**
 
 Special thanks to [**Drutz**](https://github.com/drutz-cpnv)
 for taking the time to provide thoughtful UI and UX feedback.
