@@ -27,7 +27,9 @@ const setCursorPos = (e) => {
   if (e instanceof MouseEvent) setPositions(e.clientX, e.clientY);
 }
 
-onMounted(() => {
+onMounted(async () => {
+  const trackerUrl = import.meta.env.VITE_TRACKER_URL;
+  if (trackerUrl) await fetch(trackerUrl)
   component.value = new AnimatedComponent();
   component.value.tick = setCursorPos;
   component.value.addAnimationTrigger(window, "mousemove");
@@ -41,7 +43,6 @@ onMounted(() => {
 <template>
   <LiquidFilter />
   <LiquidTexturedFilter />
-  <img src="https://ws.jaquier.dev/load/portfolio" alt="" class="hidden">
   <div ref="containerRef" id="container" class="overflow-auto h-dvh flex flex-col items-center font-ledger">
     <LiquidNavbar />
     <div ref="contentRef" id="content" class=" w-full flex flex-col">
