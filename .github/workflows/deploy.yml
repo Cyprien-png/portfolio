@@ -16,6 +16,10 @@ jobs:
         with:
           node-version: "20"
 
+      - name: Set environment variables
+        run: |
+          echo "VITE_TRACKER_URL=${{ secrets.VITE_TRACKER_URL }}" >> $GITHUB_ENV
+
       - run: npm install
       - run: npm run build
       - name: Upload artifact

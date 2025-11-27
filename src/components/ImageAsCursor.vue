@@ -61,7 +61,7 @@ onBeforeUnmount(() => {
 
 <template>
   <div
-    class="aspect-video absolute shadow-[#0003] shadow-lg z-40 -translate-1/2 pointer-events-none rounded-[4dvw] overflow-hidden ease-linear transition-all duration-75"
+    class="aspect-video absolute hidden md:flex shadow-[#0003] shadow-lg z-40 -translate-1/2 pointer-events-none rounded-[4dvw] overflow-hidden ease-linear transition-all duration-75"
     :class="isOpen ? (isSmall ? 'w-[20dvh]' : 'w-[30dvh]') : 'w-0'" :style="`left: ${x}px; top: ${y}px`">
     <div class="relative w-full h-full">
       <div :class="`${isUrl ? 'opacity-60' : 'opacity-0'}`" class="absolute h-full w-full transition-all inset-0 bg-black flex justify-center items-center">
