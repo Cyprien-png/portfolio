@@ -32,12 +32,21 @@ const updatePosition = () => {
 
   parallaxItems.value.forEach(el => {
     const multiplicator = el.dataset.parallaxValue;
+    let x;
+    let y;
 
-    const dx = cur.x - relativeCursorX;
-    const dy = cur.y - relativeCursorY;
-    const x = -(dx * multiplicator * 2) / Math.log(Math.abs(dx) + 2);
-    const y = -(dy * multiplicator * 2) / Math.log(Math.abs(dy) + 2);
-
+    if (!md.value) {
+      // Linear move
+      x = (cur.x - relativeCursorX) * -multiplicator;
+      y = (cur.y - relativeCursorY) * -multiplicator;
+     
+    } else {
+       // Quadratic move
+      const dx = cur.x - relativeCursorX;
+      const dy = cur.y - relativeCursorY;
+      x = -(dx * multiplicator * 2) / Math.log(Math.abs(dx) + 2);
+      y = -(dy * multiplicator * 2) / Math.log(Math.abs(dy) + 2);
+    }
 
     el.style.transform = `translateX(${x}px) translateY(${y}px)`;
   })
