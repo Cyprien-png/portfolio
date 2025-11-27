@@ -37,6 +37,8 @@ const tick = () => {
 }
 
 onMounted(async () => {
+    prepareAnimation();
+    tick();
     component.value = new AnimatedComponent(frameRef.value);
     component.value.addAnimationTrigger(containerRef.value, "scroll");
     component.value.prepareForAnimations = prepareAnimation;
