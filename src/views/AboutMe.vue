@@ -25,13 +25,15 @@ const prepareAnimation = () => {
         if (el.getBoundingClientRect().top <= 0) triggerCount++;
     });
 
-    if (triggerCount <= triggerSections.value.length -1 && triggerSections.value[triggerCount].getBoundingClientRect().top <= triggerSections.value[triggerCount].offsetTop) {
+    if (triggerCount > triggerSections.value.length -1 ) {
+         sectionPercent.value = 100;
+    } else if (triggerCount <= triggerSections.value.length -1 && triggerSections.value[triggerCount].getBoundingClientRect().top <= triggerSections.value[triggerCount].offsetTop) {
         const min = (triggerCount == 0) ? 0 : triggerSections.value[triggerCount - 1].offsetTop;
-        const max = Math.max(triggerSections.value[triggerCount].offsetTop - min, 100);
-        sectionPercent.value = (max - triggerSections.value[triggerCount].getBoundingClientRect().top) * 100 / max, 100;
+        const max = triggerSections.value[triggerCount].offsetTop - min;
+        sectionPercent.value = Math.min((max - triggerSections.value[triggerCount].getBoundingClientRect().top) * 100 / max, 100);
     } else if (triggerCount <= triggerSections.value.length -1 && triggerSections.value[triggerCount].getBoundingClientRect().top >= triggerSections.value[triggerCount].offsetTop) {
         sectionPercent.value = 0;
-    }
+    }  
 
     if (triggerCount == stories.length) triggerCount--;
     translationY.value = -100 * triggerCount;
