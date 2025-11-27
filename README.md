@@ -54,7 +54,7 @@ Every commit merged into `main` automatically builds and updates the live versio
 
 In order to follow best practices and make the project easier to maintain, I followed the conventions below:
 
-* Commit folliwing the [Conventional Commits standard](https://www.conventionalcommits.org/en/v1.0.0/)
+* Commit following the [Conventional Commits standard](https://www.conventionalcommits.org/en/v1.0.0/)
 * A lightweight [Git Flow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow) structure.
 * All code changes go through pull requests. This allows me to review my work cleanly and maintain a structured workflow even as a solo developer.
 
