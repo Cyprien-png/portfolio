@@ -27,7 +27,7 @@ const prepareAnimation = () => {
     });
 
     currentSectionId.value = Math.min(triggerCount, triggerSections.value.length - 1);
-    const currentSection = triggerSections.value[triggerCount];
+    const currentSection = triggerSections.value[currentSectionId.value];
     const currentScrollTop = currentSection.getBoundingClientRect().top
     const currentOffsetTop = currentSection.offsetTop
 
@@ -44,8 +44,7 @@ const prepareAnimation = () => {
         sectionPercent.value = 0;
     }  
 
-    if (triggerCount == stories.length) triggerCount--;
-    translationY.value = -100 * triggerCount;
+    translationY.value = -100 * currentSectionId.value;
 }
 
 const tick = () => {
