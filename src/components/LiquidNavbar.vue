@@ -59,15 +59,15 @@ onBeforeUnmount(() => {
 
 <template>
     <nav ref="nav"
-        class="text-white fixed flex-col top-[4dvw] z-50 rounded-3xl filter before:rounded-3xl backdrop-filter-[url('#liquidFilter')]">
+        class="text-white fixed pointer-events-none flex-col top-[4dvw] z-50 rounded-3xl filter before:rounded-3xl backdrop-filter-[url('#liquidFilter')]">
                 <div class="absolute inset-0 w-full h-full bg-black opacity-25 -z-10 rounded-3xl"></div>
         <div ref="navContainerRef" class="hidden md:flex gap-4 p-4 relative">
             <CustomA v-for="(s, si) in getSections()" :key="s.id" :text="s.id" href="" @click="(e) => scrollTo(e, s.el)"
-                class="navLink relative after:content-[''] after:h-[1px] after:left-0 after:bottom-0 after:absolute after:bg-white"
+                class="navLink pointer-events-auto relative after:content-[''] after:h-[1px] after:left-0 after:bottom-0 after:absolute after:bg-white"
                 :class="{ 'after:transition-all after:duration-300': si === getSections().length - 1 }" />
         </div>
 
-        <div class="flex md:hidden relative gap-4 transition-all p-4 cursor-pointer rounded-3xl" @click="isMobileMenuOpened = true">
+        <div class="flex md:hidden relative gap-4 transition-all p-4 cursor-pointer rounded-3xl pointer-events-auto" @click="isMobileMenuOpened = true">
             <BurgerIcon />
             <span>{{ currentSection }}</span>
         </div>
