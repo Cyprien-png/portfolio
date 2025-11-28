@@ -24,9 +24,9 @@ onMounted(() => {
         <div class="flex-1 w-full bg-fit flex flex-col text-center pt-20">
             <div class="w-full h-full flex flex-col">
                 <ToggleSection v-for="(project, pi) in projects" :key="pi" :open="isOpen(pi)" @toggle="toggle(pi)"
-                    @hover="setImage(project.image), setIsOpen(true), openIndex == pi ? setIsSmall(true) : setIsSmall(false)" @leave="setIsOpen(false), setIsSmall(false)">
+                    @hover="setImage(project.background), setIsOpen(true), openIndex == pi ? setIsSmall(true) : setIsSmall(false)" @leave="setIsOpen(false), setIsSmall(false)">
                     <template v-slot:header>
-                        <img :src="project.image" class="absolute h-full w-full top-0 left-0 -z-20 brightness-50 object-cover"/>
+                        <img :src="project.background" class="absolute h-full w-full top-0 left-0 -z-20 brightness-50 object-cover"/>
                         <h1 class="tracking-[-0.3dvw] hidden md:flex">
                             00-{{ (pi + 1).toLocaleString('en-US', { minimumIntegerDigits: 2 }) }}
                         </h1>
@@ -37,10 +37,14 @@ onMounted(() => {
                         <div class="px-6 pb-6">
                             <div
                                 class="relative w-full text-black overflow-hidden flex flex-col items-start gap-6 h-fit">
-                                <p class="z-20 min-h-[24dvh] w-full text-white p-4 text-justify">{{ project.description }}</p>
-                                <a @mouseenter="setIsUrl(true)" @mouseleave="setIsUrl(false)" :href="project.link" class="relative w-full flex bg-center bg-cover text-white" target="_blank">
+                                <div class="gap-4 flex items-center">
+
+                                    <p class="z-20 min-h-[24dvh] w-full text-white p-4 text-justify">{{ project.description }}</p>
+                                    <img :src="project.mobile_pic" class="h-52 aspect-[9/16]"/>
+                                    <img :src="project.desktop_pic" class="h-52 aspect-[16/9] object-contain"/>
+                                </div>
+                                <a @mouseenter="setIsUrl(true)" @mouseleave="setIsUrl(false)" :href="project.link" class="relative w-full flex bg-center bg-cover bg-white" target="_blank">
                                     <CustomA text="View more" :href="project.link" target="_blank" class="z-10 h-full w-full p-4"/>
-                                    <img :src="project.image" class="absolute top-0 left-0 object-cover w-full h-full brightness-75"/>
                                 </a>
                             </div>
                         </div>
