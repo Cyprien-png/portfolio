@@ -44,7 +44,7 @@ const computeLayout = () => {
 
     const padding = window.innerHeight - (items[0].offsetHeight + items[items.length - 1].offsetHeight) / 2
     scrollableSectionPadding.value = parseFloat(getComputedStyle(highlightEl.value.parentElement.parentElement).padding)
-    scrollableSectionRef.value.style.height = `${contentContainerRef.value.offsetHeight + padding - 2*scrollableSectionPadding.value}px`
+    scrollableSectionRef.value.style.height = `${contentContainerRef.value.offsetHeight + padding - 2 * scrollableSectionPadding.value}px`
     applyParagraphsTransform(0, true)
 }
 
@@ -52,8 +52,8 @@ const applyParagraphsTransform = (scroll, isSetup = false) => {
     Array.from(contentContainerRef.value.children).forEach((el) => {
         if (isSetup || el.getBoundingClientRect().top < highlightEl.value.getBoundingClientRect().bottom && el.getBoundingClientRect().bottom > highlightEl.value.getBoundingClientRect().top) {
             // ensure that the rotation value is between -200 and 200
-            const rotation =  Math.min(Math.max(-(scroll + el.offsetTop), -200), 200);
-            el.style.transform = `translateZ(${-Math.abs(rotation)}px) rotateX(${rotation/ 3}deg)`;
+            const rotation = Math.min(Math.max(-(scroll + el.offsetTop), -200), 200);
+            el.style.transform = `translateZ(${-Math.abs(rotation)}px) rotateX(${rotation / 3}deg)`;
         }
     })
 }
@@ -66,10 +66,10 @@ const tick = () => {
     if (translation >= 0) {
         translation = 0
     } else if (bottomLimit < 0) {
-        translation = maxParagraphSize.value.offsetHeight - contentContainerRef.value.offsetHeight;
-    } else {
-        applyParagraphsTransform(translation)
+        translation = maxParagraphSize.value - contentContainerRef.value.offsetHeight;
     }
+
+    applyParagraphsTransform(translation)
     contentContainerRef.value.style.transform = `translateY(${translation}px)`;
 }
 
@@ -96,10 +96,13 @@ onBeforeUnmount(() => {
     <FollowingFrame :contentSection="contentSection">
         <div class="relative h-dvh w-full top-0 left-0 pointer-events-none">
             <div class="h-full w-full overflow-hidden z-20 p-[3dvw]">
-                <div class="h-full w-full flex flex-row justify-center items-center rounded-4xl outline-[6dvw] outline-white">
-                    <div ref="highlightEl" class="rounded-full bg-white w-3/4 lg:w-2/3 px-4 pb-2 z-20 relative overflow-hidden">
+                <div
+                    class="h-full w-full flex flex-row justify-center items-center rounded-4xl outline-[6dvw] outline-white">
+                    <div ref="highlightEl"
+                        class="rounded-full bg-white w-3/4 lg:w-2/3 px-4 pb-2 z-20 relative overflow-hidden">
                         <slot name="content" :registerContainer="registerContainer"></slot>
-                        <div class="absolute h-full w-full top-0 left-0 z-30 bg-linear-[white_0%,transparent_15%,transparent_85%,white_100%]">
+                        <div
+                            class="absolute h-full w-full top-0 left-0 z-30 bg-linear-[white_0%,transparent_15%,transparent_85%,white_100%]">
                         </div>
                     </div>
                 </div>
